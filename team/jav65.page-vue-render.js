@@ -1,0 +1,4 @@
+
+    const renderFn = new Function("const { createElementVNode: _createElementVNode, createTextVNode: _createTextVNode, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock } = Vue\n\nconst _hoisted_1 = /*#__PURE__*/_createElementVNode(\"h3\", { id: \"project-noknock\" }, [\n  /*#__PURE__*/_createTextVNode(\"Project: NOKnock\"),\n  /*#__PURE__*/_createElementVNode(\"a\", {\n    class: \"fa fa-anchor\",\n    href: \"#project-noknock\",\n    onclick: \"event.stopPropagation()\"\n  })\n], -1 /* HOISTED */)\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"p\", null, \"Given below are my contributions to the project.\", -1 /* HOISTED */)\n\nreturn function render(_ctx, _cache) {\n  return (_openBlock(), _createElementBlock(_Fragment, null, [\n    _hoisted_1,\n    _createTextVNode(),\n    _hoisted_2\n  ], 64 /* STABLE_FRAGMENT */))\n}");
+    var render = renderFn();
+  

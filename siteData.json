@@ -7,7 +7,10 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "phanuphat-srisukhawasu-oad": "Phanuphat Srisukhawasu (Oad)"
+        "phanuphat-srisukhawasu-oad": "Phanuphat Srisukhawasu (Oad)",
+        "javier-enrique-wong": "Javier Enrique Wong",
+        "jane-doe": "Jane Doe",
+        "johnny-doe": "Johnny Doe"
       },
       "headingKeywords": {}
     },
@@ -128,6 +131,14 @@
       "title": "",
       "headings": {
         "addressbook-level-3": "AddressBook Level-3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/jav65.md",
+      "title": "Javier's Project Portfolio Page",
+      "headings": {
+        "project-noknock": "Project: NOKnock"
       },
       "headingKeywords": {}
     },
