@@ -9,8 +9,7 @@
         "project-team": "Project team",
         "phanuphat-srisukhawasu-oad": "Phanuphat Srisukhawasu (Oad)",
         "xiaoqi": "Xiaoqi",
-        "javier-enrique-wong": "Javier Enrique Wong",
-        "dylan": "Dylan"
+        "javier-enrique-wong": "Javier Enrique Wong"
       },
       "headingKeywords": {}
     },
@@ -131,14 +130,6 @@
       "title": "",
       "headings": {
         "addressbook-level-3": "AddressBook Level-3"
-      },
-      "headingKeywords": {}
-    },
-    {
-      "src": "team/butanol.md",
-      "title": "Phanuphat (Oad) Srisukhawasu's Project Portfolio Page",
-      "headings": {
-        "project-noknock": "Project: NOKnock"
       },
       "headingKeywords": {}
     },
