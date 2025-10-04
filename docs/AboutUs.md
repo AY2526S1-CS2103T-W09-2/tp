@@ -37,3 +37,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/jav65.md)]
 
 * Role: Project Advisor
+
+### Dylan
+
+<img src="images/butanol.png" width="200px">
+[[github](http://github.com/Butanol)] [[portfolio](team/butanol.md)]
+
+* Role: Intellij Expert
+* Responsibilities: Code Quality
