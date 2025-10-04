@@ -1,6 +1,6 @@
 ---
 layout: default.md
-title: "Javier Enrique Wong's Project Portfolio Page"
+title: "Xiaoqi's Project Portfolio Page"
 ---
 
 ### Project: NOKnock

@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titleSuffix": "NOKnock",
+  "faviconPath": "images/NOKnock.png",
   "style": {
     "codeTheme": "light"
   },
@@ -16,10 +16,15 @@
     ".git/*",
     "node_modules/*"
   ],
-  "pagesExclude": ["node_modules/*"],
+  "pagesExclude": [
+    "node_modules/*"
+  ],
   "pages": [
     {
-      "glob": ["**/index.md", "**/*.md"]
+      "glob": [
+        "**/index.md",
+        "**/*.md"
+      ]
     }
   ],
   "deploy": {

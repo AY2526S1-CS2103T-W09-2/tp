@@ -1,20 +1,21 @@
 ---
-  layout: default.md
-  title: ""
+layout: default.md
+title: NOKnock
 ---
 
-# AddressBook Level-3
+<img src="images/NOKnock.png" alt="image" width="300px"/>
+
+# NOKnock
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**NOKnock is a CLI-based nursing home management system** for tracking patients, their Next-of-Kin (NOK) contacts, and caring sessions. Designed for nursing home staff who prefer command-line interfaces for fast, efficient daily operations.
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
-
+* If you are interested in using NOKnock, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing NOKnock, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 **Acknowledgements**
 
