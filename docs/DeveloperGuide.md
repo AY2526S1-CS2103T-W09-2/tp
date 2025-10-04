@@ -332,6 +332,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The app should return search results in under 1 second.
+5.  Startup time should not exceed 2 seconds on a standard laptop
+6.  The app should not crash during adding operations.
+7.  Data integrity should be guaranteed if program exits unexpectedly.
+8.  Commands should be clear and unambiguous for non-tech savvy users.
+9.  Data should be able to recover if corrupted.
+10. Data should be encrypted and follow PDPA.
 
 *{More to be added}*
 
