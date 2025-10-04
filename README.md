@@ -7,7 +7,7 @@ This is a CLI-based nursing home management system for tracking patients, their 
 
 Example usages:
 * Track patients and their contact information
-* Add information on their NOK.
+* Add information on their NOK
 * Add care session information
 
 Software Engineering Practices:
