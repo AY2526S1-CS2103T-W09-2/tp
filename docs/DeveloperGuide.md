@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# NOKnock Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,27 +274,50 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* nursing home staff who need to manage many patients and their Next-of-Kin (NOK) contacts
+* prefer command-line interfaces over GUIs for speed and efficiency
+* can type fast and are comfortable using text-based systems
+* need to track patient information, NOK details, and daily caring sessions
+* value lightweight, reliable tools that reduce manual paperwork and coordination errors
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Replace manual scheduling and contact-tracking methods with a fast, 
+CLI-based system that improves coordination, safety, and productivity in elderly care.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​             | I want to …​                            | So that I can…​                                                                 |
+|----------|---------------------|------------------------------------------|---------------------------------------------------------------------------------|
+| `* * *`  | nurse               | add a patient                            | create a new patient record in the system                                       |
+| `* * *`  | nurse               | edit a patient’s information             | keep records accurate and up to date                                            |
+| `* * *`  | nurse               | delete a patient                         | remove discharged patients and their related data                               |
+| `* * *`  | nurse               | add a NOK to a patient                   | store emergency and family contacts for coordination                            |
+| `* * *`  | nurse               | edit NOK details                         | ensure contact info (phone, relation) is accurate                               |
+| `* * *`  | nurse               | delete a NOK                             | keep only relevant contacts                                                     |
+| `* * *`  | nurse               | search for a patient by name             | quickly locate their information                                                |
+| `* * *`  | nurse               | search for a patient by NOK name         | retrieve a patient even if I only know the relative’s name                      |
+| `* * *`  | nurse               | create a caring session                  | record scheduled care activities for patients                                   |
+| `* * *`  | nurse               | specify the date and time of a session   | know exactly when the care task should happen                                   |
+| `* * *`  | nurse               | update or cancel a caring session        | correct mistakes or remove outdated tasks                                       |
+| `* * *`  | nurse               | mark a caring session as completed       | track what has been done vs what’s still pending                                |
+| `* * *`  | nurse               | view today’s caring sessions             | focus on tasks due today                                                        |
+| `* * *`  | nurse               | view upcoming sessions                   | prepare ahead for the next few days                                             |
+| `* * *`  | nurse               | list all patients                        | see a summary of who is currently in the system                                 |
+| `* * *`  | nurse               | view detailed patient info (with NOKs & sessions) | get a full picture of patient care and contacts                          |
+| `* * *`  | nurse               | back up and restore patient/schedule data| prevent loss of important records                                               |
+| `* *`    | nurse               | set recurring caring sessions            | avoid re-entering common tasks (e.g., daily hygiene)                            |
+| `* *`    | nurse               | filter a schedule by patient             | focus on a single patient’s tasks                                               |
+| `* *`    | nurse               | export a patient’s schedule (e.g., CSV)  | share it with families or doctors                                               |
+| `* *`    | nurse               | use short command aliases                | type commands faster                                                            |
+| `* *`    | nurse               | undo the last command                    | fix mistakes without retyping                                                   |
+| `* *`    | nurse               | view command history                     | repeat frequent actions quickly                                                 |
+| `* *`    | new nurse           | follow an onboarding tutorial            | learn to use the app efficiently                                                |
+| `*`      | nurse               | use autocomplete for inputs              | avoid typing full commands/names                                                |
+| `*`      | nurse on night shift| enable dark mode                         | reduce eye strain during late hours                                             |
+| `*`      | nurse               | categorize patients by urgency/severity  | prioritize care for critical patients                                           |
+
 
 *{More to be added}*
 
