@@ -332,13 +332,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+4.  Users should not be able to access the file where the contacts are stored in.
+5.  All new code modules must include automated unit tests that cover at least 80% of the new logic.
+6.  A user with no prior CLI knowledge should find the features intuitive to use.
+7.  All patient and next of kin informaton must be encrypted and accessible only to authorised personnel, complying with the privacy regulations from HPAA.
+8.  The system must provide near-instantaneous response times for searches, contact updates, and session scheduling, even during peak hours
+9.  The system needs to be highly available (e.g., 99.9% uptime) to ensure nursing staff can access it whenever needed, including during emergencies.
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Intuitive**: User should be able to understand how the feature by reading relevant parts of the user guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
