@@ -302,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC0: Delete a person**
 
 **MSS**
 
@@ -325,7 +325,131 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**UC1: Add patient** <br>
+Actor: Nurse (primary) <br>
+Goal: Add a new patient record to the system.
+**MSS**
+1.  Nurse enters the add-patient command with patient details.
+2.  System validates the inputs (name, IC, tags).
+3.  System adds the new patient to the patient list.
+4.  System confirms success with a message showing the patient’s name and IC.
+
+Use case ends.<br>
+**Extensions**
+
+* 2a. Inputs are invalid. <br>
+    * 2a1. System shows an error message explaining the correct format. <br>
+    * 2a2. Nurse re-enters the details.
+    * Use case resumes from step 2. 
+* 2b. IC number already exists.
+    * 2b1. System shows “Patient with IC … already exists”. 
+    Use case ends.
+
+**UC02: Edit Patient** <br>
+Actor: Nurse <br>
+Goal: Update details of an existing patient. <br>
+**MSS**
+
+1.  Nurse requests to edit patient 
+2.  AddressBook accepts the parameters
+3.  Address Book updates the patient’s information.
+4.  AddressBook displays confirmation
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The patient could not be found.
+
+  Use case ends.
+
+* 2b. New name is a duplicate of another patient. 
+
+    * System rejects update, shows error.
+
+    * Use case ends
+
+**UC03: Add NOK** <br>
+Actor: Nurse <br>
+Goal: Add a new NOK contact to an existing patient. <br>
+**MSS**
+
+1.  Nurse requests to add next of kin
+2.  AddressBook accepts the parameters
+3.  Address Book associates the next of kin with the patient.
+4.  AddressBook displays confirmation
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The patient could not be found.
+
+  Use case ends.
+
+* 2b. NOK already exists for the patient.
+
+    * System shows NOK already exists.
+
+    * Use case ends
+
+**Use case:** UC04 – Add Caring Session  
+**Actor:** Nurse  
+**Goal:** Schedule a caring session for a patient.  
+
+### MSS
+1. Nurse requests to add session.
+2. System validates parameters.  
+3. System adds the session to the patient’s schedule.  
+4. System confirms success with details of the session.  
+   Use case ends.  
+
+### Extensions
+- **2a.** Date is invalid or in the past.  
+  - 2a1. System shows “Date must not be in the past”.  
+  - Use case ends.  
+- **2b.** Time format invalid.  
+  - 2b1. System shows “Invalid time format”.  
+  - Use case ends.  
+- **2c.** Patient index invalid.  
+  - 2c1. System shows error.  
+  - Use case ends.  
+
+---
+**Use case:** UC05 – View Today’s Sessions  
+**Actor:** Nurse  
+**Goal:** See all sessions scheduled for the current day.  
+
+### MSS
+1. Nurse lists today's session.  
+2. System retrieves today’s sessions.  
+3. System displays the list of sessions, with patients, times, and care types.  
+   Use case ends.  
+
+### Extensions
+- **2a.** No sessions scheduled.  
+  - 2a1. System shows “No caring sessions scheduled for today”.  
+  - Use case ends.  
+
+---
+**Use case:** UC06 – Complete Caring Session  
+**Actor:** Nurse  
+**Goal:** Mark a session as completed.  
+
+### MSS
+1. Nurse enters complete session ID.  
+2. System validates the session ID.  
+3. System marks the session as completed.  
+4. System confirms success with session details.  
+   Use case ends.  
+
+### Extensions
+- **2a.** Invalid or missing session ID.  
+  - 2a1. System shows “Session not found”.  
+  - Use case ends.  
+- **2b.** Session already completed.  
+  - 2b1. System shows “Session already completed”.  
+  - Use case ends.  
 
 ### Non-Functional Requirements
 
