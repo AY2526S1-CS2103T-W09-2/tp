@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/AY2526S1-CS2103T-W09-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2526S1-CS2103T-W09-2/tp/actions)
+[![Java CI](https://github.com/AY2526S1-CS2103T-W09-2/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2526S1-CS2103T-W09-2/tp/actions/workflows/gradle.yml)
 
 # NOKnock
 ![Ui](docs/images/Ui.png)
