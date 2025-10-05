@@ -10,7 +10,8 @@
         "phanuphat-srisukhawasu-oad": "Phanuphat Srisukhawasu (Oad)",
         "xiaoqi": "Xiaoqi",
         "javier-enrique-wong": "Javier Enrique Wong",
-        "dylan": "Dylan"
+        "dylan": "Dylan",
+        "chew-yue-yang": "Chew Yue Yang"
       },
       "headingKeywords": {}
     },
@@ -137,6 +138,14 @@
     {
       "src": "team/butanol.md",
       "title": "Phanuphat (Oad) Srisukhawasu's Project Portfolio Page",
+      "headings": {
+        "project-noknock": "Project: NOKnock"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/chewy03.md",
+      "title": "Yue Yang's Project Portfolio Page",
       "headings": {
         "project-noknock": "Project: NOKnock"
       },
