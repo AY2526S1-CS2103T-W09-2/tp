@@ -7,9 +7,9 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
+        "javier-enrique-wong": "Javier Enrique Wong",
         "phanuphat-srisukhawasu-oad": "Phanuphat Srisukhawasu (Oad)",
         "xiaoqi": "Xiaoqi",
-        "javier-enrique-wong": "Javier Enrique Wong",
         "dylan": "Dylan",
         "chew-yue-yang": "Chew Yue Yang"
       },
@@ -129,15 +129,15 @@
     },
     {
       "src": "index.md",
-      "title": "",
+      "title": "NOKnock",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "noknock": "NOKnock"
       },
       "headingKeywords": {}
     },
     {
       "src": "team/butanol.md",
-      "title": "Phanuphat (Oad) Srisukhawasu's Project Portfolio Page",
+      "title": "Dylan's Project Portfolio Page",
       "headings": {
         "project-noknock": "Project: NOKnock"
       },
@@ -153,23 +153,23 @@
     },
     {
       "src": "team/jav65.md",
-      "title": "Javier's Project Portfolio Page",
+      "title": "Javier Enrique Wong's Project Portfolio Page",
       "headings": {
         "project-noknock": "Project: NOKnock"
       },
       "headingKeywords": {}
     },
     {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
+      "src": "team/oadultradeepfield.md",
+      "title": "Phanuphat (Oad) Srisukhawasu's Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-noknock": "Project: NOKnock"
       },
       "headingKeywords": {}
     },
     {
-      "src": "team/oadultradeepfield.md",
-      "title": "Phanuphat (Oad) Srisukhawasu's Project Portfolio Page",
+      "src": "team/xiaoqi01010.md",
+      "title": "Xiaoqi's Project Portfolio Page",
       "headings": {
         "project-noknock": "Project: NOKnock"
       },
