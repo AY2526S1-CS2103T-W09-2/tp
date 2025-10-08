@@ -37,7 +37,7 @@ It is designed for caregivers who prefer **fast, keyboard-based input** and need
 
 - [_User Guide_](https://github.com/se-edu/addressbook-level3/tree/master/docs/UserGuide.md)
 
-- [_Developer Guide_](https://github.com/se-edu/addressbook-level3/tree/master/docs/SettingUp.md)
+- [_Developer Guide_](https://github.com/se-edu/addressbook-level3/tree/master/docs/DeveloperGuide.md)
 
 - [_About Us_](https://github.com/se-edu/addressbook-level3/tree/master/docs/AboutUs.md)
 
