@@ -1,54 +1,45 @@
-# 🏥 NOKnock — Nursing Home Care Manager
+# 🏥 NOKnock - Nursing Home Care Manager
 
 [![Java CI](https://github.com/AY2526S1-CS2103T-W09-2/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2526S1-CS2103T-W09-2/tp/actions/workflows/gradle.yml)
 
-NOKnock is a desktop application that helps **nursing home staff** manage **patients, next-of-kin (NOK)**, and **caring sessions** efficiently and safely.  
+NOKnock is a desktop application that helps **nursing home staff** manage **patients, next-of-kin (NOK)**, and **caring sessions** efficiently and safely.
+
 It is designed for caregivers who prefer **fast, keyboard-based input** and need **offline reliability**.
-
-
----
 
 ## 🌐 User Interface
 
 ![Ui](docs/images/Ui.png)
 
-
----
-
 ## ✨ Features
 
-- **👩‍⚕️ Patient Management** – Add, edit, and view patient details.  
-- **📞 Next-of-Kin (NOK) Tracking** – Store emergency contact information linked to patients.  
-- **📅 Caring Session Scheduling** – Create, edit, and complete daily or recurring sessions.  
-- **⏰ Overdue Alerts** – Highlight missed or late care sessions automatically.  
-- **⚠️ Urgency Levels** – Prioritize patients by care level (High / Medium / Low).  
-- **📤 CSV Export** – Export patient and session data for reporting and sharing.  
-- **↩️ Undo/Redo Support** – Reverse or reapply recent commands safely.  
-- **🌙 Dark Mode** – Reduce eye strain for caregivers during night shifts.  
+- **👩‍⚕️ Patient Management** – Add, edit, and view patient details.
+- **📞 Next-of-Kin (NOK) Tracking** – Store emergency contact information linked to patients.
+- **📅 Caring Session Scheduling** – Create, edit, and complete daily or recurring sessions.
+- **⏰ Overdue Alerts** – Highlight missed or late care sessions automatically.
+- **⚠️ Urgency Levels** – Prioritize patients by care level (High / Medium / Low).
+- **📤 CSV Export** – Export patient and session data for reporting and sharing.
+- **↩️ Undo/Redo Support** – Reverse or reapply recent commands safely.
+- **🌙 Dark Mode** – Reduce eye strain for caregivers during night shifts.
 - **💻 Cross-Platform Support** – Works on Windows, macOS, and Linux.
-
----
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Java 17** or above must be installed on your system.  
+
+- **Java 17** or above must be installed on your system.
 - Compatible with **Windows**, **macOS**, and **Linux**.
 
 ### Setup
-- Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
----
+- Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## 📚 Documentation
 
-- [_User Guide_](https://github.com/se-edu/addressbook-level3/tree/master/docs/UserGuide.md))
+- [_User Guide_](https://github.com/se-edu/addressbook-level3/tree/master/docs/UserGuide.md)
 
-- [ Developer Guide_](https://github.com/se-edu/addressbook-level3/tree/master/docs/SettingUp.md))
+- [_Developer Guide_](https://github.com/se-edu/addressbook-level3/tree/master/docs/SettingUp.md)
 
-- [_About Us_](https://github.com/se-edu/addressbook-level3/tree/master/docs/AboutUs.md))
-
----
+- [_About Us_](https://github.com/se-edu/addressbook-level3/tree/master/docs/AboutUs.md)
 
 ## 🏗️ Project Goals
 
@@ -61,8 +52,6 @@ It is designed for caregivers who prefer **fast, keyboard-based input** and need
 - Ensure timely communication between caregivers and next-of-kin.
 
 - Offer a safe, offline environment for patient data management.
-
----
 
 ## 🤝 Acknowledgements
 
