@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # NOKnock Developer Guide
@@ -36,6 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -112,10 +113,12 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
+
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -136,7 +139,6 @@ The `Model` component,
 
 </box>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -144,6 +146,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
+
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -164,9 +167,9 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()`— Saves the current address book state in its history.
+* `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
@@ -216,7 +219,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <box type="info" seamless>
 
@@ -241,13 +244,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -280,199 +283,182 @@ _{Explain here how the data archiving feature will be implemented}_
 * need to track patient information, NOK details, and daily caring sessions
 * value lightweight, reliable tools that reduce manual paperwork and coordination errors
 
-**Value proposition**: Replace manual scheduling and contact-tracking methods with a fast, 
+**Value proposition**: Replace manual scheduling and contact-tracking methods with a fast,
 CLI-based system that improves coordination, safety, and productivity in elderly care.
-
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​             | I want to …​                            | So that I can…​                                                                 |
-|----------|---------------------|------------------------------------------|---------------------------------------------------------------------------------|
-| `* * *`  | nurse               | add a patient                            | create a new patient record in the system                                       |
-| `* * *`  | nurse               | edit a patient’s information             | keep records accurate and up to date                                            |
-| `* * *`  | nurse               | delete a patient                         | remove discharged patients and their related data                               |
-| `* * *`  | nurse               | add a NOK to a patient                   | store emergency and family contacts for coordination                            |
-| `* * *`  | nurse               | edit NOK details                         | ensure contact info (phone, relation) is accurate                               |
-| `* * *`  | nurse               | delete a NOK                             | keep only relevant contacts                                                     |
-| `* * *`  | nurse               | search for a patient by name             | quickly locate their information                                                |
-| `* * *`  | nurse               | search for a patient by NOK name         | retrieve a patient even if I only know the relative’s name                      |
-| `* * *`  | nurse               | create a caring session                  | record scheduled care activities for patients                                   |
-| `* * *`  | nurse               | specify the date and time of a session   | know exactly when the care task should happen                                   |
-| `* * *`  | nurse               | update or cancel a caring session        | correct mistakes or remove outdated tasks                                       |
-| `* * *`  | nurse               | mark a caring session as completed       | track what has been done vs what’s still pending                                |
-| `* * *`  | nurse               | view today’s caring sessions             | focus on tasks due today                                                        |
-| `* * *`  | nurse               | view upcoming sessions                   | prepare ahead for the next few days                                             |
-| `* * *`  | nurse               | list all patients                        | see a summary of who is currently in the system                                 |
-| `* * *`  | nurse               | view detailed patient info (with NOKs & sessions) | get a full picture of patient care and contacts                          |
-| `* * *`  | nurse               | back up and restore patient/schedule data| prevent loss of important records                                               |
-| `* *`    | nurse               | set recurring caring sessions            | avoid re-entering common tasks (e.g., daily hygiene)                            |
-| `* *`    | nurse               | filter a schedule by patient             | focus on a single patient’s tasks                                               |
-| `* *`    | nurse               | export a patient’s schedule (e.g., CSV)  | share it with families or doctors                                               |
-| `* *`    | nurse               | use short command aliases                | type commands faster                                                            |
-| `* *`    | nurse               | undo the last command                    | fix mistakes without retyping                                                   |
-| `* *`    | nurse               | view command history                     | repeat frequent actions quickly                                                 |
-| `* *`    | new nurse           | follow an onboarding tutorial            | learn to use the app efficiently                                                |
-| `*`      | nurse               | use autocomplete for inputs              | avoid typing full commands/names                                                |
-| `*`      | nurse on night shift| enable dark mode                         | reduce eye strain during late hours                                             |
-| `*`      | nurse               | categorize patients by urgency/severity  | prioritize care for critical patients                                           |
-
+| Priority | As a …​              | I want to …​                                      | So that I can…​                                            |
+|----------|----------------------|---------------------------------------------------|------------------------------------------------------------|
+| `* * *`  | nurse                | add a patient                                     | create a new patient record in the system                  |
+| `* * *`  | nurse                | edit a patient’s information                      | keep records accurate and up to date                       |
+| `* * *`  | nurse                | delete a patient                                  | remove discharged patients and their related data          |
+| `* * *`  | nurse                | add a NOK to a patient                            | store emergency and family contacts for coordination       |
+| `* * *`  | nurse                | edit NOK details                                  | ensure contact info (phone, relation) is accurate          |
+| `* * *`  | nurse                | delete a NOK                                      | keep only relevant contacts                                |
+| `* * *`  | nurse                | search for a patient by name                      | quickly locate their information                           |
+| `* * *`  | nurse                | search for a patient by NOK name                  | retrieve a patient even if I only know the relative’s name |
+| `* * *`  | nurse                | create a caring session                           | record scheduled care activities for patients              |
+| `* * *`  | nurse                | specify the date and time of a session            | know exactly when the care task should happen              |
+| `* * *`  | nurse                | update or cancel a caring session                 | correct mistakes or remove outdated tasks                  |
+| `* * *`  | nurse                | mark a caring session as completed                | track what has been done vs what’s still pending           |
+| `* * *`  | nurse                | view today’s caring sessions                      | focus on tasks due today                                   |
+| `* * *`  | nurse                | view upcoming sessions                            | prepare ahead for the next few days                        |
+| `* * *`  | nurse                | list all patients                                 | see a summary of who is currently in the system            |
+| `* * *`  | nurse                | view detailed patient info (with NOKs & sessions) | get a full picture of patient care and contacts            |
+| `* * *`  | nurse                | back up and restore patient/schedule data         | prevent loss of important records                          |
+| `* *`    | nurse                | set recurring caring sessions                     | avoid re-entering common tasks (e.g., daily hygiene)       |
+| `* *`    | nurse                | filter a schedule by patient                      | focus on a single patient’s tasks                          |
+| `* *`    | nurse                | export a patient’s schedule (e.g., CSV)           | share it with families or doctors                          |
+| `* *`    | nurse                | use short command aliases                         | type commands faster                                       |
+| `* *`    | nurse                | undo the last command                             | fix mistakes without retyping                              |
+| `* *`    | nurse                | view command history                              | repeat frequent actions quickly                            |
+| `* *`    | new nurse            | follow an onboarding tutorial                     | learn to use the app efficiently                           |
+| `*`      | nurse                | use autocomplete for inputs                       | avoid typing full commands/names                           |
+| `*`      | nurse on night shift | enable dark mode                                  | reduce eye strain during late hours                        |
+| `*`      | nurse                | categorize patients by urgency/severity           | prioritize care for critical patients                      |
 
 *{More to be added}*
 
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC0: Delete a person**
+**UC1: Add patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Nurse enters the add-patient command with patient details.
+2. AddressBook validates the inputs (name, IC, tags).
+3. AddressBook adds the new patient to the patient list.
+4. AddressBook confirms success with a message showing the patient’s name and IC.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Inputs are invalid.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-**UC1: Add patient** <br>
-Actor: Nurse (primary) <br>
-Goal: Add a new patient record to the system.
-**MSS**
-1.  Nurse enters the add-patient command with patient details.
-2.  System validates the inputs (name, IC, tags).
-3.  System adds the new patient to the patient list.
-4.  System confirms success with a message showing the patient’s name and IC.
-
-Use case ends.<br>
-**Extensions**
-
-* 2a. Inputs are invalid. <br>
-    * 2a1. System shows an error message explaining the correct format. <br>
+    * 2a1. AddressBook shows an error message explaining the correct format.
     * 2a2. Nurse re-enters the details.
-    * Use case resumes from step 2. 
-* 2b. IC number already exists.
-    * 2b1. System shows “Patient with IC … already exists”. 
-    Use case ends.
+      Use case resumes from step 2.
 
-**UC02: Edit Patient** <br>
-Actor: Nurse <br>
-Goal: Update details of an existing patient. <br>
+* 2b. IC number already exists.
+
+    * 2b1. AddressBook shows “Patient with IC … already exists.”
+      Use case ends.
+
+**UC2: Edit patient**
+
 **MSS**
 
-1.  Nurse requests to edit patient 
-2.  AddressBook accepts the parameters
-3.  Address Book updates the patient’s information.
-4.  AddressBook displays confirmation
+1. Nurse requests to edit a patient.
+2. AddressBook accepts the parameters.
+3. AddressBook updates the patient’s information.
+4. AddressBook displays confirmation.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. The patient could not be found.
-
   Use case ends.
 
-* 2b. New name is a duplicate of another patient. 
+* 2b. New name is a duplicate of another patient.
 
-    * System rejects update, shows error.
+    * 2b1. AddressBook rejects the update and shows an error message.
+      Use case ends.
 
-    * Use case ends
+**UC3: Add next of kin (NOK)**
 
-**UC03: Add NOK** <br>
-Actor: Nurse <br>
-Goal: Add a new NOK contact to an existing patient. <br>
 **MSS**
 
-1.  Nurse requests to add next of kin
-2.  AddressBook accepts the parameters
-3.  Address Book associates the next of kin with the patient.
-4.  AddressBook displays confirmation
+1. Nurse requests to add a next of kin.
+2. AddressBook accepts the parameters.
+3. AddressBook associates the next of kin with the patient.
+4. AddressBook displays confirmation.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. The patient could not be found.
-
   Use case ends.
 
 * 2b. NOK already exists for the patient.
 
-    * System shows NOK already exists.
+    * 2b1. AddressBook shows “NOK already exists.”
+      Use case ends.
 
-    * Use case ends
+**UC4: Add caring session**
 
-**Use case:** UC04 – Add Caring Session  
-**Actor:** Nurse  
-**Goal:** Schedule a caring session for a patient.  
+**MSS**
 
-### MSS
-1. Nurse requests to add session.
-2. System validates parameters.  
-3. System adds the session to the patient’s schedule.  
-4. System confirms success with details of the session.  
-   Use case ends.  
+1. Nurse requests to add a caring session.
+2. AddressBook validates the parameters.
+3. AddressBook adds the session to the patient’s schedule.
+4. AddressBook confirms success with details of the session.
 
-### Extensions
-- **2a.** Date is invalid or in the past.  
-  - 2a1. System shows “Date must not be in the past”.  
-  - Use case ends.  
-- **2b.** Time format invalid.  
-  - 2b1. System shows “Invalid time format”.  
-  - Use case ends.  
-- **2c.** Patient index invalid.  
-  - 2c1. System shows error.  
-  - Use case ends.  
+   Use case ends.
 
----
-**Use case:** UC05 – View Today’s Sessions  
-**Actor:** Nurse  
-**Goal:** See all sessions scheduled for the current day.  
+**Extensions**
 
-### MSS
-1. Nurse lists today's sessions.  
-2. System retrieves today’s sessions.  
-3. System displays the list of sessions, with patients, times, and care types.  
-   Use case ends.  
+* 2a. Date is invalid or in the past.
 
-### Extensions
-- **2a.** No sessions scheduled.  
-  - 2a1. System shows “No caring sessions scheduled for today”.  
-  - Use case ends.  
+    * 2a1. AddressBook shows “Date must not be in the past.”
+      Use case ends.
 
----
-**Use case:** UC06 – Complete Caring Session  
-**Actor:** Nurse  
-**Goal:** Mark a session as completed.  
+* 2b. Time format is invalid.
 
-### MSS
-1. Nurse enters complete session ID.  
-2. System validates the session ID.  
-3. System marks the session as completed.  
-4. System confirms success with session details.  
-   Use case ends.  
+    * 2b1. AddressBook shows “Invalid time format.”
+      Use case ends.
 
-### Extensions
-- **2a.** Invalid or missing session ID.  
-  - 2a1. System shows “Session not found”.  
-  - Use case ends.  
-- **2b.** Session already completed.  
-  - 2b1. System shows “Session already completed”.  
-  - Use case ends.  
+* 2c. Patient index is invalid.
+
+    * 2c1. AddressBook shows an error message.
+      Use case ends.
+
+**UC5: View today’s sessions**
+
+**MSS**
+
+1. Nurse requests to view today’s sessions.
+2. AddressBook retrieves today’s sessions.
+3. AddressBook displays the list of sessions, including patients, times, and care types.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No sessions scheduled.
+
+    * 2a1. AddressBook shows “No caring sessions scheduled for today.”
+      Use case ends.
+
+**UC6: Complete caring session**
+
+**MSS**
+
+1. Nurse enters the session ID to mark as completed.
+2. AddressBook validates the session ID.
+3. AddressBook marks the session as completed.
+4. AddressBook confirms success with session details.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid or missing session ID.
+
+    * 2a1. AddressBook shows “Session not found.”
+      Use case ends.
+
+* 2b. Session already completed.
+
+    * 2b1. AddressBook shows “Session already completed.”
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -539,15 +525,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -556,16 +542,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -573,6 +559,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
