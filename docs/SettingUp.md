@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Setting up and getting started"
-  pageNav: 3
+layout: default.md
+title: "Setting up and getting started"
+pageNav: 3
 ---
 
 # Setting up and getting started
@@ -29,8 +29,8 @@ If you plan to use Intellij IDEA (highly recommended):
    Note: Importing a Gradle project is slightly different from importing a normal Java project.
    </box>
 1. **Verify the setup**:
-   1. Run the `seedu.address.Main` and try a few commands.
-   1. [Run the tests](Testing.md) to ensure they all pass.
+    1. Run the `seedu.noknock.Main` and try a few commands.
+    1. [Run the tests](Testing.md) to ensure they all pass.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,6 +57,6 @@ If you plan to use Intellij IDEA (highly recommended):
 1. **Do the tutorials**
    These tutorials will help you get acquainted with the codebase.
 
-   * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
-   * [Adding a new command](https://se-education.org/guides/tutorials/ab3AddRemark.html)
-   * [Removing fields](https://se-education.org/guides/tutorials/ab3RemovingFields.html)
+    * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
+    * [Adding a new command](https://se-education.org/guides/tutorials/ab3AddRemark.html)
+    * [Removing fields](https://se-education.org/guides/tutorials/ab3RemovingFields.html)
