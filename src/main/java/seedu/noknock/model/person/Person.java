@@ -111,7 +111,6 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && ic.equals(otherPerson.ic)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -128,7 +127,6 @@ public class Person {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("ic", ic)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)

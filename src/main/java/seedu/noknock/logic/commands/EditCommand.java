@@ -235,7 +235,6 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(ic, otherEditPersonDescriptor.ic)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
@@ -246,7 +245,6 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("IC", ic)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
