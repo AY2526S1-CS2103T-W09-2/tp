@@ -37,10 +37,12 @@ public class ParserUtil {
         }
         return new Ward(trimmedWard);
     }
+
     /**
-     * @param ic
-     * @return
-     * @throws ParseException
+     * Parses a {@code String ic} into an {@code IC}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code ic} is invalid.
      */
     public static IC parseIC(String ic) throws ParseException {
         requireNonNull(ic);
@@ -50,6 +52,7 @@ public class ParserUtil {
         }
         return new IC(trimmedIC);
     }
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -78,10 +81,16 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Parses a {@code String ic} into an {@code IC} without validation.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws NullPointerException if {@code ic} is null.
+     */
     public static IC parseIc(String ic) throws ParseException {
         requireNonNull(ic);
         String trimmedIc = ic.trim();
-        return new IC(ic);
+        return new IC(trimmedIc);
     }
 
     /**
