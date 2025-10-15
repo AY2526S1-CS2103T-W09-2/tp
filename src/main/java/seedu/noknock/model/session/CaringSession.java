@@ -1,5 +1,7 @@
 package seedu.noknock.model.session;
 
+import static seedu.noknock.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.noknock.model.date.Date;
 import seedu.noknock.model.date.Time;
 import seedu.noknock.model.person.Patient;
@@ -25,6 +27,7 @@ public final class CaringSession {
      * @param time     the time of the session
      */
     public CaringSession(Patient patient, CareType careType, Note note, Date date, Time time) {
+        requireAllNonNull(patient, careType, note, date, time);
         this.patient = patient;
         this.careType = careType;
         this.note = note;
