@@ -5,27 +5,32 @@ package seedu.noknock.model.person;
  * <p>
  * A ward is identified by a room number that must be a positive integer followed by an alphabet (e.g., "2A").
  * This class provides validation for the ward format and stores the ward information for a person.
- * */
+ *
+ */
 public class Ward {
     public static final String REGEX_PATTERN = "\\d+[a-zA-Z]";
     public static final String MESSAGE_CONSTRAINTS = "Ward number must be a positive integer "
-            + "followed by an alphabet. E.g. 2A";
+        + "followed by an alphabet. E.g. 2A";
+
     private final String room;
 
     /**
      * Return a Ward object
+     *
      * @param room
      */
     public Ward(String room) {
         this.room = room;
     }
-    public String getRoom() {
-        return room;
-    }
 
     public static boolean isValidWard(String ward) {
         return ward.matches(REGEX_PATTERN);
     }
+
+    public String getRoom() {
+        return room;
+    }
+
     public String toString() {
         return "Ward " + room;
     }
