@@ -24,10 +24,8 @@ public class Note {
      * @param note A valid note (can be null or up to 200 characters).
      */
     public Note(String note) {
-        if (note != null) {
-            requireNonNull(note);
-            checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
-        }
+        requireNonNull(note);
+        checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
         value = note;
     }
 

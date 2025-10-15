@@ -115,7 +115,7 @@ public final class Patient extends Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getIC(), getTags());
+        return Objects.hash(getName(), getWard(), getIC(), getTags());
     }
 
     @Override
