@@ -1,6 +1,5 @@
 package seedu.noknock.model.session;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.noknock.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
