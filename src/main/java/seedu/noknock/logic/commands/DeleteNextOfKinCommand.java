@@ -1,7 +1,9 @@
 package seedu.noknock.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.noknock.commons.core.index.Index;
@@ -10,50 +12,62 @@ import seedu.noknock.logic.Messages;
 import seedu.noknock.logic.commands.exceptions.CommandException;
 import seedu.noknock.model.Model;
 import seedu.noknock.model.person.NextOfKin;
+import seedu.noknock.model.person.Patient;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a next of kin identified by patient and NOK indices.
  */
 public class DeleteNextOfKinCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-nok";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the next of kin identified by the index number used in the displayed next of kin list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+        + ": Deletes the next of kin identified by the patient index and NOK index.\n"
+        + "Parameters: PATIENT_INDEX NOK_INDEX (both must be positive integers)\n"
+        + "Example: " + COMMAND_WORD + " 1 2";
 
-    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted NextOfKin: %1$s";
-    public static final String MESSAGE_INVALID_PATIENT_INDEX = "Invalid next of kin index.\n"
-            + "Please use a number from the next of kin list.";
-    public static final String MESSAGE_PATIENT_NOT_FOUND = "NextOfKin not found at index %d";
+    public static final String MESSAGE_DELETE_NOK_SUCCESS = "Deleted NextOfKin: %1$s";
+    public static final String MESSAGE_INVALID_NOK_INDEX = "Invalid next of kin index for patient.";
 
-    private final Index targetIndex;
+    private final Index patientIndex;
+    private final Index nokIndex;
 
-    public DeleteNextOfKinCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * Creates a DeleteNextOfKinCommand to delete the specified next of kin of a patient.
+     *
+     * @param patientIndex Index of the patient in the filtered patient list.
+     * @param nokIndex     Index of the next of kin in the patient's next of kin list.
+     */
+    public DeleteNextOfKinCommand(Index patientIndex, Index nokIndex) {
+        this.patientIndex = patientIndex;
+        this.nokIndex = nokIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<NextOfKin> lastShownList = model.getFilteredPersonList().stream()
-                .filter(p -> p instanceof NextOfKin)
-                .map(p -> (NextOfKin) p)
-                .toList();
+        List<Patient> patientList = model.getFilteredPersonList();
 
-        int zeroBasedIndex = targetIndex.getZeroBased();
-        if (zeroBasedIndex >= lastShownList.size() || zeroBasedIndex < 0) {
-            throw new CommandException(MESSAGE_INVALID_PATIENT_INDEX);
+        if (patientIndex.getZeroBased() >= patientList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        NextOfKin nextOfKinToDelete = lastShownList.get(zeroBasedIndex);
-        if (nextOfKinToDelete == null) {
-            throw new CommandException(String.format(MESSAGE_PATIENT_NOT_FOUND, targetIndex.getOneBased()));
+        Patient patient = patientList.get(patientIndex.getZeroBased());
+        List<NextOfKin> nokList = patient.getNextOfKinList();
+
+        if (nokIndex.getZeroBased() >= nokList.size() || nokIndex.getZeroBased() < 0) {
+            throw new CommandException(MESSAGE_INVALID_NOK_INDEX);
         }
 
-        model.deletePerson(nextOfKinToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(nextOfKinToDelete)));
+        NextOfKin nokToDelete = nokList.get(nokIndex.getZeroBased());
+        List<NextOfKin> updatedNokList = new ArrayList<>(nokList);
+        updatedNokList.remove(nokToDelete);
+
+        Patient editedPatient = patient.withNextOfKinList(updatedNokList);
+        model.setPerson(patient, editedPatient);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_NOK_SUCCESS, Messages.format(nokToDelete)));
     }
 
     @Override
@@ -61,19 +75,18 @@ public class DeleteNextOfKinCommand extends Command {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof DeleteNextOfKinCommand otherDeleteCommand)) {
             return false;
         }
-
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return patientIndex.equals(otherDeleteCommand.patientIndex)
+            && nokIndex.equals(otherDeleteCommand.nokIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
+            .add("patientIndex", patientIndex)
+            .add("nokIndex", nokIndex)
+            .toString();
     }
 }
