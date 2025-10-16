@@ -73,7 +73,8 @@ public class EditPatientCommand extends Command {
         IC updatedIc = editPatientDescriptor.getIc().orElse(patientToEdit.getIC());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
-        return new Patient(updatedName, updatedWard, updatedIc, updatedTags);
+        return new Patient(updatedName, updatedWard, updatedIc, updatedTags).withNextOfKinList(
+            patientToEdit.getNextOfKinList());
     }
 
     @Override
