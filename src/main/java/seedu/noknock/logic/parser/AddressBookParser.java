@@ -8,9 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.noknock.commons.core.LogsCenter;
+import seedu.noknock.logic.commands.AddCaringSessionCommand;
 import seedu.noknock.logic.commands.AddPatientCommand;
 import seedu.noknock.logic.commands.ClearCommand;
 import seedu.noknock.logic.commands.Command;
+import seedu.noknock.logic.commands.DeleteCaringSessionCommand;
 import seedu.noknock.logic.commands.DeleteCommand;
 import seedu.noknock.logic.commands.DeleteNextOfKinCommand;
 import seedu.noknock.logic.commands.EditCommand;
@@ -59,11 +61,17 @@ public class AddressBookParser {
         case AddPatientCommand.COMMAND_WORD:
             return new AddPatientCommandParser().parse(arguments);
 
+        case AddCaringSessionCommand.COMMAND_WORD:
+            return new AddCaringSessionCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteCaringSessionCommand.COMMAND_WORD:
+            return new DeleteCaringSessionCommandParser().parse(arguments);
 
         case DeleteNextOfKinCommand.COMMAND_WORD:
             return new DeleteNextOfKinCommandParser().parse(arguments);
