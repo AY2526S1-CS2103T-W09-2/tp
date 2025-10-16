@@ -2,7 +2,7 @@ package seedu.noknock.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.noknock.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.noknock.testutil.TypicalPatients.getTypicalAddressBook;
 
 import java.nio.file.Path;
 

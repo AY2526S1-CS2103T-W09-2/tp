@@ -1,11 +1,8 @@
 package seedu.noknock.logic.parser;
 
 import static seedu.noknock.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_WARD;
 
@@ -34,12 +31,12 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WARD, PREFIX_IC, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_WARD, PREFIX_IC, PREFIX_TAG)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_WARD, PREFIX_IC)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_WARD, PREFIX_IC);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Ward ward = ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get());
         IC ic = ParserUtil.parseIC(argMultimap.getValue(PREFIX_IC).get());

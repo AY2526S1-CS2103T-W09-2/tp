@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.noknock.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.noknock.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.noknock.testutil.TypicalPersons.CARL;
-import static seedu.noknock.testutil.TypicalPersons.ELLE;
-import static seedu.noknock.testutil.TypicalPersons.FIONA;
-import static seedu.noknock.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.noknock.testutil.TypicalPatients.CARL;
+import static seedu.noknock.testutil.TypicalPatients.ELLE;
+import static seedu.noknock.testutil.TypicalPatients.FIONA;
+import static seedu.noknock.testutil.TypicalPatients.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;

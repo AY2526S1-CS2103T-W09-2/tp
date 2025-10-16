@@ -3,12 +3,11 @@ package seedu.noknock.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.noknock.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.noknock.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.noknock.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.noknock.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.noknock.logic.commands.CommandTestUtil.IC_DESC_AMY;
 import static seedu.noknock.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.noknock.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.noknock.logic.commands.CommandTestUtil.WARD_DESC_AMY;
 import static seedu.noknock.testutil.Assert.assertThrows;
-import static seedu.noknock.testutil.TypicalPersons.AMY;
+import static seedu.noknock.testutil.TypicalPatients.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,7 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.noknock.logic.commands.AddCommand;
+import seedu.noknock.logic.commands.AddPatientCommand;
 import seedu.noknock.logic.commands.CommandResult;
 import seedu.noknock.logic.commands.ListCommand;
 import seedu.noknock.logic.commands.exceptions.CommandException;
@@ -27,11 +26,11 @@ import seedu.noknock.model.Model;
 import seedu.noknock.model.ModelManager;
 import seedu.noknock.model.ReadOnlyAddressBook;
 import seedu.noknock.model.UserPrefs;
-import seedu.noknock.model.person.Person;
+import seedu.noknock.model.person.Patient;
 import seedu.noknock.storage.JsonAddressBookStorage;
 import seedu.noknock.storage.JsonUserPrefsStorage;
 import seedu.noknock.storage.StorageManager;
-import seedu.noknock.testutil.PersonBuilder;
+import seedu.noknock.testutil.PatientBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -165,9 +164,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddPatientCommand.COMMAND_WORD + NAME_DESC_AMY + WARD_DESC_AMY
+                + IC_DESC_AMY;
+        Patient expectedPerson = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

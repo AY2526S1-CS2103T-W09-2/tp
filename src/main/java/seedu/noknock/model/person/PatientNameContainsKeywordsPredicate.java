@@ -10,7 +10,7 @@ import seedu.noknock.commons.util.ToStringBuilder;
  * Tests that a {@code Person} is an instance of {@code Patient} and that their name
  * matches any of the given keywords.
  */
-public class PatientNameContainsKeywordsPredicate implements Predicate<Person> {
+public class PatientNameContainsKeywordsPredicate implements Predicate<Patient> {
     private final List<String> keywords;
 
     public PatientNameContainsKeywordsPredicate(List<String> keywords) {
@@ -18,7 +18,7 @@ public class PatientNameContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Patient person) {
         if (!(person instanceof Patient)) {
             return false;
         }

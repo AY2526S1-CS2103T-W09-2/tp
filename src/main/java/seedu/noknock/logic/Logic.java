@@ -8,7 +8,7 @@ import seedu.noknock.logic.commands.CommandResult;
 import seedu.noknock.logic.commands.exceptions.CommandException;
 import seedu.noknock.logic.parser.exceptions.ParseException;
 import seedu.noknock.model.ReadOnlyAddressBook;
-import seedu.noknock.model.person.Person;
+import seedu.noknock.model.person.Patient;
 
 /**
  * API of the Logic component
@@ -31,7 +31,7 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Patient> getFilteredPersonList();
 
     /**
      * Returns the user prefs' address book file path.

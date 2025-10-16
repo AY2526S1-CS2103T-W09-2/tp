@@ -8,7 +8,7 @@ import static seedu.noknock.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.noknock.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.noknock.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.noknock.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.noknock.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.noknock.testutil.TypicalPatients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ import seedu.noknock.logic.Messages;
 import seedu.noknock.model.Model;
 import seedu.noknock.model.ModelManager;
 import seedu.noknock.model.UserPrefs;
-import seedu.noknock.model.person.Person;
+import seedu.noknock.model.person.Patient;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,7 +29,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Patient personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
@@ -53,7 +53,7 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Patient personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,

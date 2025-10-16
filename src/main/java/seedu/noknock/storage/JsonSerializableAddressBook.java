@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.noknock.commons.exceptions.IllegalValueException;
 import seedu.noknock.model.AddressBook;
 import seedu.noknock.model.ReadOnlyAddressBook;
-import seedu.noknock.model.person.Person;
+import seedu.noknock.model.person.Patient;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,7 +20,6 @@ import seedu.noknock.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     /**
@@ -48,7 +47,7 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
+            Patient person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }

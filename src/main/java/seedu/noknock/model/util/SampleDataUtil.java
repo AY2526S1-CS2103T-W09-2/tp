@@ -7,27 +7,27 @@ import java.util.stream.Collectors;
 import seedu.noknock.model.AddressBook;
 import seedu.noknock.model.ReadOnlyAddressBook;
 import seedu.noknock.model.person.Name;
-import seedu.noknock.model.person.Person;
+import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh")),
-            new Person(new Name("Bernice Yu")),
-            new Person(new Name("Charlotte Oliveiro")),
-            new Person(new Name("David Li")),
-            new Person(new Name("Irfan Ibrahim")),
-            new Person(new Name("Roy Balakrishnan"))
+    public static Patient[] getSamplePersons() {
+        return new Patient[] {
+            new Patient(new Name("Alex Yeoh")),
+            new Patient(new Name("Bernice Yu")),
+            new Patient(new Name("Charlotte Oliveiro")),
+            new Patient(new Name("David Li")),
+            new Patient(new Name("Irfan Ibrahim")),
+            new Patient(new Name("Roy Balakrishnan"))
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
+        for (Patient samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;

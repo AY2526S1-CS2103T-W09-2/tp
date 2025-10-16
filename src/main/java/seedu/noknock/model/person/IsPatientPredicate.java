@@ -7,10 +7,10 @@ import seedu.noknock.commons.util.ToStringBuilder;
 /**
  * A predicate that tests whether a {@code Person} is an instance of {@code Patient}.
  */
-public class IsPatientPredicate implements Predicate<Person> {
+public class IsPatientPredicate implements Predicate<Patient> {
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Patient person) {
         return person instanceof Patient;
     }
 

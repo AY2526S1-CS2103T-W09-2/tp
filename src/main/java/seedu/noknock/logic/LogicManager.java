@@ -15,7 +15,7 @@ import seedu.noknock.logic.parser.AddressBookParser;
 import seedu.noknock.logic.parser.exceptions.ParseException;
 import seedu.noknock.model.Model;
 import seedu.noknock.model.ReadOnlyAddressBook;
-import seedu.noknock.model.person.Person;
+import seedu.noknock.model.person.Patient;
 import seedu.noknock.storage.Storage;
 
 /**
@@ -67,7 +67,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Patient> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 

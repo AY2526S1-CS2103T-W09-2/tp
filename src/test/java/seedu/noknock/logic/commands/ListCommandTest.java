@@ -3,7 +3,7 @@ package seedu.noknock.logic.commands;
 import static seedu.noknock.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.noknock.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.noknock.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.noknock.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.noknock.testutil.TypicalPatients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

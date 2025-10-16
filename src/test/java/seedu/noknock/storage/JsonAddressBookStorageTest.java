@@ -3,10 +3,10 @@ package seedu.noknock.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.noknock.testutil.Assert.assertThrows;
-import static seedu.noknock.testutil.TypicalPersons.ALICE;
-import static seedu.noknock.testutil.TypicalPersons.HOON;
-import static seedu.noknock.testutil.TypicalPersons.IDA;
-import static seedu.noknock.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.noknock.testutil.TypicalPatients.ALICE;
+import static seedu.noknock.testutil.TypicalPatients.HOON;
+import static seedu.noknock.testutil.TypicalPatients.IDA;
+import static seedu.noknock.testutil.TypicalPatients.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;

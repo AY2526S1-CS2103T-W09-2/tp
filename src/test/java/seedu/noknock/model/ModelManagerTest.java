@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.noknock.testutil.Assert.assertThrows;
-import static seedu.noknock.testutil.TypicalPersons.ALICE;
-import static seedu.noknock.testutil.TypicalPersons.BENSON;
+import static seedu.noknock.testutil.TypicalPatients.ALICE;
+import static seedu.noknock.testutil.TypicalPatients.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

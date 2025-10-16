@@ -1,8 +1,8 @@
 {
   "persons": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
+    "name": "This is an invalid name Hans Must$!",
+    "ward": "2A",
+    "ic": "S1234567A",
     "address": "4th street"
   } ]
 }

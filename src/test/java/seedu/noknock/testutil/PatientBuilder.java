@@ -15,9 +15,9 @@ import seedu.noknock.model.util.SampleDataUtil;
  */
 public class PatientBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_WARD = "2A";
-    public static final String DEFAULT_IC = "S1234567A";
+    public static final String DEFAULT_IC = "T1234567A";
 
     private Name name;
     private Ward ward;
@@ -25,7 +25,7 @@ public class PatientBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PatientBuilder} with the default details.
+     * Creates a {@code PersonBuilder} with the default details.
      */
     public PatientBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -35,7 +35,7 @@ public class PatientBuilder {
     }
 
     /**
-     * Initializes the PatientBuilder with the data of {@code patientToCopy}.
+     * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PatientBuilder(Patient patientToCopy) {
         name = patientToCopy.getName();
@@ -45,7 +45,7 @@ public class PatientBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Patient} that we are building.
+     * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PatientBuilder withName(String name) {
         this.name = new Name(name);
@@ -53,7 +53,15 @@ public class PatientBuilder {
     }
 
     /**
-     * Sets the {@code Ward} of the {@code Patient} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PatientBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PatientBuilder withWard(String ward) {
         this.ward = new Ward(ward);
@@ -61,22 +69,16 @@ public class PatientBuilder {
     }
 
     /**
-     * Sets the {@code Ic} of the {@code Patient} that we are building.
+     * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PatientBuilder withIc(String ic) {
+    public PatientBuilder withIC(String ic) {
         this.ic = new IC(ic);
         return this;
     }
 
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code Patient} that we are building.
-     */
-    public PatientBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
 
     public Patient build() {
         return new Patient(name, ward, ic, tags);
     }
+
 }
