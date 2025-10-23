@@ -18,6 +18,7 @@ public class EditNextOfKinCommandParser implements Parser<EditNextOfKinCommand> 
     /**
      * Parses the given {@code String} of arguments in the context of the EditPatientCommand
      * and returns an EditPatientCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
@@ -46,23 +47,24 @@ public class EditNextOfKinCommandParser implements Parser<EditNextOfKinCommand> 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_RELATIONSHIP);
 
-        EditNextOfKinCommand.EditNokDescriptor editNokDescriptor = new EditNextOfKinCommand.EditNokDescriptor();
+        EditNextOfKinCommand.EditNextOfKinDescriptor
+            editNextOfKinDescriptor = new EditNextOfKinCommand.EditNextOfKinDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editNokDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editNextOfKinDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editNokDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editNextOfKinDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_RELATIONSHIP).isPresent()) {
-            editNokDescriptor.setRelationship(ParserUtil.parseRelationship(argMultimap
+            editNextOfKinDescriptor.setRelationship(ParserUtil.parseRelationship(argMultimap
                 .getValue(PREFIX_RELATIONSHIP).get()));
         }
 
-        if (!editNokDescriptor.isAnyFieldEdited()) {
+        if (!editNextOfKinDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditNextOfKinCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditNextOfKinCommand(patientIndex, nokIndex, editNokDescriptor);
+        return new EditNextOfKinCommand(patientIndex, nokIndex, editNextOfKinDescriptor);
     }
 }

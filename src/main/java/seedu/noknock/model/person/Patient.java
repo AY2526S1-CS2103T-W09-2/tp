@@ -4,6 +4,7 @@ import static seedu.noknock.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -53,8 +54,18 @@ public final class Patient extends Person {
         return nextOfKinList;
     }
 
+    /**
+     * Returns a sorted list of caring sessions by date and time.
+     *
+     * @return Sorted list of caring sessions.
+     */
     public List<CaringSession> getCaringSessionList() {
-        return caringSessionList;
+        return caringSessionList.stream()
+            .sorted(
+                Comparator.comparing((CaringSession a) -> a.getDate().value)
+                    .thenComparing(a -> a.getTime().value)
+            )
+            .toList();
     }
 
     /**

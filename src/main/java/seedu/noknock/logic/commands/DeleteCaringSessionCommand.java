@@ -62,7 +62,7 @@ public class DeleteCaringSessionCommand extends Command {
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS,
-            patient.getName(), sessionToDelete));
+            Messages.formatSession(sessionToDelete), Messages.formatPatient(patient)));
     }
 
     @Override

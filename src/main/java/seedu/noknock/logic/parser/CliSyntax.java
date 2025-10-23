@@ -14,6 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_RELATIONSHIP = new Prefix("r/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_TIME = new Prefix("time/");
-    public static final Prefix PREFIX_TYPE = new Prefix("type/");
-    public static final Prefix PREFIX_NOTE = new Prefix("note/");
+    public static final Prefix PREFIX_CARE_TYPE = new Prefix("type/");
+    public static final Prefix PREFIX_NOTES = new Prefix("notes/");
+    public static final Prefix PREFIX_STATUS = new Prefix("status/");
 }

@@ -1,10 +1,10 @@
 package seedu.noknock.logic.parser;
 
 import static seedu.noknock.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_CARE_TYPE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -30,6 +30,7 @@ public class AddCaringSessionCommandParser implements Parser<AddCaringSessionCom
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCaringSessionCommand
      * and returns an AddCaringSessionCommand object for execution.
@@ -39,7 +40,7 @@ public class AddCaringSessionCommandParser implements Parser<AddCaringSessionCom
     @Override
     public AddCaringSessionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_TIME, PREFIX_TYPE, PREFIX_NOTE);
+            ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE, PREFIX_NOTES);
 
         Index patientIndex;
 
@@ -50,17 +51,17 @@ public class AddCaringSessionCommandParser implements Parser<AddCaringSessionCom
                 AddCaringSessionCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_TIME, PREFIX_TYPE)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddCaringSessionCommand.MESSAGE_USAGE));
+                AddCaringSessionCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_TIME, PREFIX_TYPE, PREFIX_NOTE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE, PREFIX_NOTES);
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-        CareType type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
-        Optional<String> noteValue = argMultimap.getValue(PREFIX_NOTE);
+        CareType type = ParserUtil.parseCareType(argMultimap.getValue(PREFIX_CARE_TYPE).get());
+        Optional<String> noteValue = argMultimap.getValue(PREFIX_NOTES);
         Note note;
         if (noteValue.isPresent()) {
             note = ParserUtil.parseNote(noteValue.get()); // may throw ParseException

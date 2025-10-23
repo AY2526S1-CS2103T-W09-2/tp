@@ -41,7 +41,9 @@ public class PatientPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PatientCard(person, getIndex() + 1).getRoot());
+                // Only show sessions when there is exactly one patient in the list
+                boolean showSessions = personListView.getItems().size() == 1;
+                setGraphic(new PatientCard(person, getIndex() + 1, showSessions).getRoot());
             }
         }
     }

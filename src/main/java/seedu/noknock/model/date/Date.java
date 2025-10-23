@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Dates must be in YYYY-MM-DD or DD-MM-YYYY format and must not be in the past";
+        "Dates must be in YYYY-MM-DD or DD-MM-YYYY format";
 
     public final LocalDate value;
 
@@ -34,7 +34,7 @@ public class Date {
      * Returns true if a given local date is a valid date.
      */
     public static boolean isValidDate(LocalDate test) {
-        return test != null && !test.isBefore(LocalDate.now());
+        return test != null;
     }
 
     /**
@@ -70,6 +70,13 @@ public class Date {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns the date in a pretty format: d MMMM yyyy (e.g., 5 January 2023).
+     */
+    public String printPretty() {
+        return value.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     @Override

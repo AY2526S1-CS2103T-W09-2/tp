@@ -29,8 +29,8 @@ import seedu.noknock.model.session.Note;
 public class AddCaringSessionCommandTest {
 
     private static final CaringSession VALID_SESSION =
-            new CaringSession(new CareType("medication"), new Note("Check sugar"),
-                    new Date("2025-12-25"), new Time("14:30"));
+        new CaringSession(new CareType("medication"), new Note("Check sugar"),
+            new Date("2025-12-25"), new Time("14:30"));
 
     @Test
     public void execute_validIndex_success() {
@@ -48,8 +48,7 @@ public class AddCaringSessionCommandTest {
         AddCaringSessionCommand command = new AddCaringSessionCommand(Index.fromOneBased(1), VALID_SESSION);
 
         String expectedMessage = String.format(AddCaringSessionCommand.MESSAGE_ADD_CARING_SESSION_SUCCESS,
-                VALID_SESSION.getCareType(), VALID_SESSION.getDate(), VALID_SESSION.getTime(),
-                VALID_SESSION.getNote(), Messages.formatPatient(expectedEditedPatient));
+            Messages.formatSession(VALID_SESSION), Messages.formatPatient(expectedEditedPatient));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -60,7 +59,7 @@ public class AddCaringSessionCommandTest {
         int outOfBoundsIndex = model.getFilteredPatientList().size() + 1;
 
         AddCaringSessionCommand command =
-                new AddCaringSessionCommand(Index.fromOneBased(outOfBoundsIndex), VALID_SESSION);
+            new AddCaringSessionCommand(Index.fromOneBased(outOfBoundsIndex), VALID_SESSION);
 
         assertCommandFailure(command, model, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
@@ -80,7 +79,7 @@ public class AddCaringSessionCommandTest {
         AddCaringSessionCommand command = new AddCaringSessionCommand(Index.fromOneBased(1), VALID_SESSION);
 
         assertCommandFailure(command, model,
-                String.format(AddCaringSessionCommand.MESSAGE_HAS_OVERLAPPING_SESSION, VALID_SESSION.getCareType()));
+            String.format(AddCaringSessionCommand.MESSAGE_HAS_OVERLAPPING_SESSION, VALID_SESSION.getCareType()));
     }
 
     @Test
