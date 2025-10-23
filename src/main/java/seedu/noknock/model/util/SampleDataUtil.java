@@ -1,6 +1,7 @@
 package seedu.noknock.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,12 +19,18 @@ import seedu.noknock.model.tag.Tag;
 public class SampleDataUtil {
     public static Patient[] getSamplePatients() {
         return new Patient[] {
-            new Patient(new Name("Alex Yeoh"), new Ward("2A"), new IC("S1234567A"), null),
-            new Patient(new Name("Bernice Yu"), new Ward("3B"), new IC("T1234567B"), null),
-            new Patient(new Name("Charlotte Oliveiro"), new Ward("2A"), new IC("S8654256A"), null),
-            new Patient(new Name("David Li"), new Ward("4C"), new IC("S3124567A"), null),
-            new Patient(new Name("Irfan Ibrahim"), new Ward("1B"), new IC("S1235767A"), null),
-            new Patient(new Name("Roy Balakrishnan"), new Ward("2B"), new IC("S3534657A"), null)
+            new Patient(new Name("Alex Yeoh"), new Ward("2A"), new IC("S1234567A"),
+                getTagSet("VIP", "Diabetic")),
+            new Patient(new Name("Bernice Yu"), new Ward("3B"), new IC("T1234567B"),
+                getTagSet("Allergic")),
+            new Patient(new Name("Charlotte Oliveiro"), new Ward("2A"), new IC("S8654256A"),
+                getTagSet("PostOp", "Dementia")),
+            new Patient(new Name("David Li"), new Ward("4C"), new IC("S3124567A"),
+                getTagSet("Isolation")),
+            new Patient(new Name("Irfan Ibrahim"), new Ward("1B"), new IC("S1235767A"),
+                getTagSet("Critical")),
+            new Patient(new Name("Roy Balakrishnan"), new Ward("2B"), new IC("S3534657A"),
+                new HashSet<>())
         };
     }
 
@@ -40,8 +47,8 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
 }
