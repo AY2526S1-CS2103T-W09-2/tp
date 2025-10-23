@@ -101,5 +101,17 @@ public class PatientCard extends UiPart<Region> {
                 sessions.getChildren().add(sessionContainer);
             }
         }
+
+        // Hide Next of Kin section if empty
+        nextOfKins.getParent().visibleProperty().bind(
+            javafx.beans.binding.Bindings.isNotEmpty(nextOfKins.getChildren())
+        );
+        nextOfKins.getParent().managedProperty().bind(nextOfKins.getParent().visibleProperty());
+
+        // Hide Sessions section if empty
+        sessions.getParent().visibleProperty().bind(
+            javafx.beans.binding.Bindings.isNotEmpty(sessions.getChildren())
+        );
+        sessions.getParent().managedProperty().bind(sessions.getParent().visibleProperty());
     }
 }
