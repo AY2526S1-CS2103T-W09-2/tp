@@ -1,0 +1,38 @@
+@startuml CaringSessionViewModel
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam backgroundColor #FEFEFE
+skinparam classBorderColor #666666
+
+package "Model" {
+    class Patient {
+        - caringSessionList: List<CaringSession>
+        + getCaringSessionList(): List<CaringSession>
+    }
+
+    class PatientCaringSession {
+        - patient: Patient
+        - session: CaringSession
+        + getPatient(): Patient
+        + getSession(): CaringSession
+    }
+
+    class CaringSession {
+        - date: Date
+        - time: Time
+        - careType: CareType
+        - status: Status
+        + getDate(): Date
+        + getTime(): Time
+        + getCareType(): CareType
+        + getStatus(): Status
+    }
+}
+
+PatientCaringSession *-right-> "1" Patient
+PatientCaringSession *-right-> "1" CaringSession
+Patient *-right-> "*" CaringSession : contains
+
+@enduml

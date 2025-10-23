@@ -1,0 +1,32 @@
+@startuml CaringSessionViewUI
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam backgroundColor #FEFEFE
+skinparam classBorderColor #666666
+
+package "UI" {
+    class CaringSessionPanel {
+        - flattenedItems: ObservableList<Object>
+        - sessionListView: ListView<Object>
+        + rebuildFromPatients(): void
+    }
+
+    class GroupedCaringSessionCell {
+        + updateItem(item: Object, empty: boolean): void
+    }
+
+    class CaringSessionCard {
+        + CaringSessionCard(session: PatientCaringSession)
+    }
+
+    class DateHeader {
+        + date: Date
+    }
+}
+
+' Virtual arrow to link with Model package (drawn only when included together)
+CaringSessionCard ..> PatientCaringSession : <<uses>>
+
+@enduml

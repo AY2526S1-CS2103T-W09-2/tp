@@ -252,14 +252,40 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+### Viewing Caring Sessions for Today/This Week
 
-### \[Proposed\] Data archiving
+#### Implementation
 
-_{Explain here how the data archiving feature will be implemented}_
+The viewing feature is implemented through `CaringSessionPanel`, which gathers all caring sessions from patients and groups them by date for display.
 
+**Key Components**
 
---------------------------------------------------------------------------------------------------------------------
+* **`CaringSessionPanel`**: Builds and manages the flattened list of grouped sessions.
+* **`GroupedCaringSessionCell`**: Renders either a date header or a session card depending on item type.
+* **`CaringSessionCard`**: Displays individual session details such as patient name, care type, time, and status.
+* **`DateHeader`**: Represents the date grouping shown above sessions of the same day.
+
+Below is the partial class diagram for the **UI layer**, showing the key display components and their relationships.
+
+<puml src="diagrams/CaringSessionViewUIClassDiagram.puml" alt="Caring Session View UI Class Diagram" />
+
+The **Model layer** defines how patient and session data are structured and linked.
+
+<puml src="diagrams/CaringSessionViewModelClassDiagram.puml" alt="Caring Session View Model Class Diagram" />
+
+**Process Overview**
+
+1. `CaringSessionPanel` receives an `ObservableList<Patient>` from the model.
+2. All sessions are collected, sorted by date and time, and grouped using a `LinkedHashMap<Date, List<PatientCaringSession>>`.
+3. A flattened list is built by alternating `DateHeader` and `PatientCaringSession` items.
+4. `GroupedCaringSessionCell` renders each entry as either a header or a `CaringSessionCard`.
+5. Any model update triggers a view refresh automatically.
+
+The sequence below illustrates this flow at runtime.
+
+<puml src="diagrams/CaringSessionViewSequenceDiagram.puml" alt="Caring Session View Sequence Diagram" />
+
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
