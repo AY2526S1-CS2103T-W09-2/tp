@@ -14,7 +14,7 @@ import seedu.noknock.model.session.CaringSession;
 import seedu.noknock.model.session.Note;
 
 /**
- * An UI component that displays information of a {@code Patient}.
+ * A UI component that displays information of a {@code Patient}.
  */
 public class PatientCard extends UiPart<Region> {
 
@@ -42,9 +42,10 @@ public class PatientCard extends UiPart<Region> {
     private VBox sessions;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Person}, index to display,
+     * and a flag indicating whether sessions should be shown.
      */
-    public PatientCard(Person person, int displayedIndex) {
+    public PatientCard(Person person, int displayedIndex, boolean showSessions) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -67,38 +68,40 @@ public class PatientCard extends UiPart<Region> {
                 nextOfKins.getChildren().add(nokLabel);
             }
 
-            // Display sessions as numbered list
-            int sessionIndex = 1;
-            for (CaringSession session : patient.getCaringSessionList()) {
-                Note note = session.getNote();
-                HBox sessionContainer = new HBox(0.5);
-                sessionContainer.setAlignment(Pos.TOP_LEFT);
+            // Only build and display sessions when allowed (e.g., list size == 1)
+            if (showSessions) {
+                int sessionIndex = 1;
+                for (CaringSession session : patient.getCaringSessionList()) {
+                    Note note = session.getNote();
+                    HBox sessionContainer = new HBox(0.5);
+                    sessionContainer.setAlignment(Pos.TOP_LEFT);
 
-                // Status indicator
-                Label statusBadge = new Label(session.isComplete() ? "✓" : "✗");
-                statusBadge.setMinWidth(20);
+                    // Status indicator
+                    Label statusBadge = new Label(session.isComplete() ? "✓" : "✗");
+                    statusBadge.setMinWidth(20);
 
-                // Session text
-                VBox sessionContent = new VBox(2);
-                String mainText = String.format("%d. %s - %s at %s",
-                    sessionIndex++,
-                    session.getCareType(),
-                    session.getDate().printPretty(),
-                    session.getTime());
+                    // Session text
+                    VBox sessionContent = new VBox(2);
+                    String mainText = String.format("%d. %s - %s at %s",
+                        sessionIndex++,
+                        session.getCareType(),
+                        session.getDate().printPretty(),
+                        session.getTime());
 
-                Label mainLabel = new Label(mainText);
-                mainLabel.setWrapText(true);
-                sessionContent.getChildren().add(mainLabel);
+                    Label mainLabel = new Label(mainText);
+                    mainLabel.setWrapText(true);
+                    sessionContent.getChildren().add(mainLabel);
 
-                if (!note.value.isEmpty()) {
-                    Label noteLabel = new Label("   Notes: " + note);
-                    noteLabel.setWrapText(true);
-                    noteLabel.getStyleClass().addAll("cell_small_label", "session-note");
-                    sessionContent.getChildren().add(noteLabel);
+                    if (!note.value.isEmpty()) {
+                        Label noteLabel = new Label("   Notes: " + note);
+                        noteLabel.setWrapText(true);
+                        noteLabel.getStyleClass().addAll("cell_small_label", "session-note");
+                        sessionContent.getChildren().add(noteLabel);
+                    }
+
+                    sessionContainer.getChildren().addAll(statusBadge, sessionContent);
+                    sessions.getChildren().add(sessionContainer);
                 }
-
-                sessionContainer.getChildren().addAll(statusBadge, sessionContent);
-                sessions.getChildren().add(sessionContainer);
             }
         }
 
@@ -108,7 +111,7 @@ public class PatientCard extends UiPart<Region> {
         );
         nextOfKins.getParent().managedProperty().bind(nextOfKins.getParent().visibleProperty());
 
-        // Hide Sessions section if empty
+        // Hide Sessions section if empty (sessions will be empty when showSessions == false)
         sessions.getParent().visibleProperty().bind(
             javafx.beans.binding.Bindings.isNotEmpty(sessions.getChildren())
         );
