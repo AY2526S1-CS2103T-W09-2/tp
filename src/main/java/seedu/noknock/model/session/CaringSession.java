@@ -136,11 +136,4 @@ public final class CaringSession {
             .add("status", getStatus())
             .toString();
     }
-
-    /**
-     * Returns a user-friendly string representation of the caring session.
-     */
-    public String toDisplayString() {
-        return String.format("[%s] %s on %s at %s (Notes: %s)", status, careType, date.printPretty(), time, note);
-    }
 }
