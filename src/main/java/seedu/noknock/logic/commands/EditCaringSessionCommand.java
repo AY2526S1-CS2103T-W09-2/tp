@@ -1,6 +1,11 @@
 package seedu.noknock.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_CARE_TYPE;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -29,10 +34,20 @@ public class EditCaringSessionCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-session";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of a caring session for a patient.\n"
-        + "Parameters: PATIENT_INDEX SESSION_INDEX "
-        + "[careType=CARE_TYPE] [note=NOTE] [date=DATE] [time=TIME] [status=STATUS]\n"
-        + "Example: " + COMMAND_WORD + " 1 2 careType=Physio note=\"Follow up\" status=Complete";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of a caring session for a patient "
+        + "identified by the index number used in the displayed patient list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: PATIENT_INDEX (must be a positive integer) "
+        + "SESSION_INDEX (must be a positive integer) "
+        + "[" + PREFIX_CARE_TYPE + "CARE_TYPE] "
+        + "[" + PREFIX_NOTES + "NOTE] "
+        + "[" + PREFIX_DATE + "DATE] "
+        + "[" + PREFIX_TIME + "TIME] "
+        + "[" + PREFIX_STATUS + "STATUS]\n"
+        + "Example: " + COMMAND_WORD + " 1 2 "
+        + PREFIX_CARE_TYPE + "Physio "
+        + PREFIX_NOTES + "\"Follow up\" "
+        + PREFIX_STATUS + "Complete";
 
     public static final String MESSAGE_EDIT_SESSION_SUCCESS = "Edited CaringSession: %1$s of Patient: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
