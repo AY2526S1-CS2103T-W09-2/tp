@@ -12,12 +12,13 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class UniquePatientList
+Class NextOfKinList
+Class CaringSessionList
+Class Patient
 Class Name
-Class Phone
+Class Ward
+Class IC
 Class Tag
 
 Class I #FFFFFF
@@ -35,20 +36,19 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniquePatientList
+UniquePatientList --> "~* all" Patient
+Patient *--> Name
+Patient *--> Ward
+Patient *--> IC
+Patient *--> "1" NextOfKinList
+Patient *--> "1" CaringSessionList
+Patient *--> "*" Tag
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Patient -[hidden]up--> I
+UniquePatientList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Name -[hidden]right-> Ward
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Patient
 @enduml

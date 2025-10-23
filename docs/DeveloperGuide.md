@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatientListPanel`, `CaringSessionListPanel `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Patient` object residing in the `Model`.
 
 ### Logic component
 
@@ -103,7 +103,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeletePatientCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -126,14 +126,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
+* stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Patient` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Patient` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -179,11 +179,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete-patient 5` command to delete the 5th patient in the address book. The `delete-patient` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete-patient 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add-patient n/David …​` to add a new patient. The `add-patient` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -716,39 +716,53 @@ These instructions combine quick-start steps and feature-specific test cases to 
 ### Patient management
 
 #### Add patient
+Add patient to NOKnock
 
 1. Command: `add-patient n/Name ic/IC_NUMBER w/WARD [t/TAG]...`
 2. Expected: success message with name and IC.
 3. Edge cases: add with duplicate IC → `Patient with IC ... already exists`. Missing params → parameter-specific error.
 
 #### List and view
+List and view all patients in the database.
 
-1. `list-patients` — Expected: all patients.
-2. `view-patient 1` — Expected: full profile including NOKs and sessions.
-3. Invalid index: `view-patient 999` → `Patient not found at index 999`.
+1. Test case: `list-patients` \
+Expected: all patients.
+2. Test case: `view-patient 1` \
+Expected: full profile including NOKs and sessions.
+3. Test case: `view-patient 999` (Invalid Index where index > size) 
+Expected: Index Error → `Patient not found at index 999`.
 
 #### Edit patient
+Edit a patient's details.
 
-1. `edit-patient 1 n/NewName` — Expected: `Patient updated: NewName (IC)`.
-2. Invalid index or duplicate IC → appropriate error.
+1. Test Case: `edit-patient 1 n/Bob w/1A`  \
+Expected: The first patient's name and ward are updated to "Bob" and "1A" respectively.
+2. Test Case: Invalid index \
+Expected: Index Error
+3. Test Case: duplicate IC \
+Expected: Duplicate Error
 
 #### Delete patient (important: cascades)
 
-1. Ensure multiple patients listed with `list-patients`.
-2. `delete-patient 1` — Expected: patient deleted and related NOKs/sessions removed; status message updated.
-3. `delete-patient 0` / `delete-patient` / `delete-patient x` where x > size — Expected: error message, no deletion.
+Prerequisites: Ensure multiple patients listed with `list-patients`.
+1. Test case: `delete-patient 1` \ 
+Expected: patient deleted and related NOKs/sessions removed; status message updated. 
+2. Test case: `delete-patient 0` / `delete-patient` / `delete-patient x` where x > size \
+Expected: error message, no deletion.
 
 ### Next-of-Kin (NOK) management
 
 #### Add NOK
 
-1. `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP`
-2. Expected: success message. Duplicate NOK for same patient → `NOK with same name and phone already exists for this patient`.
+1. Test case: `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP` \
+Expected: Success message. 
+2. Test case: Duplicate NOK with same name and phone for same patient \
+Expected: Duplicate error. Message -> `NOK with same name and phone already exists for this patient`.
 
 #### Edit NOK
 
-1. `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`
-2. Expected: updated NOK message or error if patient/NOK not found.
+1. Test case: `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`\
+Expected: updated NOK message or error if patient/NOK not found.
 
 #### Delete NOK
 
@@ -758,9 +772,9 @@ These instructions combine quick-start steps and feature-specific test cases to 
 
 #### Add session
 
-1. `add-session PATIENT_INDEX d/DATE time/TIME type/CARE_TYPE [notes/NOTES]`
-2. Example: `add-session 1 d/2024-12-25 time/14:30 type/medication notes/Give insulin shot`
-3. Expected: `Caring session added for <Name>: <type> on <DATE> at <TIME>`. Invalid date/time → parameter-specific error.
+1. Command: `add-session PATIENT_INDEX d/DATE time/TIME type/CARE_TYPE [notes/NOTES]` \ 
+Expected: `Caring session added for <Name>: <type> on <DATE> at <TIME>`. Invalid date/time → parameter-specific error.
+2. Example: `add-session 1 d/2024-12-25 time/14:30 type/medication notes/Give insulin shot` \ 
 
 #### Edit session
 
