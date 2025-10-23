@@ -1,11 +1,11 @@
 package seedu.noknock.ui;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import seedu.noknock.model.session.PatientCaringSession;
 
 /**

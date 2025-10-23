@@ -11,7 +11,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.noknock.commons.core.LogsCenter;
-import seedu.noknock.logic.Messages;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.session.PatientCaringSession;
 

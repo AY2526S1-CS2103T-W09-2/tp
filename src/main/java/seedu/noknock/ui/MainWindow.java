@@ -16,7 +16,6 @@ import seedu.noknock.logic.Logic;
 import seedu.noknock.logic.commands.CommandResult;
 import seedu.noknock.logic.commands.exceptions.CommandException;
 import seedu.noknock.logic.parser.exceptions.ParseException;
-import seedu.noknock.model.session.CaringSession;
 
 /**
  * The Main Window. Provides the basic application layout containing
