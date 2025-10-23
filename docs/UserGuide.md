@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # NOKnock User Guide
@@ -10,10 +10,10 @@
 
 NOKnock replaces manual tracking and scheduling methods, improving coordination, safety, and productivity in elderly care.
 
-<!-- * Table of Contents -->
+<!--* Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Quick start
 
@@ -22,24 +22,24 @@ NOKnock replaces manual tracking and scheduling methods, improving coordination,
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W09-2/tp/releases).
 
-    Copy the file to the folder you wish to use as your NOKnock home folder.
+   Copy the file to the folder you wish to use as your NOKnock home folder.
 3. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar noknock.jar` command to run the application.
 
-    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
 
 4. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-   * `list-patients` — Lists all patients.
-   * `add-patient n/Dylan ic/S1234567A w/2A` — Adds a patient named Dylan.
-   * `add-nok 1 n/Oad p/+6598765432 r/son` — Adds a NOK for patient #1.
-   * `sessions-today` — Shows today’s caring sessions.
-   * `exit` — Exits the app.
+    * `list-patients` — Lists all patients.
+    * `add-patient n/Dylan ic/S1234567A w/2A` — Adds a patient named Dylan.
+    * `add-nok 1 n/Oad p/+6598765432 r/son` — Adds a NOK for patient #1.
+    * `sessions-today` — Shows today’s caring sessions.
+    * `exit` — Exits the app.
 
 5. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -87,10 +87,9 @@ Displays all patients with basic information.
 `list-patients`
 
 **Output:**
+
 * Success → Table with Index, Name, IC, Ward, Tags, NOK List, Caring Session List
 * None → `No patients in the system`
-
----
 
 ### Adding a patient: `add-patient`
 
@@ -100,19 +99,21 @@ Creates a new patient record.
 `add-patient n/NAME ic/IC_NUMBER w/WARD [t/TAG]...`
 
 **Examples:**
+
 * `add-patient n/Dylan w/2A ic/S1234567A`
 * `add-patient n/Javier w/8B ic/S9876543B t/diabetes t/mobility-issues`
 
 <box type="tip" seamless>
-Tags are optional and can be used to describe medical or care-related info.
+
+**Note:** Tags are optional and can be used to describe medical or care-related info.
+
 </box>
 
 **Output:**
+
 * Success → `Patient added: Dylan (S1234567A)`
 * Duplicate → `Patient with IC S1234567A already exists`
 * Invalid input → parameter-specific error message
-
----
 
 ### Editing a patient: `edit-patient`
 
@@ -122,15 +123,15 @@ Updates an existing patient’s information.
 `edit-patient INDEX [n/NAME] [ic/IC_NUMBER] [w/WARD] [t/TAG]...`
 
 **Examples:**
+
 * `edit-patient 1 n/Yue Yang`
 * `edit-patient 2 t/diabetes t/wheelchair`
 
 **Output:**
+
 * Success → `Patient updated: Yue Yang (S1234567A)`
 * Invalid index → `Patient index X is out of range`
 * Duplicate IC → `IC number already exists for another patient`
-
----
 
 ### Deleting a patient: `delete-patient`
 
@@ -143,14 +144,15 @@ Removes a patient and all associated data (NOKs, sessions).
 `delete-patient 1`
 
 **Output:**
+
 * Success → `Patient deleted: Yue Yang (S1234567A)`
 * Failure → `Patient not found at index X`
 
 <box type="warning" seamless>
-Deleting a patient also deletes all related NOK and caring session data.
-</box>
 
----
+**Caution:** Deleting a patient also deletes all related NOK and caring session data.
+
+</box>
 
 ### Viewing patient details: `view-patient`
 
@@ -163,10 +165,9 @@ Shows full patient details including NOKs and upcoming sessions.
 `view-patient 2`
 
 **Output:**
+
 * Success → Full profile with NOK list and upcoming sessions
 * Failure → `Patient not found at index X`
-
----
 
 ### Finding patients by name: `find-patient`
 
@@ -176,14 +177,14 @@ Search for patients by name (case-insensitive, partial matching).
 `find-patient KEYWORD [MORE_KEYWORDS]...`
 
 **Examples:**
+
 * `find-patient dylan`
 * `find-patient javier wong`
 
 **Output:**
+
 * Success → `2 patient(s) found:` + list
 * None → `No patients found matching: javier wong`
-
----
 
 ### Finding patients by NOK name: `find-by-nok`
 
@@ -193,14 +194,16 @@ Search for patients based on their NOK’s name.
 `find-by-nok KEYWORD [MORE_KEYWORDS]...`
 
 **Examples:**
+
 * `find-by-nok oad`
 * `find-by-nok javier smith`
 
 **Output:**
+
 * Success → `1 patient(s) found (via NOK search):` + list
 * None → `No patients found with NOK matching: oad`
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Next-of-Kin (NOK) Management
 
@@ -212,14 +215,14 @@ Adds a Next-of-Kin contact for a patient.
 `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP`
 
 **Examples:**
+
 * `add-nok 1 n/Oad p/+6598765432 r/son`
 * `add-nok 2 n/Dr. Kapikapi p/+656234-5678 r/doctor`
 
 **Output:**
+
 * Success → `NOK added for Dylan: Oad (son, +6598765432)`
 * Duplicate → `NOK with same name and phone already exists for this patient`
-
----
 
 ### Editing a NOK: `edit-nok`
 
@@ -232,10 +235,9 @@ Updates NOK details.
 `edit-nok 1 1 p/+6588888888`
 
 **Output:**
+
 * Success → `NOK updated for Dylan: Oad (son, +6588888888)`
 * Failure → `Patient/NOK not found`
-
----
 
 ### Deleting a NOK: `delete-nok`
 
@@ -248,10 +250,11 @@ Removes a NOK from a patient.
 `delete-nok 1 2`
 
 **Output:**
+
 * Success → `NOK deleted for Dylan: Oad Smith`
 * Failure → `Patient/NOK not found`
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Caring Session Management
 
@@ -263,14 +266,14 @@ Schedules a care session for a patient.
 `add-session PATIENT_INDEX d/DATE time/TIME type/CARE_TYPE [notes/NOTES]`
 
 **Examples:**
+
 * `add-session 1 d/2024-12-25 time/14:30 type/medication notes/Give insulin shot`
 * `add-session 2 d/25-12-2024 time/2:30pm type/hygiene`
 
 **Output:**
+
 * Success → `Caring session added for Dylan: medication on 2024-12-25 at 14:30`
 * Failure → parameter-specific error (e.g. invalid date/time)
-
----
 
 ### Editing a session: `edit-session`
 
@@ -280,14 +283,14 @@ Edit an existing care session for a patient. You may also update the session sta
 `edit-session PATIENT_INDEX SESSION_INDEX [d/DATE] [time/TIME] [type/CARE_TYPE] [notes/NOTES] [status/STATUS]`
 
 **Examples:**
+
 * `edit-session 1 2 d/2024-12-25 t/14:30 type/medication notes/Adjust dose status/complete`
 * `edit-session 2 1 status/incomplete`
 
 **Output:**
+
 * Success -> `Session updated: Dylan - medication - 2024-12-25 14:30 (complete)`
 * Failure -> parameter-specific error (e.g. invalid date/time or indices)
-
----
 
 ### Deleting a session: `delete-session`
 
@@ -300,10 +303,9 @@ Deletes a care session from a patient.
 `delete-session 1 2`
 
 **Output:**
+
 * Success → `Caring session deleted for Dylan: medication on 2024-12-25 at 14:30`
 * Failure → `Patient/Session not found`
-
----
 
 ### Viewing today’s sessions: `sessions-today`
 
@@ -313,10 +315,9 @@ Displays all caring sessions scheduled for today.
 `sessions-today`
 
 **Output:**
+
 * Success → `Today's caring sessions (2025-10-22):` + list
 * None → `No caring sessions scheduled for today`
-
----
 
 ### View this week’s sessions: `sessions-week`
 
@@ -326,10 +327,13 @@ Displays all caring sessions scheduled for the current week (Monday to Sunday).
 `sessions-week`
 
 **Output:**
+
 * Success → `This week's caring sessions (2025-10-20 to 2025-10-26):` + list
 * None → `No caring sessions scheduled for this week`
 
 ---
+
+## Data Management
 
 ### Saving the data
 
@@ -340,8 +344,11 @@ NOKnock data are saved in the hard disk automatically after any command that cha
 NOKnock data are saved automatically as a JSON file `[JAR file location]/data/noknock.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-If your changes to the data file makes its format invalid, NOKnock will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+
+**Caution:** If your changes to the data file makes its format invalid, NOKnock will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+
 Furthermore, certain edits can cause the NOKnock to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ---
@@ -362,7 +369,7 @@ Furthermore, certain edits can cause the NOKnock to behave in unexpected ways (e
 
 ## Command Summary
 
-| Action                    | Format, Examples                                                                                                                                                                          |
+| **Action**                | **Format / Example**                                                                                                                                                                      |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **List Patients**         | `list-patients`                                                                                                                                                                           |
 | **View Patient**          | `view-patient INDEX`                                                                                                                                                                      |
