@@ -13,7 +13,7 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project by the [SE-EDU initiative](https://se-education.org/). NOKnock uses the following libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -277,11 +277,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* nursing home staff who need to manage many patients and their Next-of-Kin (NOK) contacts
-* prefer command-line interfaces over GUIs for speed and efficiency
-* can type fast and are comfortable using text-based systems
-* need to track patient information, NOK details, and daily caring sessions
-* value lightweight, reliable tools that reduce manual paperwork and coordination errors
+* Nursing home staff who need to manage many patients and their Next-of-Kin (NOK) contacts
+* Prefer command-line interfaces over GUIs for speed and efficiency
+* Can type fast and are comfortable using text-based systems
+* Need to track patient information, NOK details, and daily caring sessions
+* Value lightweight, reliable tools that reduce manual paperwork and coordination errors
 
 **Value proposition**: Replace manual scheduling and contact-tracking methods with a fast,
 CLI-based system that improves coordination, safety, and productivity in elderly care.
@@ -320,145 +320,293 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | nurse on night shift | enable dark mode                                  | reduce eye strain during late hours                        |
 | `*`      | nurse                | categorize patients by urgency/severity           | prioritize care for critical patients                      |
 
-*{More to be added}*
-
 ### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, the **System** is `NOKnock` and the **Actor** is the `nurse`, unless specified otherwise.
 
-**UC1: Add patient**
+#### UC1: Add patient
 
 **MSS**
 
-1. Nurse enters the add-patient command with patient details.
-2. AddressBook validates the inputs (name, IC, tags).
-3. AddressBook adds the new patient to the patient list.
-4. AddressBook confirms success with a message showing the patient’s name and IC.
+1. Nurse enters `add-patient n/NAME ic/IC_NUMBER w/WARD [t/TAG]...`.
+2. System validates inputs.
+3. System adds the patient to the patient list.
+4. System returns success message with patient name and IC.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Inputs are invalid.
-
-    * 2a1. AddressBook shows an error message explaining the correct format.
-    * 2a2. Nurse re-enters the details.
-      Use case resumes from step 2.
-
-* 2b. IC number already exists.
-
-    * 2b1. AddressBook shows “Patient with IC … already exists.”
-      Use case ends.
-
-**UC2: Edit patient**
-
-**MSS**
-
-1. Nurse requests to edit a patient.
-2. AddressBook accepts the parameters.
-3. AddressBook updates the patient’s information.
-4. AddressBook displays confirmation.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The patient could not be found.
+* 2a. Invalid input → System shows parameter-specific error.
   Use case ends.
 
-* 2b. New name is a duplicate of another patient.
-
-    * 2b1. AddressBook rejects the update and shows an error message.
-      Use case ends.
-
-**UC3: Add next of kin (NOK)**
-
-**MSS**
-
-1. Nurse requests to add a next of kin.
-2. AddressBook accepts the parameters.
-3. AddressBook associates the next of kin with the patient.
-4. AddressBook displays confirmation.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The patient could not be found.
+* 2b. Duplicate IC → System shows `Patient with IC ... already exists`.
   Use case ends.
 
-* 2b. NOK already exists for the patient.
-
-    * 2b1. AddressBook shows “NOK already exists.”
-      Use case ends.
-
-**UC4: Add caring session**
+#### UC2: Edit patient
 
 **MSS**
 
-1. Nurse requests to add a caring session.
-2. AddressBook validates the parameters.
-3. AddressBook adds the session to the patient’s schedule.
-4. AddressBook confirms success with details of the session.
+1. Nurse enters `edit-patient INDEX [n/NAME] [ic/IC_NUMBER] [w/WARD] [t/TAG]...`.
+2. System validates index and inputs.
+3. System updates patient record.
+4. System returns confirmation.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Date is invalid or in the past.
+* 2a. Index out of range → System shows `Patient index X is out of range`.
+  Use case ends.
 
-    * 2a1. AddressBook shows “Date must not be in the past.”
-      Use case ends.
+* 2b. Duplicate IC → System shows `IC number already exists for another patient`.
+  Use case ends.
 
-* 2b. Time format is invalid.
-
-    * 2b1. AddressBook shows “Invalid time format.”
-      Use case ends.
-
-* 2c. Patient index is invalid.
-
-    * 2c1. AddressBook shows an error message.
-      Use case ends.
-
-**UC5: View today’s sessions**
+#### UC3: Delete patient
 
 **MSS**
 
-1. Nurse requests to view today’s sessions.
-2. AddressBook retrieves today’s sessions.
-3. AddressBook displays the list of sessions, including patients, times, and care types.
+1. Nurse enters `delete-patient INDEX`.
+2. System validates index.
+3. System deletes patient and cascades deletion of related NOKs and sessions.
+4. System returns deletion confirmation.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. No sessions scheduled.
+* 2a. Invalid index → System shows `Patient not found at index X`.
+  Use case ends.
 
-    * 2a1. AddressBook shows “No caring sessions scheduled for today.”
-      Use case ends.
+* 2b. Confirm prompt (if implemented) → Nurse confirms/cancels.
+  Use case ends.
 
-**UC6: Complete caring session**
+#### UC4: View patient details
 
 **MSS**
 
-1. Nurse enters the session ID to mark as completed.
-2. AddressBook validates the session ID.
-3. AddressBook marks the session as completed.
-4. AddressBook confirms success with session details.
+1. Nurse enters `view-patient INDEX`.
+2. System retrieves patient, NOK list, and upcoming sessions.
+3. System displays full profile.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Invalid or missing session ID.
+* 2a. Invalid index → System shows `Patient not found at index X`.
+  Use case ends.
 
-    * 2a1. AddressBook shows “Session not found.”
-      Use case ends.
+#### UC5: List patients
 
-* 2b. Session already completed.
+**MSS**
 
-    * 2b1. AddressBook shows “Session already completed.”
-      Use case ends.
+1. Nurse enters `list-patients`.
+2. System displays all patients (index, name, IC, ward, tags).
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No patients → System shows `No patients in the system`.
+  Use case ends.
+
+#### UC6: Add Next-of-Kin (NOK)
+
+**MSS**
+
+1. Nurse enters `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP`.
+2. System validates patient index and NOK fields.
+3. System associates NOK with patient and persists.
+4. System returns confirmation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid patient index → System shows `Patient not found at index X`.
+  Use case ends.
+
+* 2b. Duplicate NOK → System shows `NOK with same name and phone already exists for this patient`.
+  Use case ends.
+
+#### UC7: Edit NOK
+
+**MSS**
+
+1. Nurse enters `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`.
+2. System validates indices and inputs.
+3. System updates NOK record.
+4. System returns confirmation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid indices → System shows `Patient/NOK not found`.
+  Use case ends.
+
+#### UC8: Delete NOK
+
+**MSS**
+
+1. Nurse enters `delete-nok PATIENT_INDEX NOK_INDEX`.
+2. System validates indices.
+3. System removes NOK from patient.
+4. System returns confirmation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid indices → System shows `Patient/NOK not found`.
+  Use case ends.
+
+#### UC9: Add caring session
+
+**MSS**
+
+1. Nurse enters `add-session PATIENT_INDEX d/DATE time/TIME type/CARE_TYPE [notes/NOTES]`.
+2. System validates index, date, time, and business rules (e.g., not in past).
+3. System adds session to patient schedule and persists.
+4. System returns confirmation with session details.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid date/time → System shows parameter-specific error.
+  Use case ends.
+
+* 2b. Invalid patient index → System shows `Patient not found at index X`.
+  Use case ends.
+
+#### UC10: Edit caring session
+
+**MSS**
+
+1. Nurse enters `edit-session PATIENT_INDEX SESSION_INDEX [d/DATE] [time/TIME] [type/CARE_TYPE] [notes/NOTES] [status/STATUS]`.
+2. System validates indices and fields.
+3. System updates session and persists.
+4. System returns confirmation including updated status.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid indices → System shows `Patient/Session not found`.
+  Use case ends.
+
+* 2b. Invalid date/time/status → System shows parameter-specific error.
+  Use case ends.
+
+#### UC11: Delete caring session
+
+**MSS**
+
+1. Nurse enters `delete-session PATIENT_INDEX SESSION_INDEX`.
+2. System validates indices.
+3. System deletes the session from the patient.
+4. System returns confirmation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid indices → System shows `Patient/Session not found`.
+  Use case ends.
+
+#### UC12: View today’s sessions
+
+**MSS**
+
+1. Nurse enters `sessions-today`.
+2. System collects sessions scheduled for today.
+3. System displays list or message if none.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No sessions → System shows `No caring sessions scheduled for today`.
+  Use case ends.
+
+#### UC13: View this week’s sessions
+
+**MSS**
+
+1. Nurse enters `sessions-week`.
+2. System computes current week range and collects sessions.
+3. System displays list or message if none.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No sessions → System shows `No caring sessions scheduled for this week`.
+  Use case ends.
+
+#### UC14: Complete caring session
+
+**MSS**
+
+1. Nurse enters `edit-session PATIENT_INDEX SESSION_INDEX status/complete` (or uses dedicated complete command).
+2. System validates indices and current status.
+3. System marks session as completed and persists.
+4. System returns confirmation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid indices → System shows `Session not found`.
+  Use case ends.
+
+* 2b. Already completed → System shows `Session already completed`.
+  Use case ends.
+
+#### UC15: Find patients by name
+
+**MSS**
+
+1. Nurse enters `find-patient KEYWORD [MORE_KEYWORDS]...`.
+2. System performs case-insensitive partial match search on patient names.
+3. System displays matching results or none message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No matches → System shows `No patients found matching: ...`.
+  Use case ends.
+
+#### UC16: Find patients by NOK name
+
+**MSS**
+
+1. Nurse enters `find-by-nok KEYWORD [MORE_KEYWORDS]...`.
+2. System searches NOK lists and returns associated patients.
+3. System displays results or none message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No matches → System shows `No patients found with NOK matching: ...`.
+  Use case ends.
+
+#### UC17: Help and command discovery
+
+**MSS**
+
+1. Nurse enters `help` or uses Help menu/F1.
+2. System displays help window or inline guidance.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Help window minimized → System attempts to restore or notifies user where to find it.
+  Use case ends.
 
 ### Non-Functional Requirements
 
@@ -475,8 +623,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Commands should be clear and unambiguous for non-tech-savvy users; a user with no prior CLI knowledge should find the features intuitive to use.
 12. All new code modules must include automated unit tests that cover at least **80%** of the new logic.
 13. The system must be highly available (target **>= 99.9% uptime**) to ensure staff can access it whenever needed, including during emergencies.
-
-{More to be added}
 
 ### Glossary
 
@@ -512,53 +658,151 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+These instructions combine quick-start steps and feature-specific test cases to provide a practical checklist for manual testing. They are a starting point; testers should perform additional exploratory testing.
 
 <box type="info" seamless>
 
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**Note:** Commands shown use the CLI\/GUI command box. Replace `INDEX`, `PATIENT_INDEX`, `NOK_INDEX`, `SESSION_INDEX`, `NAME`, `IC_NUMBER`, `WARD`, `DATE`, `TIME`, `CARE_TYPE`, `PHONE`, `RELATIONSHIP`, `NOTES` with appropriate values.
 
 </box>
 
-### Launch and shutdown
+### Launch and quick start
 
 1. Initial launch
+    1. Place the jar file in an empty folder.
+    2. Run `java -jar noknock.jar` (or double-click the jar).
+        - Expected: GUI opens with sample data and command box visible.
+    3. Try `help`.
+        - Expected: Help window opens / help message shows.
 
-    1. Download the jar file and copy into an empty folder
+2. Quick start commands (verify basic command parsing and responses)
+    1. `list-patients` — Expected: table or list of patients or `No patients in the system`.
+    2. `add-patient n/Dylan ic/S1234567A w/2A` — Expected: `Patient added: Dylan (S1234567A)`.
+    3. `add-nok 1 n/Oad p/+6598765432 r/son` — Expected: `NOK added for Dylan: Oad (son, +6598765432)`.
+    4. `sessions-today` — Expected: list of today's sessions or `No caring sessions scheduled for today`.
+    5. `exit` — Expected: application exits cleanly.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+3. Window preferences
+    1. Resize/move window and close.
+    2. Re-launch the app.
+        - Expected: previous window size and position restored (preferences saved).
 
-1. Saving window preferences
+### Patient management
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+#### Add patient
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1. Command: `add-patient n/Name ic/IC_NUMBER w/WARD [t/TAG]...`
+2. Expected: success message with name and IC.
+3. Edge cases: add with duplicate IC → `Patient with IC ... already exists`. Missing params → parameter-specific error.
 
-1. _{ more test cases …​ }_
+#### List and view
 
-### Deleting a person
+1. `list-patients` — Expected: all patients.
+2. `view-patient 1` — Expected: full profile including NOKs and sessions.
+3. Invalid index: `view-patient 999` → `Patient not found at index 999`.
 
-1. Deleting a person while all persons are being shown
+#### Edit patient
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. `edit-patient 1 n/NewName` — Expected: `Patient updated: NewName (IC)`.
+2. Invalid index or duplicate IC → appropriate error.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+#### Delete patient (important: cascades)
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Ensure multiple patients listed with `list-patients`.
+2. `delete-patient 1` — Expected: patient deleted and related NOKs/sessions removed; status message updated.
+3. `delete-patient 0` / `delete-patient` / `delete-patient x` where x > size — Expected: error message, no deletion.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+### Next-of-Kin (NOK) management
 
-1. _{ more test cases …​ }_
+#### Add NOK
 
-### Saving data
+1. `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP`
+2. Expected: success message. Duplicate NOK for same patient → `NOK with same name and phone already exists for this patient`.
 
-1. Dealing with missing/corrupted data files
+#### Edit NOK
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`
+2. Expected: updated NOK message or error if patient/NOK not found.
 
-1. _{ more test cases …​ }_
+#### Delete NOK
+
+1. `delete-nok PATIENT_INDEX NOK_INDEX` — Expected: success message, or `Patient/NOK not found`.
+
+### Caring session management
+
+#### Add session
+
+1. `add-session PATIENT_INDEX d/DATE time/TIME type/CARE_TYPE [notes/NOTES]`
+2. Example: `add-session 1 d/2024-12-25 time/14:30 type/medication notes/Give insulin shot`
+3. Expected: `Caring session added for <Name>: <type> on <DATE> at <TIME>`. Invalid date/time → parameter-specific error.
+
+#### Edit session
+
+1. `edit-session PATIENT_INDEX SESSION_INDEX [d/DATE] [time/TIME] [type/CARE_TYPE] [notes/NOTES] [status/STATUS]`
+2. Example: `edit-session 1 2 d/2024-12-25 time/14:30 status/complete`
+3. Expected: `Session updated: <Name> - <type> - <DATE> <TIME> (<status>)`.
+
+#### Delete session
+
+1`delete-session PATIENT_INDEX SESSION_INDEX` — Expected: session removed message or `Patient/Session not found`.
+
+#### Views
+
+1. `sessions-today` — Expected: today's sessions list or `No caring sessions scheduled for today`.
+2. `sessions-week` — Expected: this week's sessions or `No caring sessions scheduled for this week`.
+
+#### Complete session
+
+1. Mark complete via `edit-session` with `status/complete` or dedicated command if present.
+2. Already completed → `Session already completed`.
+
+### Finding / searching
+
+#### Find patients by name
+
+1. `find-patient KEYWORD [MORE_KEYWORDS]...`
+2. Expected: list of matching patients (case-insensitive, partial match) or `No patients found matching: ...`.
+
+#### Find by NOK name
+
+1. `find-by-nok KEYWORD [MORE_KEYWORDS]...`
+2. Expected: patients matched via NOK name or `No patients found with NOK matching: ...`.
+
+### Saving and data integrity
+
+#### Automatic saving
+
+Modify data (add/edit/delete). Close app and reopen.
+
+- Expected: changes persisted in `data/addressbook.json` next to the jar.
+
+### Corrupted/missing data file
+
+1. Simulate: rename or corrupt `data/addressbook.json`.
+2. Launch app.
+    - Expected: app starts with empty data and creates a fresh data file; warn user (follow the app's documented behavior). Backup file before editing manually.
+
+#### Backup and restore manual test (if supported)
+
+Export/backup, then restore, verify data matches original.
+
+### Example test session (regression checklist)
+
+1. Launch app.
+2. `add-patient n/Test ic/T1234567A w/1B`
+3. `list-patients` → confirm presence.
+4. `add-nok 1 n/Lee p/+651234567 r/daughter`
+5. `add-session 1 d/2025-12-01 time/09:00 type/hygiene notes/Assist with shower`
+6. `view-patient 1` → confirm NOK and session shown.
+7. `edit-session 1 1 status/complete`
+8. `delete-nok 1 1`
+9. `delete-patient 1`
+10. Close and reopen app → confirm persistent state matches expectations.
+
+---
+
+## Notes
+
+- For every test case, record command, expected output, actual output, and pass/fail.
+- Tests that modify state should be followed by verification steps (e.g., `list-patients`, `view-patient`).
+- Automated unit tests should complement manual tests; aim for coverage of edge cases (invalid params, out-of-range indices, duplicate entries).
