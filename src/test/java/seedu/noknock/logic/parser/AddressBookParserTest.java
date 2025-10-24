@@ -33,6 +33,8 @@ import seedu.noknock.logic.commands.FindPatientCommand;
 import seedu.noknock.logic.commands.HelpCommand;
 import seedu.noknock.logic.commands.ListCommand;
 import seedu.noknock.logic.commands.ListPatientsCommand;
+import seedu.noknock.logic.commands.SessionsTodayCommand;
+import seedu.noknock.logic.commands.SessionsWeekCommand;
 import seedu.noknock.logic.parser.exceptions.ParseException;
 import seedu.noknock.model.person.NameContainsKeywordsPredicate;
 import seedu.noknock.model.person.Patient;
@@ -175,5 +177,17 @@ public class AddressBookParserTest {
     public void parseCommand_listPatients() throws Exception {
         assertTrue(parser.parseCommand(ListPatientsCommand.COMMAND_WORD) instanceof ListPatientsCommand);
         assertTrue(parser.parseCommand(ListPatientsCommand.COMMAND_WORD + " 3") instanceof ListPatientsCommand);
+    }
+
+    @Test
+    public void parseCommand_sessionsToday() throws Exception {
+        assertTrue(parser.parseCommand(SessionsTodayCommand.COMMAND_WORD) instanceof SessionsTodayCommand);
+        assertTrue(parser.parseCommand(SessionsTodayCommand.COMMAND_WORD + " 3") instanceof SessionsTodayCommand);
+    }
+
+    @Test
+    public void parseCommand_sessionsWeek() throws Exception {
+        assertTrue(parser.parseCommand(SessionsWeekCommand.COMMAND_WORD) instanceof SessionsWeekCommand);
+        assertTrue(parser.parseCommand(SessionsWeekCommand.COMMAND_WORD + " 3") instanceof SessionsWeekCommand);
     }
 }

@@ -3,9 +3,11 @@ package seedu.noknock.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.noknock.commons.core.GuiSettings;
 import seedu.noknock.model.person.Patient;
+import seedu.noknock.model.session.CaringSession;
 
 /**
  * The API of the Model component.
@@ -13,6 +15,7 @@ import seedu.noknock.model.person.Patient;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Patient> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<CaringSession> PREDICATE_SHOW_ALL_SESSIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,4 +88,22 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);
+
+    /**
+     * Updates the filter of the displayed caring sessions (across all patients) to the given {@code predicate}.
+     * This affects presentation only and does not modify any stored data.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void setSessionDisplayFilter(Predicate<CaringSession> predicate);
+
+    /**
+     * Returns the current predicate used to filter the displayed caring sessions (across all patients).
+     */
+    Predicate<CaringSession> getSessionDisplayFilter();
+
+    /**
+     * Returns a read-only property of the caring-session display filter.
+     * UI may observe this property to react to filter changes.
+     */
+    ReadOnlyObjectProperty<Predicate<CaringSession>> sessionDisplayFilterProperty();
 }
