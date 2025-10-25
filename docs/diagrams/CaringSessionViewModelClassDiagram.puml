@@ -31,8 +31,8 @@ package "Model" {
     }
 }
 
-PatientCaringSession *-right-> "1" Patient
-PatientCaringSession *-right-> "1" CaringSession
+PatientCaringSession -right-> "1" Patient
+PatientCaringSession -right-> "1" CaringSession
 Patient *-right-> "*" CaringSession : contains
 
 @enduml
