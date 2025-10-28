@@ -66,7 +66,7 @@ public class EditNextOfKinCommandTest {
         expectedModel.setPatient(patient, editedPatient);
 
         String expectedMessage = String.format(EditNextOfKinCommand.MESSAGE_EDIT_NOK_SUCCESS,
-            Messages.formatPatient(editedNextOfKin), Messages.formatPatient(patient));
+            Messages.formatNextOfKin(editedNextOfKin), Messages.formatPatient(patient));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -91,7 +91,7 @@ public class EditNextOfKinCommandTest {
         expectedModel.setPatient(patient, editedPatient);
 
         String expectedMessage = String.format(EditNextOfKinCommand.MESSAGE_EDIT_NOK_SUCCESS,
-            Messages.formatPatient(editedNextOfKin), Messages.formatPatient(patient));
+            Messages.formatNextOfKin(editedNextOfKin), Messages.formatPatient(patient));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -114,7 +114,7 @@ public class EditNextOfKinCommandTest {
         expectedModel.setPatient(patient, editedPatient);
 
         String expectedMessage = String.format(EditNextOfKinCommand.MESSAGE_EDIT_NOK_SUCCESS,
-            Messages.formatPatient(nokToEdit), Messages.formatPatient(patient));
+            Messages.formatNextOfKin(nokToEdit), Messages.formatPatient(patient));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

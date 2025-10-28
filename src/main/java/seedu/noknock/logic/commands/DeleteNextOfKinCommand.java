@@ -66,7 +66,7 @@ public class DeleteNextOfKinCommand extends Command {
         model.setPatient(patient, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_NOK_SUCCESS, Messages.formatPatient(nokToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_NOK_SUCCESS, Messages.formatNextOfKin(nokToDelete)));
     }
 
     @Override

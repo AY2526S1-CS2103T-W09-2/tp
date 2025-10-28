@@ -103,7 +103,7 @@ public class EditNextOfKinCommand extends Command {
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_NOK_SUCCESS,
-            Messages.formatPatient(editedNok), Messages.formatPatient(patient)));
+            Messages.formatNextOfKin(editedNok), Messages.formatPatient(patient)));
     }
 
     @Override

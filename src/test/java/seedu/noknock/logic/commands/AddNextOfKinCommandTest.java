@@ -49,7 +49,7 @@ public class AddNextOfKinCommandTest {
             .execute(modelStub);
 
         assertEquals(String.format(AddNextOfKinCommand.MESSAGE_ADD_NOK_SUCCESS,
-                Messages.formatPatient(validNok), Messages.formatPatient(validPatient)),
+                Messages.formatNextOfKin(validNok), Messages.formatPatient(validPatient)),
             commandResult.getFeedbackToUser());
         assertEquals(List.of(validNok), modelStub.noksAdded);
     }

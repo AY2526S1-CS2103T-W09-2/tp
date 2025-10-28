@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.noknock.logic.parser.Prefix;
-import seedu.noknock.model.person.Person;
+import seedu.noknock.model.person.NextOfKin;
+import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.session.CaringSession;
 
 /**
@@ -38,9 +39,18 @@ public class Messages {
     /**
      * Formats the {@code person} for display to the user.
      */
-    public static String formatPatient(Person person) {
+    public static String formatPatient(Patient patient) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName());
+        builder.append(patient.getName());
+        return builder.toString();
+    }
+
+    /**
+     * Format the {@code nextOfKin} for display to the user.
+     */
+    public static String formatNextOfKin(NextOfKin nextOfKin) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(nextOfKin.getName());
         return builder.toString();
     }
 
