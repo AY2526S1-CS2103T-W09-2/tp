@@ -22,8 +22,6 @@ import seedu.noknock.logic.commands.DeleteCommand;
 import seedu.noknock.logic.commands.DeleteNextOfKinCommand;
 import seedu.noknock.logic.commands.DeletePatientCommand;
 import seedu.noknock.logic.commands.EditCaringSessionCommand;
-import seedu.noknock.logic.commands.EditCommand;
-import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.noknock.logic.commands.EditNextOfKinCommand;
 import seedu.noknock.logic.commands.EditPatientCommand;
 import seedu.noknock.logic.commands.ExitCommand;
@@ -36,8 +34,6 @@ import seedu.noknock.logic.commands.ListPatientsCommand;
 import seedu.noknock.logic.parser.exceptions.ParseException;
 import seedu.noknock.model.person.NameContainsKeywordsPredicate;
 import seedu.noknock.model.person.Patient;
-import seedu.noknock.model.person.Person;
-import seedu.noknock.testutil.EditPatientDescriptorBuilder;
 import seedu.noknock.testutil.PatientBuilder;
 import seedu.noknock.testutil.PersonUtil;
 
@@ -63,15 +59,6 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
             DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
-    }
-
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new PatientBuilder().build();
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-            + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPatientDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

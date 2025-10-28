@@ -60,22 +60,22 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPatientDescriptor DESC_AMY;
-    public static final EditCommand.EditPatientDescriptor DESC_BOB;
+    public static final EditPatientCommand.EditPatientDescriptor DESC_AMY;
+    public static final EditPatientCommand.EditPatientDescriptor DESC_BOB;
     public static final EditNextOfKinCommand.EditNextOfKinDescriptor DESC_DAUGHTER;
     public static final EditNextOfKinCommand.EditNextOfKinDescriptor DESC_GRANDPA;
 
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withWard(VALID_WARD_AMY).withIC(VALID_IC_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+            .withWard(VALID_WARD_AMY).withIC(VALID_IC_AMY)
+            .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withWard(VALID_WARD_AMY).withIC(VALID_IC_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withWard(VALID_WARD_AMY).withIC(VALID_IC_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         DESC_DAUGHTER = new EditNextOfKinDescriptorBuilder().withName(VALID_NAME_DAUGHTER)
-                .withPhone(VALID_PHONE_DAUGHTER).withRelationship(VALID_RELATION_DAUGHTER).build();
+            .withPhone(VALID_PHONE_DAUGHTER).withRelationship(VALID_RELATION_DAUGHTER).build();
         DESC_GRANDPA = new EditNextOfKinDescriptorBuilder().withName(VALID_NAME_GRANDPA)
-                .withPhone(VALID_PHONE_GRANDPA).withRelationship(VALID_RELATION_GRANDPA).build();
+            .withPhone(VALID_PHONE_GRANDPA).withRelationship(VALID_RELATION_GRANDPA).build();
     }
 
     /**
@@ -84,7 +84,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -99,7 +99,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -120,6 +120,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPatientList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
