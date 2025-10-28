@@ -1,10 +1,14 @@
 package seedu.noknock.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.noknock.model.person.IC;
 import seedu.noknock.model.person.Name;
+import seedu.noknock.model.person.NextOfKin;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.person.Ward;
 import seedu.noknock.model.tag.Tag;
@@ -23,6 +27,7 @@ public class PatientBuilder {
     private Ward ward;
     private IC ic;
     private Set<Tag> tags;
+    private List<NextOfKin> noks = new ArrayList<>();
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -55,7 +60,7 @@ public class PatientBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PatientBuilder withTags(String ... tags) {
+    public PatientBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -76,9 +81,20 @@ public class PatientBuilder {
         return this;
     }
 
-
-    public Patient build() {
-        return new Patient(name, ward, ic, tags);
+    /**
+     * Adds {@code NextOfKin} to the {@code Person} that we are building.
+     */
+    public PatientBuilder withNextOfKinList(NextOfKin... noks) {
+        this.noks.addAll(Arrays.asList(noks));
+        return this;
     }
 
+    /**
+     * Builds the Patient object.
+     */
+    public Patient build() {
+        Patient patient = new Patient(name, ward, ic, tags);
+        noks.forEach(nok -> patient.getNextOfKinList().add(nok));
+        return patient;
+    }
 }
