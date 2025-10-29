@@ -19,7 +19,7 @@ public class Ward {
      * @param room
      */
     public Ward(String room) {
-        this.room = room;
+        this.room = room.toUpperCase();
     }
 
     public static boolean isValidWard(String ward) {
