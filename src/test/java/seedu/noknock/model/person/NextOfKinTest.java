@@ -3,12 +3,16 @@ package seedu.noknock.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.noknock.logic.commands.CommandTestUtil.INVALID_PHONE;
+import static seedu.noknock.logic.commands.CommandTestUtil.INVALID_PHONE_NON_DIGIT;
+import static seedu.noknock.logic.commands.CommandTestUtil.INVALID_RELATIONSHIP;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_NAME_DAUGHTER;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_NAME_GRANDPA;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_PHONE_DAUGHTER;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_PHONE_GRANDPA;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_RELATION_DAUGHTER;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_RELATION_GRANDPA;
+import static seedu.noknock.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -69,7 +73,6 @@ public class NextOfKinTest {
         assertFalse(nok.isSamePerson(editedNok));
     }
 
-
     @Test
     public void equals() {
         NextOfKin nok = new NextOfKinBuilder().build();
@@ -98,6 +101,29 @@ public class NextOfKinTest {
         // different relationship -> returns false
         NextOfKin differentRelation = new NextOfKinBuilder(nok).withRelationship(VALID_RELATION_GRANDPA).build();
         assertFalse(nok.equals(differentRelation));
+    }
+
+    @Test
+    public void constructor_invalidFields_throwsException() {
+        // Invalid phone (too short)
+        assertThrows(IllegalArgumentException.class, () ->
+                new NextOfKinBuilder().withPhone(INVALID_PHONE).build());
+
+        // Invalid phone (non-digit)
+        assertThrows(IllegalArgumentException.class, () ->
+                new NextOfKinBuilder().withPhone(INVALID_PHONE_NON_DIGIT).build());
+
+        // Invalid relationship (contains numbers/special chars)
+        assertThrows(IllegalArgumentException.class, () ->
+                new NextOfKinBuilder().withRelationship(INVALID_RELATIONSHIP).build());
+
+        // Null phone -> should throw NullPointerException
+        assertThrows(NullPointerException.class, () ->
+                new NextOfKinBuilder().withPhone(null).build());
+
+        // Null relationship -> should throw NullPointerException
+        assertThrows(NullPointerException.class, () ->
+                new NextOfKinBuilder().withRelationship(null).build());
     }
 
     @Test
