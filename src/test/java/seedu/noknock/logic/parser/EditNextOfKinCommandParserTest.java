@@ -79,8 +79,8 @@ public class EditNextOfKinCommandParserTest {
                 new EditNextOfKinCommand(patientIndex, nokIndex, descriptor));
 
         // relationship only
-        userInput = patientIndex.getOneBased() + " " + nokIndex.getOneBased() + " " +
-                PREFIX_RELATIONSHIP + VALID_RELATIONSHIP;
+        userInput = patientIndex.getOneBased() + " " + nokIndex.getOneBased() + " "
+                + PREFIX_RELATIONSHIP + VALID_RELATIONSHIP;
         descriptor = new EditNextOfKinDescriptorBuilder()
                 .withRelationship(VALID_RELATIONSHIP)
                 .build();
