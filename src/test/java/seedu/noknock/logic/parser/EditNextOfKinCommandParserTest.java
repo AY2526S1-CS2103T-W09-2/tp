@@ -1,11 +1,11 @@
 package seedu.noknock.logic.parser;
 
 import static seedu.noknock.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.noknock.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.noknock.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
+import static seedu.noknock.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.noknock.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +17,11 @@ import seedu.noknock.testutil.EditNextOfKinDescriptorBuilder;
 
 public class EditNextOfKinCommandParserTest {
 
-    private final EditNextOfKinCommandParser parser = new EditNextOfKinCommandParser();
-
     private static final String VALID_NAME = "Jane Doe";
     private static final String VALID_PHONE = "98765432";
     private static final String VALID_RELATIONSHIP = "Mother";
+
+    private final EditNextOfKinCommandParser parser = new EditNextOfKinCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -79,7 +79,8 @@ public class EditNextOfKinCommandParserTest {
                 new EditNextOfKinCommand(patientIndex, nokIndex, descriptor));
 
         // relationship only
-        userInput = patientIndex.getOneBased() + " " + nokIndex.getOneBased() + " " + PREFIX_RELATIONSHIP + VALID_RELATIONSHIP;
+        userInput = patientIndex.getOneBased() + " " + nokIndex.getOneBased() + " " +
+                PREFIX_RELATIONSHIP + VALID_RELATIONSHIP;
         descriptor = new EditNextOfKinDescriptorBuilder()
                 .withRelationship(VALID_RELATIONSHIP)
                 .build();
