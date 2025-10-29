@@ -2,6 +2,8 @@ package seedu.noknock.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.noknock.commons.util.AppUtil.checkArgument;
+import static seedu.noknock.commons.util.StringUtil.cleanSpaces;
+
 
 /**
  * Represents a Person's name in the address book.
@@ -27,15 +29,16 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        String cleanedName = cleanSpaces(name);
+        checkArgument(isValidName(cleanedName), MESSAGE_CONSTRAINTS);
+        fullName = cleanedName;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches("[\\p{Alnum}]+( [\\p{Alnum}]+)*");
     }
 
 

@@ -1,6 +1,7 @@
 package seedu.noknock.model.session;
 
 import static seedu.noknock.commons.util.AppUtil.checkArgument;
+import static seedu.noknock.commons.util.StringUtil.cleanSpaces;
 
 import java.util.Objects;
 
@@ -24,7 +25,7 @@ public class Note {
      */
     public Note(String note) {
         checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
-        value = note;
+        value = (note == null) ? "" : cleanSpaces(note);
     }
 
     /**

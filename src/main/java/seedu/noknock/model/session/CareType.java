@@ -2,6 +2,7 @@ package seedu.noknock.model.session;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.noknock.commons.util.AppUtil.checkArgument;
+import static seedu.noknock.commons.util.StringUtil.cleanSpaces;
 
 /**
  * Represents a Care Type in the session.
@@ -23,9 +24,11 @@ public class CareType {
      */
     public CareType(String careType) {
         requireNonNull(careType);
-        checkArgument(isValidCareType(careType), MESSAGE_CONSTRAINTS);
-        value = careType;
+        String cleanedCareType = cleanSpaces(careType);
+        checkArgument(isValidCareType(cleanedCareType), MESSAGE_CONSTRAINTS);
+        value = cleanedCareType;
     }
+
 
     /**
      * Returns true if a given string is a valid care type.
