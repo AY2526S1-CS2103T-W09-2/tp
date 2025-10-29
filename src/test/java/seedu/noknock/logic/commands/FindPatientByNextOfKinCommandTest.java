@@ -15,14 +15,11 @@ import seedu.noknock.model.AddressBook;
 import seedu.noknock.model.Model;
 import seedu.noknock.model.ModelManager;
 import seedu.noknock.model.UserPrefs;
-import seedu.noknock.model.person.Name;
 import seedu.noknock.model.person.NextOfKin;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.person.PatientNokContainsKeywordsPredicate;
-import seedu.noknock.model.person.Phone;
-import seedu.noknock.model.person.Relationship;
-import seedu.noknock.testutil.PatientBuilder;
 import seedu.noknock.testutil.NextOfKinBuilder;
+import seedu.noknock.testutil.PatientBuilder;
 
 public class FindPatientByNextOfKinCommandTest {
 
@@ -86,7 +83,8 @@ public class FindPatientByNextOfKinCommandTest {
     @Test
     public void execute_singleKeyword_singlePatientFound() {
         FindPatientByNextOfKinCommand command =
-                new FindPatientByNextOfKinCommand(new PatientNokContainsKeywordsPredicate(Collections.singletonList("Jane")));
+                new FindPatientByNextOfKinCommand(
+                        new PatientNokContainsKeywordsPredicate(Collections.singletonList("Jane")));
         CommandResult result = command.execute(model);
 
         assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1),
@@ -109,7 +107,8 @@ public class FindPatientByNextOfKinCommandTest {
     @Test
     public void execute_caseInsensitiveMatch_success() {
         FindPatientByNextOfKinCommand command =
-                new FindPatientByNextOfKinCommand(new PatientNokContainsKeywordsPredicate(Collections.singletonList("jane")));
+                new FindPatientByNextOfKinCommand(
+                        new PatientNokContainsKeywordsPredicate(Collections.singletonList("jane")));
         CommandResult result = command.execute(model);
 
         assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1),
