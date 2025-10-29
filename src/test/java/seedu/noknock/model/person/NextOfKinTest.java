@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.noknock.logic.commands.CommandTestUtil.INVALID_PHONE;
 import static seedu.noknock.logic.commands.CommandTestUtil.INVALID_PHONE_NON_DIGIT;
 import static seedu.noknock.logic.commands.CommandTestUtil.INVALID_RELATIONSHIP;
-import static seedu.noknock.testutil.Assert.assertThrows;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_NAME_DAUGHTER;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_NAME_GRANDPA;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_PHONE_DAUGHTER;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_PHONE_GRANDPA;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_RELATION_DAUGHTER;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_RELATION_GRANDPA;
+import static seedu.noknock.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -61,14 +61,16 @@ public class NextOfKinTest {
         assertThrows(IllegalArgumentException.class, () ->
                 new NextOfKin(new Name(VALID_NAME_DAUGHTER), new Phone(INVALID_PHONE), Relationship.DAUGHTER));
         assertThrows(IllegalArgumentException.class, () ->
-                new NextOfKin(new Name(VALID_NAME_DAUGHTER), new Phone(INVALID_PHONE_NON_DIGIT), Relationship.DAUGHTER));
+                new NextOfKin(new Name(VALID_NAME_DAUGHTER),
+                        new Phone(INVALID_PHONE_NON_DIGIT), Relationship.DAUGHTER));
     }
 
     @Test
     public void constructor_invalidRelationship_throwsIllegalArgumentException() {
         // Invalid relationship string should throw IllegalArgumentException
         assertThrows(IllegalArgumentException.class, () ->
-                new NextOfKin(new Name(VALID_NAME_DAUGHTER), new Phone(VALID_PHONE_DAUGHTER), Relationship.valueOf(INVALID_RELATIONSHIP)));
+                new NextOfKin(new Name(VALID_NAME_DAUGHTER),
+                        new Phone(VALID_PHONE_DAUGHTER), Relationship.valueOf(INVALID_RELATIONSHIP)));
     }
 
     @Test
