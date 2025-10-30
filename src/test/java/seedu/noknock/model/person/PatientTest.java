@@ -3,12 +3,15 @@ package seedu.noknock.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.noknock.logic.commands.CommandTestUtil.VALID_IC_AMY;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_IC_BOB;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.noknock.logic.commands.CommandTestUtil.VALID_WARD_AMY;
 import static seedu.noknock.logic.commands.CommandTestUtil.VALID_WARD_BOB;
 import static seedu.noknock.testutil.Assert.assertThrows;
 import static seedu.noknock.testutil.TypicalPatients.ALICE;
+import static seedu.noknock.testutil.TypicalPatients.AMY;
 import static seedu.noknock.testutil.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -26,29 +29,20 @@ public class PatientTest {
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(AMY.isSamePerson(AMY));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(AMY.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PatientBuilder(ALICE)
-                .withWard(VALID_WARD_BOB).withIC(VALID_IC_BOB)
+        // same IC, all other attributes different -> returns true
+        Person editedAmy = new PatientBuilder(BOB)
+                .withWard(VALID_WARD_AMY).withIC(VALID_IC_AMY)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(AMY.isSamePerson(editedAmy));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new PatientBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
-
-        // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PatientBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PatientBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        // different ic, all other attributes same -> returns false
+        editedAmy = new PatientBuilder(AMY).withIC(VALID_IC_BOB).build();
+        assertFalse(AMY.isSamePerson(editedAmy));
     }
 
     @Test

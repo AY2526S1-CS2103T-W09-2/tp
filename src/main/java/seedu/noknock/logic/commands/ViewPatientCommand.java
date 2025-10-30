@@ -34,6 +34,7 @@ public class ViewPatientCommand extends Command {
      * @param index The index of the patient to view.
      */
     public ViewPatientCommand(Index index) {
+        requireNonNull(index);
         this.index = index;
     }
 
@@ -60,7 +61,7 @@ public class ViewPatientCommand extends Command {
         if (!(other instanceof ViewPatientCommand otherCommand)) {
             return false;
         }
-        return index == otherCommand.index;
+        return index.equals(otherCommand.index);
     }
 
     @Override

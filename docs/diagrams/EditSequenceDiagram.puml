@@ -1,0 +1,54 @@
+@startuml
+title Generic Edit Command Sequence Diagram (Full Flow)
+
+actor User
+
+User -> UI : Enters "edit INDEX [fields]"
+UI -> LogicManager : execute("edit INDEX [fields]")
+
+activate LogicManager
+LogicManager -> AddressBookParser : parseCommand("edit INDEX [fields]")
+
+activate AddressBookParser
+AddressBookParser -> EditCommandParser : parse(arguments)
+deactivate AddressBookParser
+
+activate EditCommandParser
+EditCommandParser -> EditDescriptor ++: create descriptor\n(from prefixes)
+EditDescriptor --> EditCommandParser
+deactivate EditDescriptor
+EditCommandParser --> EditCommandParser : validate input\n(e.g. at least 1 field edited)
+EditCommandParser -> EditCommand++: create EditCommand with editedEntity
+EditCommand --> EditCommandParser
+deactivate EditCommand
+EditCommandParser --> LogicManager: EditCommand
+deactivate EditCommandParser
+
+LogicManager -> Model : execute(EditCommand)
+
+activate Model
+Model -> AddressBook : getFilteredList()
+AddressBook --> Model : returns target list
+
+Model -> Model : validate index\n(throws CommandException if invalid)
+
+Model -> Entity : create editedEntity\n(immutable copy with updated fields)
+Entity --> Model : returns editedEntity
+
+Model -> AddressBook : setEntity(targetIndex, editedEntity)
+AddressBook --> Model : entity replaced
+
+Model -> VersionedAddressBook : commit()\n(save undo/redo state)
+VersionedAddressBook --> Model : committed
+deactivate Model
+
+LogicManager -> Storage : saveAddressBook(VersionedAddressBook)
+activate Storage
+Storage --> LogicManager : success
+deactivate Storage
+
+LogicManager --> UI : CommandResult("Edited entity successfully")
+deactivate LogicManager
+
+UI -> UI : refresh displayed list
+@enduml

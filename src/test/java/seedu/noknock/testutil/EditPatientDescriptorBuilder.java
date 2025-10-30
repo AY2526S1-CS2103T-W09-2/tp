@@ -4,8 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
-import seedu.noknock.model.person.Address;
+import seedu.noknock.logic.commands.EditPatientCommand.EditPatientDescriptor;
 import seedu.noknock.model.person.IC;
 import seedu.noknock.model.person.Name;
 import seedu.noknock.model.person.Patient;
@@ -37,7 +36,7 @@ public class EditPatientDescriptorBuilder {
         descriptor = new EditPatientDescriptor();
         descriptor.setName(patient.getName());
         descriptor.setWard(patient.getWard());
-        descriptor.setIC(patient.getIC());
+        descriptor.setIc(patient.getIC());
         descriptor.setTags(patient.getTags());
     }
 
@@ -61,15 +60,7 @@ public class EditPatientDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withIC(String ic) {
-        descriptor.setIC(new IC(ic));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditPatientDescriptor} that we are building.
-     */
-    public EditPatientDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+        descriptor.setIc(new IC(ic));
         return this;
     }
 

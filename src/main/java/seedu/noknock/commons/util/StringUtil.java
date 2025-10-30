@@ -65,4 +65,14 @@ public class StringUtil {
             return false;
         }
     }
+
+    /** Collapse consecutive spaces into single space and trim */
+    public static String cleanSpaces(String input) {
+        return input == null ? null : input.trim().replaceAll("\\s{2,}", " ");
+    }
+
+    /** Remove all spaces */
+    public static String removeSpaces(String input) {
+        return input == null ? null : input.replaceAll("\\s+", "");
+    }
 }
