@@ -73,10 +73,10 @@ public class PatientNokContainsKeywordsPredicateTest {
 
     @Test
     public void test_nokDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
+        // Zero keywords (should list all patients)
         PatientNokContainsKeywordsPredicate predicate =
             new PatientNokContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PatientBuilder().withName("Alice").withNextOfKinList(
+        assertTrue(predicate.test(new PatientBuilder().withName("Alice").withNextOfKinList(
             new NextOfKinBuilder().withName("John Doe").build()).build()));
 
         // Non-matching keyword

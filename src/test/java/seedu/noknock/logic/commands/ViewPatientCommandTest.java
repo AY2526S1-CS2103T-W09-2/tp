@@ -23,8 +23,8 @@ public class ViewPatientCommandTest {
     @BeforeEach
     public void setUp() {
         AddressBook addressBook = new AddressBook();
-        addressBook.addPatient(new PatientBuilder().withName("Alice Pauline").build());
-        addressBook.addPatient(new PatientBuilder().withName("Bob Brown").build());
+        addressBook.addPatient(new PatientBuilder().withIC("S1234567A").withName("Alice Pauline").build());
+        addressBook.addPatient(new PatientBuilder().withIC("S1234567B").withName("Bob Brown").build());
         model = new ModelManager(addressBook, new UserPrefs());
     }
 
