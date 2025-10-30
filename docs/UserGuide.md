@@ -487,8 +487,8 @@ Displays all caring sessions scheduled for today.
 
 **Output:**
 
-* Success → `Today's caring sessions (2025-10-22):` + list
-* None → Shows an empty table with column headers but no entries.
+* Success → `today's sessions list` + list
+* None → `No caring sessions scheduled for today` + Shows an empty table with column headers but no entries.
 
 ### View this week’s sessions: `sessions-week`
 
@@ -499,8 +499,8 @@ Displays all caring sessions scheduled for the current week (Monday to Sunday).
 
 **Output:**
 
-* Success → `This week's caring sessions (2025-10-20 to 2025-10-26):` + list
-* None → Shows an empty table with column headers but no entries.
+* Success → `this week's sessions` + list
+* None → `No caring sessions scheduled for this week` + Shows an empty table with column headers but no entries.
 
 ---
 
