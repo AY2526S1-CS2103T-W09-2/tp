@@ -36,15 +36,19 @@ New to the command line? You can copy each command from this guide and paste it 
 - Purpose‑built for nursing homes: Built‑in linkage between Patient ⇄ NOK ⇄ Caring Sessions fits actual eldercare workflows.
 - Lightweight and portable: A single .jar file you can run on any machine with Java 17+.
 
-How it compares:
-- Versus spreadsheets: NOKnock enforces structure (unique IDs, linked NOKs/sessions), searchable lists, and date/time‑aware scheduling.
-- Versus GUI‑only tools: Keyboard‑first commands make bulk operations and day‑to‑day updates much faster once you get the hang of it.
+**Comparison:**
+| Feature                 | Spreadsheets                       | GUI-Only Tools                     | NOKnock (CLI-First)                  |
+|-------------------------|-----------------------------------|-----------------------------------|-------------------------------------|
+| Structured Data          | Limited                          | Moderate                          | Strong (IDs, linked NOKs & sessions)|
+| Bulk Operations          | Manual                           | Slower                            | Fast via commands                   |
+| Offline Usage            | Yes                              | Varies                             | Yes                                 |
+| Scheduling Awareness     | Manual                           | Often limited                      | Date/Time-aware                     |
 
 ---
 
 ## Quick start
 
-1. Ensure you meet the [system requirements](#system-requirements) and have Java `17` — see [Getting Java 17](#getting-java-17).
+1. Ensure your system meets the [system requirements](#system-requirements) and has Java `17` — see [Getting Java 17](#getting-java-17).
 2. [Set up the app](#setting-up).
 3. Type commands — follow the [5‑minute first task](#5-minute-tutorial) to try the core workflow.
 4. Refer to the [Features](#features) below for details of each command.
@@ -53,14 +57,14 @@ How it compares:
 
 ## System requirements
 
-- Operating system:
+- **Operating system:**
     - Windows 10 or 11 (x64)
     - macOS 12+ (Intel or Apple Silicon)
     - Linux (e.g., Ubuntu 20.04+/Debian 11+/Fedora 36+) with glibc compatible with Java 17
-- Java: JDK/JRE 17 or newer 
-- Disk: ~200 MB free (app + data headroom)
-- Permissions: Write access to the folder containing the .jar (for saving data to data/noknock.json)
-- Network: Not required (online access only needed to download Java/app updates)
+- **Java:** JDK/JRE 17 or newer 
+- **Disk:** ~200 MB free (app + data headroom)
+- **Permissions:** Write access to the folder containing the .jar
+- **Network:** Only needed for downloads and updates
 
 ---
 
@@ -68,12 +72,12 @@ How it compares:
 
 Choose one of the following:
 
-- Windows: https://se-education.org/guides/tutorials/javaInstallationWindows.html
-- macOS: https://se-education.org/guides/tutorials/javaInstallationMac.html
-- Linux: https://se-education.org/guides/tutorials/javaInstallationLinux.html
+- **Windows:** https://se-education.org/guides/tutorials/javaInstallationWindows.html
+- **macOS:** https://se-education.org/guides/tutorials/javaInstallationMac.html
+- **Linux:** https://se-education.org/guides/tutorials/javaInstallationLinux.html
 
 <box type="info" seamless>
-If <code>java -version</code> doesn’t work, restart your terminal or computer, then try again. If it still fails, reinstall Java using the links above.
+If <code>java -version</code> fails, restart your terminal or computer, then try again. Reinstall Java if needed.
 </box>
 
 ---
@@ -83,15 +87,15 @@ If <code>java -version</code> doesn’t work, restart your terminal or computer,
 1. Download the latest `.jar` file from the Releases page:
    https://github.com/AY2526S1-CS2103T-W09-2/tp/releases
 
-2. Choose (or create) a folder to act as your NOKnock home folder, and copy the `.jar` file into it.
+2. Choose (or create) a folder to act as your **NOKnock** home folder, and copy the `.jar` file into it.
 
 3. Open a command terminal and change into that folder:
-    - Windows (PowerShell):
+    - **Windows (PowerShell):**
       ```
       cd "C:\path\to\your\NOKnock"
       java -jar noknock.jar
       ```
-    - macOS/Linux (Terminal):
+    - **macOS/Linux (Terminal):**
       ```
       cd ~/NOKnock
       java -jar noknock.jar
@@ -107,12 +111,12 @@ If <code>java -version</code> doesn’t work, restart your terminal or computer,
 
 Follow this quick walkthrough to learn the core workflow. Copy each command into NOKnock’s command box and press Enter.
 
-1) List current patients (to see indexes)
+**1) List current patients**
 ~~~
 list-patients
 ~~~
 
-2) Add a new patient
+**2) Add a new patient**
 ~~~
 add-patient n/Aisha Tan ic/S1234567A w/2A t/diabetes
 ~~~
@@ -121,13 +125,13 @@ Expected:
 Patient added: Aisha Tan (S1234567A)
 ~~~
 
-3) Find your patient’s index (since sample data may exist)
+**3) Find your patient’s index**
 ~~~
 find-patient aisha
 ~~~
 Note the Index shown for “Aisha Tan” (e.g., 5). Use that number in the next commands instead of X.
 
-4) Add a Next‑of‑Kin for that patient (replace X with Aisha’s index)
+**4) Add a Next‑of‑Kin for that patient (replace X with patient index)**
 ~~~
 add-nok X n/Daniel Tan p/+6598765432 r/son
 ~~~
@@ -136,7 +140,7 @@ Expected:
 NOK added for Aisha Tan: Daniel Tan (son, +6598765432)
 ~~~
 
-5) Schedule a caring session (replace X; adjust date/time as needed)
+**5) Schedule a caring session (replace X; adjust date/time as needed)**
 ~~~
 add-session X d/2025-11-01 time/09:30 type/medication notes/Metformin 500mg
 ~~~
@@ -145,20 +149,22 @@ Expected:
 Caring session added for Aisha Tan: medication on 2025-11-01 at 09:30
 ~~~
 
-6) View the full patient profile
+**6) View the full patient profile**
 ~~~
 view-patient 1
 ~~~
 You’ll see Aisha’s details, linked NOK(s), and upcoming sessions in one place.
 
-7) Optional: See today’s sessions
+**7) Optional:** See today’s sessions
 ~~~
 sessions-today
 ~~~
-Tip: If you want the session to appear here, schedule one with today’s date.
-
 <box type="tip" seamless>
-Made a typo? Use <code>edit-patient</code>, <code>edit-nok</code>, or <code>edit-session</code> to update fields; or the <code>delete-*</code> commands to remove entries. See Features below for full command formats and options.
+💡 Tip: If you want the session to appear here, schedule one with today’s date.
+</box>
+<p></p>
+<box type="tip" seamless>
+⚠️ Made a typo? Use <code>edit-patient</code>, <code>edit-nok</code>, or <code>edit-session</code> to update fields; or the <code>delete-*</code> commands to remove entries. See Features below for full command formats and options.
 </box>
 
 ---
@@ -227,10 +233,13 @@ Creates a new patient record.
 * `add-patient n/Dylan w/2A ic/S1234567A`
 * `add-patient n/Javier w/8B ic/S9876543B t/diabetes t/mobility-issues`
 
+<box type="tip" seamless>
 💡 **Tip:** You can always enter the command phrase to be prompted the right usage of commands
+</box>
+<p> </p>
 ![help message](images/TipCommandHint.png)
 
-❌ **Common mistakes**: It is common for one to enter the orders of fields wrongly.
+❗ **Common mistakes**: It is common for one to enter the orders of fields wrongly.
 <box type="error">
 E.g.add-patient n/Amy ic/S1234567A w/2A
 </box>
@@ -288,7 +297,7 @@ Removes a patient and all associated data (NOKs, sessions).
 
 <box type="tip" seamless>
 
-⚠️ Tip: Once the first person is deleted, the original second person becomes the first. To delete first N patients,
+💡 Tip: Once the first person is deleted, the original second person becomes the first. To delete first N patients,
 use the `delete-patient 1` command for N times
 ![Delete](images/TipDeletePatient.png)
 ![Delete](images/TipDeletePatientAfter.png)
@@ -324,7 +333,7 @@ Search for patients by name (case-insensitive, partial matching).
 
 * Success → `2 patient(s) found:` + list
 * None → `No patients found matching: javier wong`
-⚠️ Tip: You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
+💡 Tip: You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
 ![Find](images/TipFindCommand.png)
 ![Find](images/TipFindCommandAfter.png)
 ❗ **Common error**: keywords must match at least 1 word in patient's name. A prefix will not yield
@@ -367,8 +376,7 @@ Adds a Next-of-Kin contact for a patient.
 * Success → `NOK added for Dylan: Oad (son, +6598765432)`
 * Duplicate → `NOK with same name and phone already exists for this patient`
 
-⚠️ **Tip**: you can always use the `list-patient` command to see the list of patients before deciding which patient the
-nok should be added to.
+💡 **Tip**: you can always use the `list-patient` command to see the list of patients before deciding which patient the NOK should be added to.
 
 After adding a patient, you should see something similar to the picture below
 ![AddNOK](images/TipAddNOKCommand.png)
@@ -440,7 +448,7 @@ Edit an existing care session for a patient. You may also update the session sta
 * Success -> `Session updated: Dylan - medication - 2024-12-25 14:30 (complete)`
 * Failure -> parameter-specific error (e.g. invalid date/time or indices)
 
-⚠️ **Tip**: To get a better view of the caring session for a specific patient before editing, use `view-patient`
+💡 **Tip**: To get a better view of the caring session for a specific patient before editing, use `view-patient`
 command. 
 E.g. To edit a session of first patient, limit the caring sessions view to that of the first patient only
 
