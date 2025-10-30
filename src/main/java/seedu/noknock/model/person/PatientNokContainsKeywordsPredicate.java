@@ -18,9 +18,14 @@ public class PatientNokContainsKeywordsPredicate implements Predicate<Patient> {
 
     @Override
     public boolean test(Patient patient) {
+        // If no keywords, consider it a match (i.e., list all patients)
+        if (keywords.isEmpty()) {
+            return true;
+        }
+
         return patient.getNextOfKinList().stream()
-            .anyMatch(nok -> keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(nok.getName().fullName, keyword)));
+                .anyMatch(nok -> keywords.stream()
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(nok.getName().fullName, keyword)));
     }
 
     @Override
