@@ -21,7 +21,7 @@ public class Ward {
      * @param room
      */
     public Ward(String room) {
-        this.room = removeSpaces(room);
+        this.room = removeSpaces(room).toUpperCase();
     }
 
     public static boolean isValidWard(String ward) {
