@@ -697,7 +697,7 @@ Expected: `Caring session added for <Name>: <type> on <DATE> at <TIME>`. Invalid
 1. `sessions-today` — Expected: today's sessions list or `No caring sessions scheduled for today`.
 2. `sessions-week` — Expected: this week's sessions or `No caring sessions scheduled for this week`.
 
-<puml src="diagrams/SessionsTodayCommandSequenceDiagram.puml" width="280" />
+<puml src="diagrams/SessionsTodayCommandSequenceDiagram.puml" width="850" />
 
 Sequence diagram for `sessions-today` command.
 
