@@ -33,7 +33,7 @@ public class DeletePatientCommandTest {
         DeletePatientCommand deletePatientCommand = new DeletePatientCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
-                Messages.formatPatient(patientToDelete));
+            Messages.formatPatient(patientToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
@@ -57,7 +57,7 @@ public class DeletePatientCommandTest {
         DeletePatientCommand deletePatientCommand = new DeletePatientCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
-                Messages.formatPatient(patientToDelete));
+            Messages.formatPatient(patientToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
@@ -80,6 +80,21 @@ public class DeletePatientCommandTest {
     }
 
     @Test
+    public void execute_lastPersonUnfilteredList_success() {
+        Index lastPersonIndex = Index.fromOneBased(model.getFilteredPatientList().size());
+        Patient lastPerson = model.getFilteredPatientList().get(lastPersonIndex.getZeroBased());
+        DeletePatientCommand deletePatientCommand = new DeletePatientCommand(lastPersonIndex);
+
+        String expectedMessage = String.format(DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
+            Messages.formatPatient(lastPerson));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePatient(lastPerson);
+
+        assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         DeletePatientCommand deleteFirstCommand = new DeletePatientCommand(INDEX_FIRST_PERSON);
         DeletePatientCommand deleteSecondCommand = new DeletePatientCommand(INDEX_SECOND_PERSON);
@@ -99,6 +114,9 @@ public class DeletePatientCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        // different type -> returns false
+        assertFalse(deleteFirstCommand.equals(new ClearCommand()));
     }
 
     @Test
