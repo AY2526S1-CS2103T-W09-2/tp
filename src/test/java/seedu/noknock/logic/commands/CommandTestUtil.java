@@ -30,7 +30,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_WARD_AMY = "2A";
     public static final String VALID_WARD_BOB = "2B";
-    public static final String VALID_IC_AMY = "T1234567A";
+    public static final String VALID_IC_AMY = "S1234567A";
     public static final String VALID_IC_BOB = "S1234567B";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
@@ -41,7 +41,6 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_GRANDPA = "22222222";
     public static final String VALID_RELATION_DAUGHTER = "Daughter";
     public static final String VALID_RELATION_GRANDPA = "Grandfather";
-
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -56,6 +55,9 @@ public class CommandTestUtil {
     public static final String INVALID_WARD_DESC = " " + PREFIX_WARD + "33"; // '33' is not allowed in ward
     public static final String INVALID_IC_DESC = " " + PREFIX_IC + "1234567S"; // 'H1234567S' is not allowed in IC
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_PHONE = "12"; // phone should be at least 3 digits long
+    public static final String INVALID_PHONE_NON_DIGIT = "12A"; // non-number characters are not allowed in phone
+    public static final String INVALID_RELATIONSHIP = "Brother123!"; // invalid chars (numbers, special chars)
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

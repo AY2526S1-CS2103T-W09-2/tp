@@ -27,8 +27,8 @@ public class FindPatientCommandTest {
         AddressBook addressBook = new AddressBook();
 
         // two patients
-        addressBook.addPatient(new PatientBuilder().withName("Alice Pauline").build());
-        addressBook.addPatient(new PatientBuilder().withName("Bob Brown").build());
+        addressBook.addPatient(new PatientBuilder().withName("Alice Pauline").withIC("S1234567A").build());
+        addressBook.addPatient(new PatientBuilder().withName("John Brown").withIC("S1234567B").build());
 
         model = new ModelManager(addressBook, new UserPrefs());
     }
