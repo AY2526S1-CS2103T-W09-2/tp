@@ -13,13 +13,16 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePatientList
-Class NextOfKinList
-Class CaringSessionList
 Class Patient
+abstract class Person
+Class NextOfKin
 Class Name
-Class Ward
-Class IC
+Class Phone
 Class Tag
+Class Relationship
+Class Ward
+CLass IC
+Class CaringSession
 
 Class I #FFFFFF
 }
@@ -35,20 +38,22 @@ Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
+Patient -right-|> Person
+NextOfKin -up-|> Person
 
 AddressBook *--> "1" UniquePatientList
 UniquePatientList --> "~* all" Patient
-Patient *--> Name
-Patient *--> Ward
+Person *--> Name
 Patient *--> IC
-Patient *--> "1" NextOfKinList
-Patient *--> "1" CaringSessionList
+Patient *--> "*" CaringSession
+Patient *--> "*" NextOfKin
 Patient *--> "*" Tag
+Patient *--> Ward
+NextOfKin *--> Relationship
+NextOfKin *--> Phone
 
 Patient -[hidden]up--> I
 UniquePatientList -[hidden]right-> I
-
-Name -[hidden]right-> Ward
 
 ModelManager --> "~* filtered" Patient
 @enduml
