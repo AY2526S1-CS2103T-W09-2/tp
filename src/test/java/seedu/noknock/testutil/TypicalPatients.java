@@ -22,7 +22,7 @@ import seedu.noknock.model.person.Patient;
 public class TypicalPatients {
 
     public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
-            .withWard("2A").withIC("S1234567A")
+            .withWard("2A").withIC("S1234568A")
             .withTags("friends").build();
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
             .withWard("2A").withIC("T9876543B")

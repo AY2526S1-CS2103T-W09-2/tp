@@ -119,8 +119,7 @@ public final class Patient extends Person {
             return false;
         }
 
-        return getName().equals(otherPatient.getName())
-                || getIC().equals(otherPatient.getIC());
+        return getIC().equals(otherPatient.getIC());
     }
 
     /**
