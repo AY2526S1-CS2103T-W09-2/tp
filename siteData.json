@@ -51,7 +51,6 @@
         "storage-component": "Storage component",
         "common-classes": "Common classes",
         "implementation": "Implementation",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "viewing-caring-sessions-for-today-this-week": "Viewing Caring Sessions for Today/This Week",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
@@ -122,13 +121,13 @@
         "getting-java-17": "Getting Java 17",
         "setting-up": "Setting up",
         "5-minute-tutorial": "5-minute tutorial",
-        "features": "Features",
         "viewing-help-help": "Viewing help : help",
         "patient-management": "Patient Management",
         "listing-all-patients-list-patients": "Listing all patients: list-patients",
         "adding-a-patient-add-patient": "Adding a patient: add-patient",
         "editing-a-patient-edit-patient": "Editing a patient: edit-patient",
         "deleting-a-patient-delete-patient": "Deleting a patient: delete-patient",
+        "viewing-patient-details-view-patient": "Viewing patient details: view-patient",
         "finding-patients-by-name-find-patient": "Finding patients by name: find-patient",
         "finding-patients-by-nok-name-find-by-nok": "Finding patients by NOK name: find-by-nok",
         "next-of-kin-nok-management": "Next-of-Kin (NOK) Management",
@@ -146,7 +145,8 @@
         "editing-the-data-file": "Editing the data file",
         "faq": "FAQ",
         "known-issues": "Known issues",
-        "command-summary": "Command Summary"
+        "command-summary": "Command Summary",
+        "glossary": "Glossary"
       },
       "headingKeywords": {}
     },
