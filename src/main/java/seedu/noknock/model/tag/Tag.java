@@ -2,7 +2,7 @@ package seedu.noknock.model.tag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.noknock.commons.util.AppUtil.checkArgument;
-import static seedu.noknock.commons.util.StringUtil.cleanSpaces;
+import static seedu.noknock.commons.util.StringUtil.removeSpaces;
 
 /**
  * Represents a patient in the system, extending the {@code Person} class.
@@ -25,7 +25,7 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        String cleanedTag = cleanSpaces(tagName);
+        String cleanedTag = removeSpaces(tagName);
         checkArgument(isValidTagName(cleanedTag), MESSAGE_CONSTRAINTS);
         this.tagName = cleanedTag;
     }

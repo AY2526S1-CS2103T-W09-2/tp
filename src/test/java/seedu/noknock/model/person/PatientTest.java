@@ -45,10 +45,10 @@ public class PatientTest {
         Person editedBob = new PatientBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true (auto-trimmed)
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PatientBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
