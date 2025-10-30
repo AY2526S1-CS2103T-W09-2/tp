@@ -2,6 +2,7 @@ package seedu.noknock.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,7 @@ public class DeleteNextOfKinCommand extends Command {
         Patient editedPatient = patient.withNextOfKinList(updatedNokList);
         model.setPatient(patient, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setSessionDisplayFilter(PREDICATE_SHOW_ALL_SESSIONS);
 
         return new CommandResult(String.format(MESSAGE_DELETE_NOK_SUCCESS, Messages.formatNextOfKin(nokToDelete)));
     }

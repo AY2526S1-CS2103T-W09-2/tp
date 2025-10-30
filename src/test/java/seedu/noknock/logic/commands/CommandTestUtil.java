@@ -16,7 +16,7 @@ import seedu.noknock.commons.core.index.Index;
 import seedu.noknock.logic.commands.exceptions.CommandException;
 import seedu.noknock.model.AddressBook;
 import seedu.noknock.model.Model;
-import seedu.noknock.model.person.NameContainsKeywordsPredicate;
+import seedu.noknock.model.person.PatientNameContainsKeywordsPredicate;
 import seedu.noknock.model.person.Person;
 import seedu.noknock.testutil.EditNextOfKinDescriptorBuilder;
 import seedu.noknock.testutil.EditPatientDescriptorBuilder;
@@ -132,7 +132,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPatientList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPatientList(new PatientNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPatientList().size());
     }

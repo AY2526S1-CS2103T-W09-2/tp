@@ -7,17 +7,23 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.noknock.commons.core.GuiSettings;
 import seedu.noknock.commons.core.LogsCenter;
 import seedu.noknock.model.person.Patient;
+import seedu.noknock.model.session.CaringSession;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private final ObjectProperty<Predicate<CaringSession>> sessionDisplayFilter =
+            new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_SESSIONS);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -145,4 +151,21 @@ public class ModelManager implements Model {
                 && filteredPatients.equals(otherModelManager.filteredPatients);
     }
 
+    //=========== Filtered Session List Accessors =============================================================
+
+    @Override
+    public void setSessionDisplayFilter(Predicate<CaringSession> predicate) {
+        requireNonNull(predicate);
+        sessionDisplayFilter.set(predicate); // property change will fire
+    }
+
+    @Override
+    public Predicate<CaringSession> getSessionDisplayFilter() {
+        return sessionDisplayFilter.get();
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<Predicate<CaringSession>> sessionDisplayFilterProperty() {
+        return sessionDisplayFilter;
+    }
 }

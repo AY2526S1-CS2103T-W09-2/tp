@@ -1,6 +1,7 @@
 package seedu.noknock.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import seedu.noknock.commons.util.ToStringBuilder;
 import seedu.noknock.logic.Messages;
@@ -30,6 +31,7 @@ public class FindPatientCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPatientList(predicate);
+        model.setSessionDisplayFilter(PREDICATE_SHOW_ALL_SESSIONS);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPatientList().size()));
     }

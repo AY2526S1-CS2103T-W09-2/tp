@@ -5,6 +5,7 @@ import static seedu.noknock.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_WARD;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import seedu.noknock.commons.util.ToStringBuilder;
 import seedu.noknock.logic.Messages;
@@ -56,6 +57,7 @@ public class AddPatientCommand extends Command {
         }
 
         model.addPatient(toAdd);
+        model.setSessionDisplayFilter(PREDICATE_SHOW_ALL_SESSIONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatPatient(toAdd)));
     }
 

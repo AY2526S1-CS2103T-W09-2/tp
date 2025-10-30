@@ -117,7 +117,8 @@ public class MainWindow extends UiPart<Stage> {
         patientPanel = new PatientPanel(logic.getFilteredPersonList());
         patientListPanelPlaceholder.getChildren().add(patientPanel.getRoot());
 
-        caringSessionPanel = new CaringSessionPanel(logic.getFilteredPersonList());
+        caringSessionPanel = new CaringSessionPanel(logic.getFilteredPersonList(),
+                logic.sessionDisplayFilterProperty());
         caringSessionListPanelPlaceholder.getChildren().add(caringSessionPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

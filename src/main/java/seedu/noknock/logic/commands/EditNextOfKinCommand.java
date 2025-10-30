@@ -5,6 +5,7 @@ import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
 import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +102,7 @@ public class EditNextOfKinCommand extends Command {
         Patient editedPatient = patient.withNextOfKinList(updatedNokList);
         model.setPatient(patient, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setSessionDisplayFilter(PREDICATE_SHOW_ALL_SESSIONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_NOK_SUCCESS,
             Messages.formatNextOfKin(editedNok), Messages.formatPatient(patient)));

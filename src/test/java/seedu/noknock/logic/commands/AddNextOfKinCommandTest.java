@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.noknock.commons.core.GuiSettings;
@@ -23,6 +24,7 @@ import seedu.noknock.model.ReadOnlyAddressBook;
 import seedu.noknock.model.ReadOnlyUserPrefs;
 import seedu.noknock.model.person.NextOfKin;
 import seedu.noknock.model.person.Patient;
+import seedu.noknock.model.session.CaringSession;
 import seedu.noknock.testutil.NextOfKinBuilder;
 import seedu.noknock.testutil.PatientBuilder;
 
@@ -179,6 +181,21 @@ public class AddNextOfKinCommandTest {
         public void updateFilteredPatientList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setSessionDisplayFilter(Predicate<CaringSession> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<CaringSession> getSessionDisplayFilter() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyObjectProperty<Predicate<CaringSession>> sessionDisplayFilterProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -233,5 +250,8 @@ public class AddNextOfKinCommandTest {
         public ObservableList<Patient> getFilteredPatientList() {
             return FXCollections.observableArrayList(patient);
         }
+
+        @Override
+        public void setSessionDisplayFilter(Predicate<CaringSession> predicate) {}
     }
 }

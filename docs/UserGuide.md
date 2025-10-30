@@ -270,7 +270,7 @@ add-patient n/Amy ic/S1234567A w/2A
 
 ### Editing a patient: `edit-patient`
 
-Updates an existing patient’s information.
+Updates an existing patient’s information. At least one field must be provided.
 
 **Format:**  
 `edit-patient INDEX [n/NAME] [ic/IC] [w/WARD] [t/TAG]...`
@@ -286,6 +286,7 @@ Updates an existing patient’s information.
 * Invalid index → `Patient index X is out of range`
 * Duplicate IC → `This patient already exists in the address book`
 
+❌ **Possible mistake**: `edit-patient 1` is incorrect because no field was provided.
 ### Deleting a patient: `delete-patient`
 
 Removes a patient and all associated data (NOKs, sessions).

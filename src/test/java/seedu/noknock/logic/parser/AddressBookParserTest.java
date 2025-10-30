@@ -7,10 +7,6 @@ import static seedu.noknock.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.noknock.testutil.Assert.assertThrows;
 import static seedu.noknock.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.noknock.logic.commands.AddCaringSessionCommand;
@@ -18,7 +14,6 @@ import seedu.noknock.logic.commands.AddNextOfKinCommand;
 import seedu.noknock.logic.commands.AddPatientCommand;
 import seedu.noknock.logic.commands.ClearCommand;
 import seedu.noknock.logic.commands.DeleteCaringSessionCommand;
-import seedu.noknock.logic.commands.DeleteCommand;
 import seedu.noknock.logic.commands.DeleteNextOfKinCommand;
 import seedu.noknock.logic.commands.DeletePatientCommand;
 import seedu.noknock.logic.commands.EditCaringSessionCommand;
@@ -26,14 +21,13 @@ import seedu.noknock.logic.commands.EditNextOfKinCommand;
 import seedu.noknock.logic.commands.EditPatientCommand;
 import seedu.noknock.logic.commands.EditPatientCommand.EditPatientDescriptor;
 import seedu.noknock.logic.commands.ExitCommand;
-import seedu.noknock.logic.commands.FindCommand;
 import seedu.noknock.logic.commands.FindPatientByNextOfKinCommand;
 import seedu.noknock.logic.commands.FindPatientCommand;
 import seedu.noknock.logic.commands.HelpCommand;
-import seedu.noknock.logic.commands.ListCommand;
 import seedu.noknock.logic.commands.ListPatientsCommand;
+import seedu.noknock.logic.commands.SessionsTodayCommand;
+import seedu.noknock.logic.commands.SessionsWeekCommand;
 import seedu.noknock.logic.parser.exceptions.ParseException;
-import seedu.noknock.model.person.NameContainsKeywordsPredicate;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.testutil.EditPatientDescriptorBuilder;
 import seedu.noknock.testutil.PatientBuilder;
@@ -57,13 +51,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
-    }
-
-    @Test
     public void parseCommand_edit() throws Exception {
         Patient patient = new PatientBuilder().build();
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
@@ -79,23 +66,9 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
-
-    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
-    }
-
-    @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
@@ -173,5 +146,17 @@ public class AddressBookParserTest {
     public void parseCommand_listPatients() throws Exception {
         assertTrue(parser.parseCommand(ListPatientsCommand.COMMAND_WORD) instanceof ListPatientsCommand);
         assertTrue(parser.parseCommand(ListPatientsCommand.COMMAND_WORD + " 3") instanceof ListPatientsCommand);
+    }
+
+    @Test
+    public void parseCommand_sessionsToday() throws Exception {
+        assertTrue(parser.parseCommand(SessionsTodayCommand.COMMAND_WORD) instanceof SessionsTodayCommand);
+        assertTrue(parser.parseCommand(SessionsTodayCommand.COMMAND_WORD + " 3") instanceof SessionsTodayCommand);
+    }
+
+    @Test
+    public void parseCommand_sessionsWeek() throws Exception {
+        assertTrue(parser.parseCommand(SessionsWeekCommand.COMMAND_WORD) instanceof SessionsWeekCommand);
+        assertTrue(parser.parseCommand(SessionsWeekCommand.COMMAND_WORD + " 3") instanceof SessionsWeekCommand);
     }
 }

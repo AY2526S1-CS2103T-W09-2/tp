@@ -6,6 +6,7 @@ import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_WARD;
 import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -95,6 +96,7 @@ public class EditPatientCommand extends Command {
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setSessionDisplayFilter(PREDICATE_SHOW_ALL_SESSIONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPatient(editedPatient)));
     }
 

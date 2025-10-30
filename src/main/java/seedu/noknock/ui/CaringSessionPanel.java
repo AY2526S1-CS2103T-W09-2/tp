@@ -5,9 +5,11 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -19,6 +21,7 @@ import javafx.scene.layout.Region;
 import seedu.noknock.commons.core.LogsCenter;
 import seedu.noknock.model.date.Date;
 import seedu.noknock.model.person.Patient;
+import seedu.noknock.model.session.CaringSession;
 import seedu.noknock.model.session.PatientCaringSession;
 
 /**
@@ -31,34 +34,46 @@ public class CaringSessionPanel extends UiPart<Region> {
 
     private final ObservableList<Object> flattenedItems = FXCollections.observableArrayList();
 
+    private final ObservableList<Patient> patients;
+    private final ReadOnlyObjectProperty<Predicate<CaringSession>> sessionFilterProp;
+
     @FXML
     private ListView<Object> sessionListView;
 
     /**
      * Creates a {@code CaringSessionPanel} with the given {@code ObservableList<Patient>}.
      */
-    public CaringSessionPanel(ObservableList<Patient> patientList) {
+    public CaringSessionPanel(ObservableList<Patient> patientList,
+                              ReadOnlyObjectProperty<Predicate<CaringSession>> sessionFilterProp) {
         super(FXML);
+        this.patients = patientList;
+        this.sessionFilterProp = sessionFilterProp;
+
         sessionListView.setItems(flattenedItems);
         sessionListView.setCellFactory(listView -> new GroupedCaringSessionCell());
 
-        rebuildFromPatients(patientList);
+        rebuildFromPatients();
 
-        patientList.addListener((ListChangeListener<Patient>) change ->
-            rebuildFromPatients(patientList)
-        );
+        this.patients.addListener((ListChangeListener<Patient>) c -> rebuildFromPatients());
+        this.sessionFilterProp.addListener((obs, oldVal, newVal) -> rebuildFromPatients());
     }
 
     /**
-     * Rebuilds the flattened, grouped list.
-     */
-    private void rebuildFromPatients(ObservableList<Patient> patientList) {
+    * Rebuilds the flattened, grouped list.
+    */
+    private void rebuildFromPatients() {
+        Predicate<CaringSession> sessionFilter =
+                sessionFilterProp.get() != null ? sessionFilterProp.get() : s -> true;
+
         // Collect and sort all sessions in ascending order (least recent first)
-        List<PatientCaringSession> sorted = patientList.stream()
-            .flatMap(p -> p.getCaringSessionList().stream().map(s -> new PatientCaringSession(p, s)))
-            .sorted(Comparator.comparing((PatientCaringSession pcs) -> pcs.getCaringSession().getDate().value)
-                .thenComparing(pcs -> pcs.getCaringSession().getTime().value))
-            .toList();
+        List<PatientCaringSession> sorted = patients.stream()
+                .flatMap(p -> p.getCaringSessionList().stream()
+                        .filter(sessionFilter)
+                        .map(s -> new PatientCaringSession(p, s)))
+                .sorted(Comparator
+                        .comparing((PatientCaringSession pcs) -> pcs.getCaringSession().getDate().value)
+                        .thenComparing(pcs -> pcs.getCaringSession().getTime().value))
+                .toList();
 
         // Group by date preserving order
         Map<Date, List<PatientCaringSession>> groupedMap = sorted.stream()

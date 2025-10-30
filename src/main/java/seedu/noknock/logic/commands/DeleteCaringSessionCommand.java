@@ -2,6 +2,7 @@ package seedu.noknock.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,7 @@ public class DeleteCaringSessionCommand extends Command {
         Patient updatedPatient = patient.withCaringSessionList(updatedSessions);
         model.setPatient(patient, updatedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setSessionDisplayFilter(PREDICATE_SHOW_ALL_SESSIONS);
 
         return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS,
             Messages.formatSession(sessionToDelete), Messages.formatPatient(patient)));

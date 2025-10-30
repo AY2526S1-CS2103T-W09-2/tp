@@ -14,20 +14,18 @@ import seedu.noknock.logic.commands.AddPatientCommand;
 import seedu.noknock.logic.commands.ClearCommand;
 import seedu.noknock.logic.commands.Command;
 import seedu.noknock.logic.commands.DeleteCaringSessionCommand;
-import seedu.noknock.logic.commands.DeleteCommand;
 import seedu.noknock.logic.commands.DeleteNextOfKinCommand;
 import seedu.noknock.logic.commands.DeletePatientCommand;
 import seedu.noknock.logic.commands.EditCaringSessionCommand;
-import seedu.noknock.logic.commands.EditCommand;
 import seedu.noknock.logic.commands.EditNextOfKinCommand;
 import seedu.noknock.logic.commands.EditPatientCommand;
 import seedu.noknock.logic.commands.ExitCommand;
-import seedu.noknock.logic.commands.FindCommand;
 import seedu.noknock.logic.commands.FindPatientByNextOfKinCommand;
 import seedu.noknock.logic.commands.FindPatientCommand;
 import seedu.noknock.logic.commands.HelpCommand;
-import seedu.noknock.logic.commands.ListCommand;
 import seedu.noknock.logic.commands.ListPatientsCommand;
+import seedu.noknock.logic.commands.SessionsTodayCommand;
+import seedu.noknock.logic.commands.SessionsWeekCommand;
 import seedu.noknock.logic.commands.ViewPatientCommand;
 import seedu.noknock.logic.parser.exceptions.ParseException;
 
@@ -76,9 +74,6 @@ public class AddressBookParser {
         case EditCaringSessionCommand.COMMAND_WORD:
             return new EditCaringSessionCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
         case EditPatientCommand.COMMAND_WORD:
             return new EditPatientCommandParser().parse(arguments);
 
@@ -88,8 +83,11 @@ public class AddressBookParser {
         case DeleteCaringSessionCommand.COMMAND_WORD:
             return new DeleteCaringSessionCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case SessionsTodayCommand.COMMAND_WORD:
+            return new SessionsTodayCommand();
+
+        case SessionsWeekCommand.COMMAND_WORD:
+            return new SessionsWeekCommand();
 
         case DeletePatientCommand.COMMAND_WORD:
             return new DeletePatientCommandParser().parse(arguments);
@@ -100,17 +98,11 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
         case FindPatientByNextOfKinCommand.COMMAND_WORD:
             return new FindPatientByNextOfKinCommandParser().parse(arguments);
 
         case FindPatientCommand.COMMAND_WORD:
             return new FindPatientCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case ListPatientsCommand.COMMAND_WORD:
             return new ListPatientsCommand();

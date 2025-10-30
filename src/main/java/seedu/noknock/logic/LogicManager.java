@@ -3,8 +3,10 @@ package seedu.noknock.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.noknock.commons.core.GuiSettings;
 import seedu.noknock.commons.core.LogsCenter;
@@ -16,6 +18,7 @@ import seedu.noknock.logic.parser.exceptions.ParseException;
 import seedu.noknock.model.Model;
 import seedu.noknock.model.ReadOnlyAddressBook;
 import seedu.noknock.model.person.Patient;
+import seedu.noknock.model.session.CaringSession;
 import seedu.noknock.storage.Storage;
 
 /**
@@ -84,5 +87,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<Predicate<CaringSession>> sessionDisplayFilterProperty() {
+        return model.sessionDisplayFilterProperty();
     }
 }

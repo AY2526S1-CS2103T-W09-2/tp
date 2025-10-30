@@ -6,6 +6,7 @@ import static seedu.noknock.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,8 @@ public class AddCaringSessionCommand extends Command {
         Patient editedPatient = patient.withCaringSessionList(updatedCaringSessionList);
         model.setPatient(patient, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+
+        model.setSessionDisplayFilter(PREDICATE_SHOW_ALL_SESSIONS);
 
         return new CommandResult(String.format(MESSAGE_ADD_CARING_SESSION_SUCCESS,
             Messages.formatSession(sessionToAdd),

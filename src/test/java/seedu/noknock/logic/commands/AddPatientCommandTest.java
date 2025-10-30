@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.noknock.commons.core.GuiSettings;
 import seedu.noknock.logic.Messages;
@@ -23,6 +24,7 @@ import seedu.noknock.model.Model;
 import seedu.noknock.model.ReadOnlyAddressBook;
 import seedu.noknock.model.ReadOnlyUserPrefs;
 import seedu.noknock.model.person.Patient;
+import seedu.noknock.model.session.CaringSession;
 import seedu.noknock.testutil.PatientBuilder;
 
 public class AddPatientCommandTest {
@@ -158,6 +160,21 @@ public class AddPatientCommandTest {
         public void updateFilteredPatientList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setSessionDisplayFilter(Predicate<CaringSession> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<CaringSession> getSessionDisplayFilter() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyObjectProperty<Predicate<CaringSession>> sessionDisplayFilterProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -200,6 +217,9 @@ public class AddPatientCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public void setSessionDisplayFilter(Predicate<CaringSession> predicate) {}
     }
 
 }

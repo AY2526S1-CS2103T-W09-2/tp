@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * Represents a Date in the application.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(LocalDate)}
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Dates must be in YYYY-MM-DD or DD-MM-YYYY format";
@@ -98,5 +98,14 @@ public class Date {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Natural ordering by chronological date.
+     */
+    @Override
+    public int compareTo(Date other) {
+        requireNonNull(other);
+        return this.value.compareTo(other.value);
     }
 }
