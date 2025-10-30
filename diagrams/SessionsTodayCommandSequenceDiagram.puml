@@ -1,0 +1,50 @@
+@startuml SessionsTodaySequence
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor User
+
+box UI MODEL_COLOR_T1
+participant ":MainWindow" as MainWindow MODEL_COLOR
+participant ":CaringSessionPanel" as CaringSessionPanel MODEL_COLOR
+end box
+
+box Logic MODEL_COLOR_T1
+participant ":LogicManager" as Logic MODEL_COLOR
+participant ":AddressBookParser" as Parser MODEL_COLOR
+participant ":SessionsTodayCommand" as SessionsTodayCommand MODEL_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+User -> MainWindow : "sessions-today"
+MainWindow -> Logic : execute("sessions-today")
+activate Logic
+
+Logic -> Parser : parse(commandText)
+Parser --> Logic : SessionsTodayCommand
+
+Logic -> SessionsTodayCommand : execute(model)
+activate SessionsTodayCommand
+SessionsTodayCommand -> Model : setSessionDisplayFilter(todayPredicate)
+SessionsTodayCommand -> Model : updateFilteredPatientList(todayPatientPredicate)
+SessionsTodayCommand --> Logic : CommandResult(message)
+deactivate SessionsTodayCommand
+
+Logic --> MainWindow : CommandResult
+deactivate Logic
+
+MainWindow -> MainWindow : show feedback message
+
+... Reactive update ...
+Model -> CaringSessionPanel : sessionDisplayFilterProperty changed
+activate CaringSessionPanel
+CaringSessionPanel -> Model : getFilteredPatientList()
+Model --> CaringSessionPanel : filtered patients
+CaringSessionPanel -> CaringSessionPanel : rebuild view\n(apply session filter, group, flatten)
+CaringSessionPanel -> MainWindow : refresh session list UI
+deactivate CaringSessionPanel
+
+@enduml
