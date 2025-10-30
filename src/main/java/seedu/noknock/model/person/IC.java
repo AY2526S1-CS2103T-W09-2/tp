@@ -1,6 +1,8 @@
 
 package seedu.noknock.model.person;
 
+import static seedu.noknock.commons.util.StringUtil.removeSpaces;
+
 /**
  * IC model
  */
@@ -11,7 +13,7 @@ public class IC {
     public final String ic;
 
     public IC(String ic) {
-        this.ic = ic;
+        this.ic = removeSpaces(ic).toUpperCase();
     }
 
     public static boolean isValidIC(String ic) {
