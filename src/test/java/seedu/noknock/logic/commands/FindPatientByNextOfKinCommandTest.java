@@ -30,8 +30,8 @@ public class FindPatientByNextOfKinCommandTest {
         AddressBook addressBook = new AddressBook();
 
         // Create patients with empty NOK lists first
-        Patient alice = new PatientBuilder().withName("Alice Pauline").build();
-        Patient bob = new PatientBuilder().withName("Bob Brown").build();
+        Patient alice = new PatientBuilder().withIC("S1234567A").withName("Alice Pauline").build();
+        Patient bob = new PatientBuilder().withIC("S1234567B").withName("Bob Brown").build();
 
         addressBook.addPatient(alice);
         addressBook.addPatient(bob);
