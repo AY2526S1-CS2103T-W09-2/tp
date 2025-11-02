@@ -245,7 +245,13 @@ Displays all patients with basic information.
 * Success → Table with Index, Name, IC, Ward, Tags, NOK List, Caring Session List
 * None → Shows an empty table with column headers but no entries.
 
-  ![List Example](images/screenshots/screenshot_list.png)
+<box type="info" seamless>
+
+**Note:** Using `list-patients` will automatically show all caring sessions (past and upcoming) for each patient in the right panel. By default, it should clear any filters applied by previous `find-patient` or `find-by-nok` commands.
+
+</box>
+
+![List Example](images/screenshots/screenshot_list.png)
 
 ### Adding a patient: `add-patient`
 
@@ -564,7 +570,7 @@ Displays all caring sessions scheduled for today.
 * Success → `Today's caring sessions: X patients.` + list
 * None → `Today's caring sessions: 0 patients. Type 'list-patients' to undo`
 
-### Viewing this week’s sessions: `sessions-week`
+### Viewing this week's sessions: `sessions-week`
 
 Displays all caring sessions scheduled for the current week (Monday to Sunday).
 
@@ -575,6 +581,12 @@ Displays all caring sessions scheduled for the current week (Monday to Sunday).
 
 * Success → `This week's caring sessions: X patients.` + list
 * None → `This week's caring sessions: 0 patients. Type 'list-patients' to undo`
+
+<box type="tip" seamless>
+
+**Tip**: To see all sessions across all patients (including past sessions) for record-keeping purposes, simply use: `list-patients`. This displays all patients and their associated caring sessions in one comprehensive view.
+
+</box>
 
 ---
 
