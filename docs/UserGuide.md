@@ -237,6 +237,12 @@ Displays all patients with basic information.
 * Success → Table with Index, Name, IC, Ward, Tags, NOK List, Caring Session List
 * None → Shows an empty table with column headers but no entries.
 
+<box type="info" seamless>
+
+**Note:** Using `list-patients` will automatically show all caring sessions (past and upcoming) for each patient in the right panel. By default, it should clear any filters applied by previous `find-patient` or `find-by-nok` commands.
+
+</box>
+
 ![List Example](images/screenshots/screenshot_list.png)
 
 ### Adding a patient: `add-patient`
