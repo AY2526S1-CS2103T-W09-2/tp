@@ -1,30 +1,28 @@
 @startuml
-title Generic Edit Command Sequence Diagram (Full Flow)
-
 actor User
 
-User -> UI : Enters "edit INDEX [fields]"
-UI -> LogicManager : execute("edit INDEX [fields]")
+User -> UI : Enters "edit-patient INDEX [fields]"
+UI -> LogicManager : execute("edit-patient INDEX [fields]")
 
 activate LogicManager
-LogicManager -> AddressBookParser : parseCommand("edit INDEX [fields]")
+LogicManager -> AddressBookParser : parseCommand("edit-patient INDEX [fields]")
 
 activate AddressBookParser
-AddressBookParser -> EditCommandParser : parse(arguments)
+AddressBookParser -> EditPatientCommandParser : parse(arguments)
 deactivate AddressBookParser
 
-activate EditCommandParser
-EditCommandParser -> EditDescriptor ++: create descriptor\n(from prefixes)
-EditDescriptor --> EditCommandParser
-deactivate EditDescriptor
-EditCommandParser --> EditCommandParser : validate input\n(e.g. at least 1 field edited)
-EditCommandParser -> EditCommand++: create EditCommand with editedEntity
-EditCommand --> EditCommandParser
-deactivate EditCommand
-EditCommandParser --> LogicManager: EditCommand
-deactivate EditCommandParser
+activate EditPatientCommandParser
+EditPatientCommandParser -> EditPatientDescriptor ++: create descriptor\n(from prefixes)
+EditPatientDescriptor --> EditPatientCommandParser
+deactivate EditPatientDescriptor
+EditPatientCommandParser --> EditPatientCommandParser : validate input\n(e.g. at least 1 field edited)
+EditPatientCommandParser -> EditPatientCommand++: create EditPatientCommand with editedEntity
+EditPatientCommand --> EditPatientCommandParser
+deactivate EditPatientCommand
+EditPatientCommandParser --> LogicManager: EditPatientCommand
+deactivate EditPatientCommandParser
 
-LogicManager -> Model : execute(EditCommand)
+LogicManager -> Model : execute(EditPatientCommand)
 
 activate Model
 Model -> AddressBook : getFilteredList()
