@@ -499,6 +499,8 @@ Schedules a care session for a patient.
 
 **Note**: Two caring sessions for the same patient cannot be scheduled at the same date and time. If you attempt to add a session with identical date and time to an existing session, NOKnock will reject it.
 
+Additionally, caring session **can be scheduled in the past.** This is to allow users to log past caring sessions that were not recorded at the time they occurred.
+
 </box>
 
 ### Editing a session: `edit-session`
