@@ -11,14 +11,50 @@ import java.util.stream.Collectors;
  * Guarantees: immutable; is valid as declared in {@link #isValidRelationship(String)}
  */
 public enum Relationship {
-    DAUGHTER("Daughter"),
+    // Immediate family
     FATHER("Father"),
     MOTHER("Mother"),
-    GRANDMOTHER("Grandmother"),
+    SON("Son"),
+    DAUGHTER("Daughter"),
+    SPOUSE("Spouse"),
+    HUSBAND("Husband"),
+    WIFE("Wife"),
+
+    // Siblings
+    BROTHER("Brother"),
+    SISTER("Sister"),
+
+    // Grandparents and grandchildren
     GRANDFATHER("Grandfather"),
+    GRANDMOTHER("Grandmother"),
+    GRANDSON("Grandson"),
     GRANDDAUGHTER("Granddaughter"),
-    GRANDSON("GrandSon"),
-    SON("Son");
+
+    // In-laws
+    FATHER_IN_LAW("Father-in-law"),
+    MOTHER_IN_LAW("Mother-in-law"),
+    SON_IN_LAW("Son-in-law"),
+    DAUGHTER_IN_LAW("Daughter-in-law"),
+    BROTHER_IN_LAW("Brother-in-law"),
+    SISTER_IN_LAW("Sister-in-law"),
+
+    // Extended family
+    UNCLE("Uncle"),
+    AUNT("Aunt"),
+    COUSIN("Cousin"),
+    NEPHEW("Nephew"),
+    NIECE("Niece"),
+
+    // Other common NOK relationships
+    GRANDUNCLE("Granduncle"),
+    GRANDAUNT("Grandaunt"),
+    GODPARENT("Godparent"),
+    GUARDIAN("Guardian"),
+    CAREGIVER("Caregiver"),
+    FRIEND("Friend"),
+    NEIGHBOUR("Neighbour"),
+    DOMESTIC_HELPER("Domestic Helper"),
+    OTHER("Other");
 
     public static final String MESSAGE_CONSTRAINTS =
         "Relationship must be one of: "
