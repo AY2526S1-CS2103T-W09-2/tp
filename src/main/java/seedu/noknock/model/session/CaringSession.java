@@ -106,6 +106,19 @@ public final class CaringSession {
             && this.time.equals(other.time);
     }
 
+    /**
+     * Checks if this caring session is the same as another session.
+     * Same session is defined as having the same care type, date, and time.
+     *
+     * @param other The other caring session to compare with.
+     * @return True if the sessions are the same, false otherwise.
+     */
+    public boolean isSameSession(CaringSession other) {
+        return this.careType.equals(other.careType)
+            && this.date.equals(other.date)
+            && this.time.equals(other.time);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

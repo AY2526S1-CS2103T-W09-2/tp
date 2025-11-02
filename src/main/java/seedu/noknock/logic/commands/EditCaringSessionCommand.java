@@ -109,7 +109,8 @@ public class EditCaringSessionCommand extends Command {
         CaringSession sessionToEdit = sessionList.get(sessionIndex.getZeroBased());
         CaringSession editedSession = createEditedSession(sessionToEdit, editSessionDescriptor);
 
-        if (patient.hasOverlappingSession(editedSession)) {
+        // Check for overlapping sessions and avoid false positive when editing the same session
+        if (patient.hasOverlappingSession(editedSession) && !sessionToEdit.isSameSession(editedSession)) {
             throw new CommandException(String.format(MESSAGE_HAS_OVERLAPPING_SESSION, editedSession.getCareType()));
         }
 
