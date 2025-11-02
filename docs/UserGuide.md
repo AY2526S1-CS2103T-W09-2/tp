@@ -21,28 +21,27 @@ NOKnock! Who's there? NOKnock is a fast :runner:, keyboard-driven :musical_keybo
     - is comfortable typing short commands or following copy‑paste instructions.
     - may have little or no prior CLI experience. No scripting knowledge is required.
     - wants a reliable, offline tool that works consistently across different computers.
-    - works with patients holding **Singapore NRIC** (National Registration Identity Card) numbers.
 - If you prefer point‑and‑click only, you can still use NOKnock's GUI window, but the fastest workflow uses commands.
 
 <box type="info" seamless>
+
 **Note:** NOKnock is designed for Singapore-based nursing homes. Patient identification requires a valid Singapore NRIC number. For international or non-NRIC identifications, please contact support or consider alternative solutions.
+
 </box>
 
 <box type="tip" seamless>
-New to the command line? You can copy each command from this guide and paste it into NOKnock’s command box. Start with the “5‑minute first task” below to get confident quickly.
+
+New to the command line? You can copy each command from this guide and paste it into NOKnock’s command box. Start with the [5‑minute tutorial](#5-minute-tutorial) below to get confident quickly.
+
 </box>
 
----
+### Why a CLI-first app (and how NOKnock is different)
 
-## Why a CLI-first app (and how NOKnock is different)
-
-- Speed and consistency: Commands are quicker than navigating menus, especially for repetitive tasks (add → edit → schedule).
-- Fewer errors: A structured command format reduces ambiguity and helps prevent duplicate or inconsistent records.
-- Works offline: All data stays on your machine in a simple JSON file—no internet required.
-- Purpose‑built for nursing homes: Built‑in linkage between Patient ⇄ NOK ⇄ Caring Sessions fits actual eldercare workflows.
-- Lightweight and portable: A single .jar file you can run on any machine with Java `17` or higher.
-
-**Comparison:**
+- **Speed and consistency**: Commands are quicker than navigating menus, especially for repetitive tasks (add → edit → schedule).
+- **Fewer errors**: A structured command format reduces ambiguity and helps prevent duplicate or inconsistent records.
+- **Works offline:** All data stays on your machine in a simple JSON file—no internet required.
+- **Purpose‑built for nursing homes:** Built‑in linkage between Patient ⇄ NOK ⇄ Caring Sessions fits actual eldercare workflows.
+- **Lightweight and portable:** A single .jar file you can run on any machine with Java `17` or higher.
 
 | Feature              | Spreadsheets | GUI-Only Tools | NOKnock (CLI-First)                  |
 |----------------------|--------------|----------------|--------------------------------------|
@@ -60,9 +59,7 @@ New to the command line? You can copy each command from this guide and paste it 
 3. Type commands — follow the [5‑minute first task](#5-minute-tutorial) to try the core workflow.
 4. Refer to the [Features](#features) below for details of each command.
 
----
-
-## System requirements
+### System requirements
 
 - **Operating system:**
     - Windows 10 or 11 (x64)
@@ -73,9 +70,7 @@ New to the command line? You can copy each command from this guide and paste it 
 - **Permissions:** Write access to the folder containing the .jar
 - **Network:** Only needed for downloads and updates
 
----
-
-## Getting Java `17`
+### Getting Java `17`
 
 Choose one of the following:
 
@@ -87,9 +82,7 @@ Choose one of the following:
 If <code>java -version</code> fails, restart your terminal or computer, then try again. Reinstall Java if needed.
 </box>
 
----
-
-## Setting up
+### Setting up
 
 1. Download the latest `.jar` file from the Releases page:
    https://github.com/AY2526S1-CS2103T-W09-2/tp/releases
@@ -112,9 +105,7 @@ If <code>java -version</code> fails, restart your terminal or computer, then try
 
    ![Ui](images/Ui.png)
 
----
-
-## 5-minute tutorial
+### 5-minute tutorial
 
 Follow this quick walkthrough to learn the core workflow. Copy each command into NOKnock’s command box and press Enter.
 
@@ -142,9 +133,9 @@ New patient added: Aisha Tan
 find-patient aisha
 ~~~
 
-Note the Index shown for “Aisha Tan” (e.g., 5). Use that number in the next commands instead of X.
+Note the Index shown for “Aisha Tan” (e.g., `5`). Use that number in the next commands instead of `X`.
 
-**4) Add a Next‑of‑Kin for that patient (replace X with patient index)**
+**4) Add a Next‑of‑Kin for that patient (replace `X` with patient index)**
 
 ~~~
 add-nok X n/Daniel Tan p/6598765432 r/son
@@ -156,7 +147,7 @@ Expected:
 Added NextOfKin: Daniel Tan to Patient: Aisha Tan
 ~~~
 
-**5) Schedule a caring session (replace X; adjust date/time as needed)**
+**5) Schedule a caring session (replace `X`; adjust date/time as needed)**
 
 ~~~
 add-session X d/2025-10-31 time/09:30 type/medication notes/Metformin 500mg
@@ -189,10 +180,6 @@ If you want the session to appear here, schedule one with today’s date.
 <box type="tip" seamless>
 Made a typo? Use <code>edit-patient</code>, <code>edit-nok</code>, or <code>edit-session</code> to update fields; or the <code>delete-*</code> commands to remove entries. See Features below for full command formats and options.
 </box>
-
----
-
-## Features
 
 <box type="info" seamless>
 
@@ -250,7 +237,7 @@ Displays all patients with basic information.
 * Success → Table with Index, Name, IC, Ward, Tags, NOK List, Caring Session List
 * None → Shows an empty table with column headers but no entries.
 
-  ![List Example](images/screenshots/screenshot_list.png)
+![List Example](images/screenshots/screenshot_list.png)
 
 ### Adding a patient: `add-patient`
 
@@ -276,20 +263,13 @@ Creates a new patient record.
 
 <box type="tip" seamless>
 
-**Tip:** You can always enter the command phrase to be prompted the right usage of commands
+**Tip:** You can always enter the command phrase to be prompted the right usage of commands. The order of fields does not matter. For example, `add-patient t/Urgent ic/S2345678A w/2A n/Amy` is also valid.
 
-</box>
-
-![help message](images/TipCommandHint.png)
-
-**Note**: The order of fields does not matter. For example,
-<box type="error">
-add-patient t/Urgent ic/S2345678A w/2A n/Amy
 </box>
 
 <box type="tip" seamless>
 
-**Note:** Tags are optional and can be used to describe medical or care-related info.
+**Tip:** Tags are optional and can be used to describe medical or care-related info.
 
 </box>
 
@@ -300,6 +280,8 @@ add-patient t/Urgent ic/S2345678A w/2A n/Amy
 * Invalid input → parameter-specific error message
 
 **Note:** A patient is considered a **duplicate** when the **IC** matches exactly.
+
+![help message](images/TipCommandHint.png)
 
 ### Editing a patient: `edit-patient`
 
@@ -351,11 +333,11 @@ Removes a patient and all associated data (NOKs, sessions).
 Once the first person is deleted, the original second person becomes the first. To delete first N patients,
 use the `delete-patient 1` command for N times
 
+</box>
+
 ![Delete](images/TipDeletePatient.png)
 
 ![Delete](images/TipDeletePatientAfter.png)
-
-</box>
 
 ### Viewing patient details: `view-patient`
 
@@ -372,7 +354,7 @@ Shows full patient details including NOKs and upcoming sessions.
 * Success → Full profile with NOK list and upcoming sessions
 * Failure → `The patient index provided is invalid`
 
-  ![View](images/ViewPatient.png)
+![View](images/ViewPatient.png)
 
 ### Finding patients by name: `find-patient`
 
@@ -395,10 +377,6 @@ Search for patients by name (case-insensitive, partial matching).
 
 **Tip:** You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
 
-![Find](images/TipFindCommand.png)
-
-![Find](images/TipFindCommandAfter.png)
-
 </box>
 
 <box type="warning" seamless>
@@ -406,6 +384,10 @@ Search for patients by name (case-insensitive, partial matching).
 **Common error**: Keywords can match any part of a patient’s name from the start of a word. For example, searching Alex will match “Alex Tan” and “Tan Alex”, but not “Malex Tan” (since the match is in the middle of a word).
 
 </box>
+
+![Find](images/TipFindCommand.png)
+
+![Find](images/TipFindCommandAfter.png)
 
 ### Finding patients by NOK name: `find-by-nok`
 
