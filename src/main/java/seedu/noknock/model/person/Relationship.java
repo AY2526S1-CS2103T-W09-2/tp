@@ -97,7 +97,7 @@ public enum Relationship {
      */
     public static Relationship fromString(String relationship) {
         requireNonNull(relationship);
-        String normalized = relationship.toUpperCase().trim().replaceAll("-", "_");
+        String normalized = relationship.toUpperCase().trim().replace("-", "_");
         try {
             return Relationship.valueOf(normalized);
         } catch (IllegalArgumentException e) {
