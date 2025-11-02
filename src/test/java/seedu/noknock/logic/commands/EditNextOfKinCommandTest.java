@@ -3,6 +3,7 @@ package seedu.noknock.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.noknock.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.noknock.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.noknock.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.noknock.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -53,7 +54,7 @@ public class EditNextOfKinCommandTest {
         Patient patient = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         NextOfKin nokToEdit = patient.getNextOfKinList().get(0);
 
-        NextOfKin editedNextOfKin = new NextOfKinBuilder().build();
+        NextOfKin editedNextOfKin = new NextOfKinBuilder().withName(VALID_NAME_BOB).build();
         EditNextOfKinCommand.EditNextOfKinDescriptor descriptor =
             new EditNextOfKinDescriptorBuilder(editedNextOfKin).build();
 
@@ -143,6 +144,27 @@ public class EditNextOfKinCommandTest {
             new EditNextOfKinCommand(patientIndex, outOfBoundNextOfKinIndex, descriptor);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_NOK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_duplicateNextOfKin_failure() {
+        Index patientIndex = INDEX_FIRST_PERSON;
+        Patient patient = model.getFilteredPatientList().get(patientIndex.getZeroBased());
+
+        NextOfKin nok1 =
+            new NextOfKinBuilder().withName("Alice").withPhone("11111111").withRelationship("Mother").build();
+        NextOfKin nok2 =
+            new NextOfKinBuilder().withName("Bob").withPhone("22222222").withRelationship("Father").build();
+        Patient updated = patient.withNextOfKinList(java.util.Arrays.asList(nok1, nok2));
+        model.setPatient(patient, updated);
+
+        // Attempt to edit the first NOK to be identical to the second NOK
+        EditNextOfKinCommand.EditNextOfKinDescriptor descriptor =
+            new EditNextOfKinDescriptorBuilder(nok2).build();
+        EditNextOfKinCommand command =
+            new EditNextOfKinCommand(patientIndex, Index.fromOneBased(1), descriptor);
+
+        assertCommandFailure(command, model, AddNextOfKinCommand.MESSAGE_DUPLICATE_NOK);
     }
 
     @Test
