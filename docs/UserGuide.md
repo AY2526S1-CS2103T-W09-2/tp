@@ -9,7 +9,6 @@ pageNav: 3
 <!--* Table of Contents -->
 <page-nav-print />
 
-
 ## What is NOKnock?
 
 Do you have trouble keeping track of the care your patients need? Do you wish that you didn't have to go through entire Excel sheets whenever you need to contact a patient's family? We've got the solution!
@@ -40,12 +39,12 @@ New to the command line? You can copy each command from this guide and paste it 
 
 **Comparison:**
 
-| Feature                 | Spreadsheets                       | GUI-Only Tools                     | NOKnock (CLI-First)                  |
-|-------------------------|-----------------------------------|-----------------------------------|-------------------------------------|
-| Structured Data          | Limited                          | Moderate                          | Strong (IDs, linked NOKs & sessions)|
-| Bulk Operations          | Manual                           | Slower                            | Fast via commands                   |
-| Offline Usage            | Yes                              | Varies                             | Yes                                 |
-| Scheduling Awareness     | Manual                           | Often limited                      | Date/Time-aware                     |
+| Feature              | Spreadsheets | GUI-Only Tools | NOKnock (CLI-First)                  |
+|----------------------|--------------|----------------|--------------------------------------|
+| Structured Data      | Limited      | Moderate       | Strong (IDs, linked NOKs & sessions) |
+| Bulk Operations      | Manual       | Slower         | Fast via commands                    |
+| Offline Usage        | Yes          | Varies         | Yes                                  |
+| Scheduling Awareness | Manual       | Often limited  | Date/Time-aware                      |
 
 ---
 
@@ -64,7 +63,7 @@ New to the command line? You can copy each command from this guide and paste it 
     - Windows 10 or 11 (x64)
     - macOS 12+ (Intel or Apple Silicon)
     - Linux (e.g., Ubuntu 20.04+/Debian 11+/Fedora 36+) with glibc compatible with Java `17`
-- **Java:** JDK/JRE 17 or newer 
+- **Java:** JDK/JRE 17 or newer
 - **Disk:** ~200 MB free (app + data headroom)
 - **Permissions:** Write access to the folder containing the .jar
 - **Network:** Only needed for downloads and updates
@@ -115,50 +114,65 @@ If <code>java -version</code> fails, restart your terminal or computer, then try
 Follow this quick walkthrough to learn the core workflow. Copy each command into NOKnock’s command box and press Enter.
 
 **1) List current patients**
+
 ~~~
 list-patients
 ~~~
 
 **2) Add a new patient**
+
 ~~~
 add-patient n/Aisha Tan ic/S1111111A w/2A t/diabetes
 ~~~
+
 Expected:
+
 ~~~
 New patient added: Aisha Tan
 ~~~
 
 **3) Find your patient’s index**
+
 ~~~
 find-patient aisha
 ~~~
+
 Note the Index shown for “Aisha Tan” (e.g., 5). Use that number in the next commands instead of X.
 
 **4) Add a Next‑of‑Kin for that patient (replace X with patient index)**
+
 ~~~
 add-nok X n/Daniel Tan p/6598765432 r/son
 ~~~
+
 Expected:
+
 ~~~
 Added NextOfKin: Daniel Tan to Patient: Aisha Tan
 ~~~
 
 **5) Schedule a caring session (replace X; adjust date/time as needed)**
+
 ~~~
 add-session X d/2025-10-31 time/09:30 type/medication notes/Metformin 500mg
 ~~~
+
 Expected:
+
 ~~~
 Added Caring Session: medication on 2025-10-31 at 09:30 to Patient: Aisha Tan
 ~~~
 
 **6) View the full patient profile**
+
 ~~~
 view-patient X
 ~~~
+
 You’ll see Aisha’s details, linked NOK(s), and upcoming sessions in one place.
 
 **7) Optional:** See today’s sessions
+
 ~~~
 sessions-today
 ~~~
@@ -201,7 +215,8 @@ Made a typo? Use <code>edit-patient</code>, <code>edit-nok</code>, or <code>edit
 * All of the commands are 1 indexed. E.g. `delete-patient 1` means deleting the first person.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-* 
+*
+
 </box>
 
 ---
@@ -230,7 +245,7 @@ Displays all patients with basic information.
 
 * Success → Table with Index, Name, IC, Ward, Tags, NOK List, Caring Session List
 * None → Shows an empty table with column headers but no entries.
-<br/><br/>
+  <br/><br/>
   ![List Example](images/screenshots/screenshot_list.png)
 
 ### Adding a patient: `add-patient`
@@ -291,6 +306,7 @@ Updates an existing patient’s information. At least one field must be provided
 * Duplicate IC → `This patient already exists in the address book`
 
 ❌ **Possible mistake**: `edit-patient 1` is incorrect because no field was provided.
+
 ### Deleting a patient: `delete-patient`
 
 Removes a patient and all associated data (NOKs, sessions).
@@ -337,7 +353,8 @@ Shows full patient details including NOKs and upcoming sessions.
 
 * Success → Full profile with NOK list and upcoming sessions
 * Failure → `The patient index provided is invalid`
-![View](images/ViewPatient.png)
+  ![View](images/ViewPatient.png)
+
 ### Finding patients by name: `find-patient`
 
 Search for patients by name (case-insensitive, partial matching).
@@ -354,11 +371,12 @@ Search for patients by name (case-insensitive, partial matching).
 
 * Success → `X persons listed!` + list
 * None → `0 persons listed!`
-⚠️ Tip: You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
-![Find](images/TipFindCommand.png)
+  ⚠️ Tip: You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
+  ![Find](images/TipFindCommand.png)
 
 ![Find](images/TipFindCommandAfter.png)
 ❗ **Common error**: Keywords can match any part of a patient’s name from the start of a word. For example, searching Alex will match “Alex Tan” and “Tan Alex”, but not “Malex Tan” (since the match is in the middle of a word).
+
 ### Finding patients by NOK name: `find-by-nok`
 
 Search for patients based on their NOK’s name.
@@ -401,6 +419,12 @@ Adds a Next-of-Kin contact for a patient.
 <box type="tip" seamless>
 
 **Tip**: you can always use the `list-patients` command to see the list of patients before deciding which patient the NOK should be added to.
+
+</box>
+
+<box type="warning" seamless>
+
+**Caution:** A NOK is treated as a **duplicate** only if the **name**, **phone number**, and **relationship** all match an existing entry. This is because a patient may have multiple NOKs with the same name (e.g., two sons named John) or the same relationship (e.g., two daughters), or even a single person with different phone numbers, but it is rare for two distinct NOKs to share all three details exactly.
 
 </box>
 
@@ -597,15 +621,15 @@ Furthermore, certain edits can cause the NOKnock to behave in unexpected ways (e
 
 ## Glossary
 
-| Term / Acronym       | Definition |
-|---------------------|------------|
-| **IC**               | **Identification Code** — a unique identifier for each patient, e.g., `S1234567A`. |
-| **NOK**              | **Next-of-Kin** — a person designated as the patient’s emergency or primary contact (e.g., family member, caregiver). |
-| **GUI**              | **Graphical User Interface** — a visual interface of the app with windows, buttons, and menus, as opposed to the CLI (command-line interface). |
-| **Ward**             | A designated area or unit within the nursing home where the patient resides, e.g., `2A`. |
-| **Caring Session**   | A scheduled task or activity related to patient care, such as administering medication, hygiene assistance, or medical observation. |
-| **CLI**              | **Command-Line Interface** — an interface where the user types text commands to perform actions. |
-| **JSON**             | **JavaScript Object Notation** — a lightweight data format used to store and exchange data; NOKnock stores patient/NOK/session data in JSON. |
-| **JAR**              | **Java ARchive** — a packaged file containing the Java application, which can be run on any system with Java installed. |
-| **Index**            | A 1-based number representing a patient, NOK, or session in a list (e.g., patient 1, NOK 2). |
-| **Tag**              | A label used to classify a patient’s condition or requirement, e.g., `diabetes`, `mobility-issues`. |
+| Term / Acronym     | Definition                                                                                                                                     |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| **IC**             | **Identification Code** — a unique identifier for each patient, e.g., `S1234567A`.                                                             |
+| **NOK**            | **Next-of-Kin** — a person designated as the patient’s emergency or primary contact (e.g., family member, caregiver).                          |
+| **GUI**            | **Graphical User Interface** — a visual interface of the app with windows, buttons, and menus, as opposed to the CLI (command-line interface). |
+| **Ward**           | A designated area or unit within the nursing home where the patient resides, e.g., `2A`.                                                       |
+| **Caring Session** | A scheduled task or activity related to patient care, such as administering medication, hygiene assistance, or medical observation.            |
+| **CLI**            | **Command-Line Interface** — an interface where the user types text commands to perform actions.                                               |
+| **JSON**           | **JavaScript Object Notation** — a lightweight data format used to store and exchange data; NOKnock stores patient/NOK/session data in JSON.   |
+| **JAR**            | **Java ARchive** — a packaged file containing the Java application, which can be run on any system with Java installed.                        |
+| **Index**          | A 1-based number representing a patient, NOK, or session in a list (e.g., patient 1, NOK 2).                                                   |
+| **Tag**            | A label used to classify a patient’s condition or requirement, e.g., `diabetes`, `mobility-issues`.                                            |
