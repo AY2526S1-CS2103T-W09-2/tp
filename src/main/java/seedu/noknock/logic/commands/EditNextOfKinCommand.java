@@ -1,6 +1,7 @@
 package seedu.noknock.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.noknock.logic.commands.AddNextOfKinCommand.MESSAGE_DUPLICATE_NOK;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
@@ -95,6 +96,11 @@ public class EditNextOfKinCommand extends Command {
 
         NextOfKin nokToEdit = nokList.get(nokIndex.getZeroBased());
         NextOfKin editedNok = createEditedNok(nokToEdit, editNextOfKinDescriptor);
+
+        // Check for duplicate NOK (ignore if the edited NOK is the same as the original)
+        if (nokList.contains(editedNok) && !nokToEdit.equals(editedNok)) {
+            throw new CommandException(MESSAGE_DUPLICATE_NOK);
+        }
 
         List<NextOfKin> updatedNokList = new ArrayList<>(nokList);
         updatedNokList.set(nokIndex.getZeroBased(), editedNok);
