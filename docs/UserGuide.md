@@ -495,6 +495,12 @@ Schedules a care session for a patient.
 * Success → `Added Caring Session: hygiene on 2024-12-25 at 14:30 to Patient: Dylan`
 * Failure → parameter-specific error (e.g. invalid date/time)
 
+<box type="info" seamless>
+
+**Note**: Two caring sessions for the same patient cannot be scheduled at the same date and time. If you attempt to add a session with identical date and time to an existing session, NOKnock will reject it.
+
+</box>
+
 ### Editing a session: `edit-session`
 
 Edit an existing care session for a patient. You may also update the session status (`completed` or `incomplete`).
