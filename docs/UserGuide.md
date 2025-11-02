@@ -432,7 +432,20 @@ Adds a Next-of-Kin contact for a patient.
 * Success → `Added NextOfKin: Oad to Patient: Dylan`
 * Duplicate → `This next of kin already exists for this patient`
 
-**Note**: Relationship must be one of: Daughter, Father, Mother, Grandmother, Grandfather, Granddaughter, GrandSon, Son (case-insensitive)
+**Note:** The `Relationship` field must match one of the valid values below:
+
+| **Category**          | **Valid Relationships**                                                                  |
+|-----------------------|------------------------------------------------------------------------------------------|
+| **Immediate Family**  | Father, Mother, Son, Daughter, Spouse, Husband, Wife                                     |
+| **Siblings**          | Brother, Sister                                                                          |
+| **Grand-family**      | Grandfather, Grandmother, Grandson, Granddaughter                                        |
+| **In-laws**           | Father-in-law, Mother-in-law, Son-in-law, Daughter-in-law, Brother-in-law, Sister-in-law |
+| **Extended Family**   | Uncle, Aunt, Cousin, Nephew, Niece                                                       |
+| **Other Family**      | Granduncle, Grandaunt, Godparent                                                         |
+| **Non-Family / Care** | Guardian, Caregiver, Friend, Neighbour, Domestic Helper                                  |
+| **Miscellaneous**     | Other                                                                                    |
+
+All relationships are **case-insensitive**, meaning entries like `father`, `Father`, or `FATHER` are treated as equivalent.
 
 <box type="tip" seamless>
 
