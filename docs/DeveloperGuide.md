@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-patient 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -98,6 +98,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 </box>
 
 #### Sequence Diagram — Edit Command
@@ -619,6 +620,7 @@ These instructions combine quick-start steps and feature-specific test cases to 
 ### Patient management
 
 #### Add patient
+
 Add patient to NOKnock
 
 1. Command: `add-patient n/Name ic/IC_NUMBER w/WARD [t/TAG]...`
@@ -626,46 +628,49 @@ Add patient to NOKnock
 3. Edge cases: add with duplicate IC → `Patient with IC ... already exists`. Missing params → parameter-specific error.
 
 #### List and view
+
 List and view all patients in the database.
 
 1. Test case: `list-patients` \
-Expected: all patients.
+   Expected: all patients.
 2. Test case: `view-patient 1` \
-Expected: full profile including NOKs and sessions.
-3. Test case: `view-patient 999` (Invalid Index where index > size) 
-Expected: Index Error → `The patient index provided is invalid`.
+   Expected: full profile including NOKs and sessions.
+3. Test case: `view-patient 999` (Invalid Index where index > size)
+   Expected: Index Error → `The patient index provided is invalid`.
 
 #### Edit patient
+
 Edit a patient's details.
 
 1. Test Case: `edit-patient 1 n/Bob w/1A`  \
-Expected: The first patient's name and ward are updated to "Bob" and "1A" respectively.
+   Expected: The first patient's name and ward are updated to "Bob" and "1A" respectively.
 2. Test Case: Invalid index \
-Expected: Index Error
+   Expected: Index Error
 3. Test Case: duplicate IC \
-Expected: Duplicate Error
+   Expected: Duplicate Error
 
 #### Delete patient (important: cascades)
 
 Prerequisites: Ensure multiple patients listed with `list-patients`.
-1. Test case: `delete-patient 1` \ 
-Expected: patient deleted and related NOKs/sessions removed; status message updated. 
+
+1. Test case: `delete-patient 1` \
+   Expected: patient deleted and related NOKs/sessions removed; status message updated.
 2. Test case: `delete-patient 0` / `delete-patient` / `delete-patient x` where x > size \
-Expected: error message, no deletion.
+   Expected: error message, no deletion.
 
 ### Next-of-Kin (NOK) management
 
 #### Add NOK
 
 1. Test case: `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP` \
-Expected: Success message. 
+   Expected: Success message.
 2. Test case: Duplicate NOK with same name and phone for same patient \
-Expected: Duplicate error. Message -> `This next of kin already exists for this patient`.
+   Expected: Duplicate error. Message -> `This next of kin already exists for this patient`.
 
 #### Edit NOK
 
 1. Test case: `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`\
-Expected: updated NOK message or error if patient/NOK not found.
+   Expected: updated NOK message or error if patient/NOK not found.
 
 #### Delete NOK
 
@@ -675,9 +680,9 @@ Expected: updated NOK message or error if patient/NOK not found.
 
 #### Add session
 
-1. Command: `add-session PATIENT_INDEX d/DATE time/TIME type/CARE_TYPE [notes/NOTES]` \ 
-Expected: `Caring session added for <Name>: <type> on <DATE> at <TIME>`. Invalid date/time → parameter-specific error.
-2. Example: `add-session 1 d/2024-12-25 time/14:30 type/medication notes/Give insulin shot` \ 
+1. Command: `add-session PATIENT_INDEX d/DATE time/TIME type/CARE_TYPE [notes/NOTES]` \
+   Expected: `Caring session added for <Name>: <type> on <DATE> at <TIME>`. Invalid date/time → parameter-specific error.
+2. Example: `add-session 1 d/2024-12-25 time/14:30 type/medication notes/Give insulin shot` \
 
 #### Edit session
 
