@@ -1,6 +1,7 @@
 package seedu.noknock.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.noknock.logic.commands.AddCaringSessionCommand.MESSAGE_HAS_OVERLAPPING_SESSION;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_CARE_TYPE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTES;
@@ -107,6 +108,10 @@ public class EditCaringSessionCommand extends Command {
 
         CaringSession sessionToEdit = sessionList.get(sessionIndex.getZeroBased());
         CaringSession editedSession = createEditedSession(sessionToEdit, editSessionDescriptor);
+
+        if (patient.hasOverlappingSession(editedSession)) {
+            throw new CommandException(String.format(MESSAGE_HAS_OVERLAPPING_SESSION, editedSession.getCareType()));
+        }
 
         List<CaringSession> updatedSessionList = new ArrayList<>(sessionList);
         updatedSessionList.set(sessionIndex.getZeroBased(), editedSession);
