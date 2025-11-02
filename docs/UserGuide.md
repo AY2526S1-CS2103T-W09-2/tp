@@ -443,7 +443,7 @@ Adds a Next-of-Kin contact for a patient.
 
 </box>
 
-After adding a patient, you should see something similar to the picture below
+After adding a NOK, you should see something similar to the picture below
 
 ![AddNOK](images/TipAddNOKCommand.png)
 
