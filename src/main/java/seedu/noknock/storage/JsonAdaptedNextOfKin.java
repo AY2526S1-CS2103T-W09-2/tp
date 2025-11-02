@@ -57,7 +57,7 @@ public class JsonAdaptedNextOfKin {
         if (!Relationship.isValidRelationship(relationship)) {
             throw new IllegalValueException(Relationship.MESSAGE_CONSTRAINTS);
         }
-        final Relationship modelRelationship = Relationship.valueOf(relationship.toUpperCase());
+        final Relationship modelRelationship = Relationship.of(relationship);
 
         return new NextOfKin(modelName, modelPhone, modelRelationship);
     }

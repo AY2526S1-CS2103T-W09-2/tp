@@ -3,9 +3,6 @@ package seedu.noknock.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.noknock.commons.util.AppUtil.checkArgument;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 /**
  * Represents the relationship between a patient and their next-of-kin.
  * Guarantees: immutable; is valid as declared in {@link #isValidRelationship(String)}
@@ -56,12 +53,18 @@ public enum Relationship {
     DOMESTIC_HELPER("Domestic Helper"),
     OTHER("Other");
 
-    public static final String MESSAGE_CONSTRAINTS =
-        "Relationship must be one of: "
-            + Arrays.stream(values())
-            .map(Relationship::toString)
-            .collect(Collectors.joining(", "))
-            + " (case-insensitive)";
+    public static final String MESSAGE_CONSTRAINTS = String.format(
+        "Relationship must be one of:%n"
+            + "Immediate Family: Father, Mother, Son, Daughter, Spouse, Husband, Wife%n"
+            + "Siblings: Brother, Sister%n"
+            + "Grand-family: Grandfather, Grandmother, Grandson, Granddaughter%n"
+            + "In-laws: Father-in-law, Mother-in-law, Son-in-law, Daughter-in-law, Brother-in-law, Sister-in-law%n"
+            + "Extended Family: Uncle, Aunt, Cousin, Nephew, Niece%n"
+            + "Other Family: Granduncle, Grandaunt, Godparent%n"
+            + "Non-Family / Care: Guardian, Caregiver, Friend, Neighbour, Domestic Helper%n"
+            + "Miscellaneous: Other%n"
+            + "(case-insensitive)"
+    );
 
     private final String displayValue;
 
@@ -94,7 +97,7 @@ public enum Relationship {
      */
     public static Relationship fromString(String relationship) {
         requireNonNull(relationship);
-        String normalized = relationship.toUpperCase().trim();
+        String normalized = relationship.toUpperCase().trim().replaceAll("-", "_");
         try {
             return Relationship.valueOf(normalized);
         } catch (IllegalArgumentException e) {
