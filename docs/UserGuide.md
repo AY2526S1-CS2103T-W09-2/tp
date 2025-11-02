@@ -567,7 +567,7 @@ Displays all caring sessions scheduled for today.
 * Success → `Today's caring sessions: X patients.` + list
 * None → `Today's caring sessions: 0 patients. Type 'list-patients' to undo`
 
-### Viewing this week’s sessions: `sessions-week`
+### Viewing this week's sessions: `sessions-week`
 
 Displays all caring sessions scheduled for the current week (Monday to Sunday).
 
@@ -578,6 +578,12 @@ Displays all caring sessions scheduled for the current week (Monday to Sunday).
 
 * Success → `This week's caring sessions: X patients.` + list
 * None → `This week's caring sessions: 0 patients. Type 'list-patients' to undo`
+
+<box type="tip" seamless>
+
+**Tip**: To see all sessions across all patients (including past sessions) for record-keeping purposes, simply use: `list-patients`. This displays all patients and their associated caring sessions in one comprehensive view.
+
+</box>
 
 ---
 
