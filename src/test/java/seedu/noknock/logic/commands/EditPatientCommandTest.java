@@ -44,7 +44,7 @@ public class EditPatientCommandTest {
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.formatPatient(editedPatient));
+            Messages.formatPatient(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
@@ -59,8 +59,8 @@ public class EditPatientCommandTest {
 
         PatientBuilder personInList = new PatientBuilder(lastPerson);
         Patient editedPatient = personInList.withName(VALID_NAME_BOB)
-                .withWard(VALID_WARD_BOB).withIC(VALID_IC_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+            .withWard(VALID_WARD_BOB).withIC(VALID_IC_BOB)
+            .withTags(VALID_TAG_HUSBAND).build();
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
             .withWard(VALID_WARD_BOB).withIC(VALID_IC_BOB).withTags(VALID_TAG_HUSBAND).build();
@@ -111,7 +111,7 @@ public class EditPatientCommandTest {
         Patient firstPerson = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(firstPerson).build();
         assertThrows(NullPointerException.class, () -> new EditPatientCommand(null,
-                new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build()));
+            new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build()));
     }
 
     @Test
@@ -162,6 +162,27 @@ public class EditPatientCommandTest {
             new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editPatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_preserveNextOfKinAndCaringSessionLists_success() {
+        // take the first patient from the model (may already contain next-of-kin and caring sessions)
+        Patient originalPatient = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        // build an edited patient by changing only the name; the builder copies other lists from originalPatient
+        Patient editedPatient = new PatientBuilder(originalPatient).withName(VALID_NAME_BOB).build();
+
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.formatPatient(editedPatient));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPatient(originalPatient, editedPatient);
+
+        // ensure that next-of-kin and caring session lists are preserved after edit by comparing patient objects
+        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
