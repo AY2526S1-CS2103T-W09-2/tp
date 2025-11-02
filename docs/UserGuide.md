@@ -17,11 +17,16 @@ NOKnock! Who's there? NOKnock is a fast :runner:, keyboard-driven :musical_keybo
 
 ### Who is This Guide For?
 
-- You are a nursing home staff member (nurse, care aide, coordinator, or supervisor) who:
+- You are a **Singapore-based nursing home staff member** (nurse, care aide, coordinator, or supervisor) who:
     - is comfortable typing short commands or following copy‑paste instructions.
     - may have little or no prior CLI experience. No scripting knowledge is required.
     - wants a reliable, offline tool that works consistently across different computers.
-- If you prefer point‑and‑click only, you can still use NOKnock’s GUI window, but the fastest workflow uses commands.
+    - works with patients holding **Singapore NRIC** (National Registration Identity Card) numbers.
+- If you prefer point‑and‑click only, you can still use NOKnock's GUI window, but the fastest workflow uses commands.
+
+<box type="info" seamless>
+**Note:** NOKnock is designed for Singapore-based nursing homes. Patient identification requires a valid Singapore NRIC number. For international or non-NRIC identifications, please contact support or consider alternative solutions.
+</box>
 
 <box type="tip" seamless>
 New to the command line? You can copy each command from this guide and paste it into NOKnock’s command box. Start with the “5‑minute first task” below to get confident quickly.
@@ -252,12 +257,22 @@ Displays all patients with basic information.
 Creates a new patient record.
 
 **Format:**  
-`add-patient n/NAME ic/IC w/WARD [t/TAG]...`
+`add-patient n/NAME ic/NRIC w/WARD [t/TAG]...`
 
 **Examples:**
 
 * `add-patient n/Dylan w/2A ic/S1234567A`
-* `add-patient n/Javier w/8B ic/S9876543B t/diabetes t/mobilityIssues`
+* `add-patient n/Javier w/8B ic/T9876543B t/diabetes t/mobilityIssues`
+
+<box type="info" seamless>
+
+**Important:** The IC field must contain a valid **Singapore NRIC** in the format `[S|T]XXXXXXX[A-Z]`:
+
+- **S-prefix:** Singapore Citizen
+- **T-prefix:** Singapore Permanent Resident (FIN holders not supported)
+- **Example formats:** `S1234567A`, `T9876543B`
+
+</box>
 
 <box type="tip" seamless>
 
@@ -626,8 +641,8 @@ Furthermore, certain edits can cause the NOKnock to behave in unexpected ways (e
 |------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**List Patients**](#listing-all-patients-list-patients)         | `list-patients`                                                                                                                                                                                                      |
 | [**View Patient**](#viewing-patient-details-view-patient)        | `view-patient INDEX`                                                                                                                                                                                                 |
-| [**Add Patient**](#adding-a-patient-add-patient)                 | `add-patient n/NAME ic/IC_NUMBER w/WARD [t/TAG]...`<br>e.g. `add-patient n/Dylan ic/S1234567A w/2A t/diabetes`                                                                                                       |
-| [**Edit Patient**](#editing-a-patient-edit-patient)              | `edit-patient INDEX [n/NAME] [w/WARD] [ic/IC_NUMBER] [t/TAG]...`<br>e.g. `edit-patient 1 n/Yue Yang`                                                                                                                 |
+| [**Add Patient**](#adding-a-patient-add-patient)                 | `add-patient n/NAME ic/NRIC w/WARD [t/TAG]...`<br>e.g. `add-patient n/Dylan ic/S1234567A w/2A t/diabetes`                                                                                                            |
+| [**Edit Patient**](#editing-a-patient-edit-patient)              | `edit-patient INDEX [n/NAME] [w/WARD] [ic/NRIC] [t/TAG]...`<br>e.g. `edit-patient 1 n/Yue Yang`                                                                                                                      |
 | [**Delete Patient**](#deleting-a-patient-delete-patient)         | `delete-patient INDEX`<br>e.g. `delete-patient 2`                                                                                                                                                                    |
 | [**Add NOK**](#adding-a-nok-add-nok)                             | `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP`<br>e.g. `add-nok 1 n/Oad p/6598765432 r/son`                                                                                                                   |
 | [**Edit NOK**](#editing-a-nok-edit-nok)                          | `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`<br>e.g. `edit-nok 1 1 p/6588888888`                                                                                                           |
@@ -642,15 +657,15 @@ Furthermore, certain edits can cause the NOKnock to behave in unexpected ways (e
 
 ## Glossary
 
-| Term / Acronym     | Definition                                                                                                                                     |
-|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| **IC**             | **Identification Code** — a unique identifier for each patient, e.g., `S1234567A`.                                                             |
-| **NOK**            | **Next-of-Kin** — a person designated as the patient’s emergency or primary contact (e.g., family member, caregiver).                          |
-| **GUI**            | **Graphical User Interface** — a visual interface of the app with windows, buttons, and menus, as opposed to the CLI (command-line interface). |
-| **Ward**           | A designated area or unit within the nursing home where the patient resides, e.g., `2A`.                                                       |
-| **Caring Session** | A scheduled task or activity related to patient care, such as administering medication, hygiene assistance, or medical observation.            |
-| **CLI**            | **Command-Line Interface** — an interface where the user types text commands to perform actions.                                               |
-| **JSON**           | **JavaScript Object Notation** — a lightweight data format used to store and exchange data; NOKnock stores patient/NOK/session data in JSON.   |
-| **JAR**            | **Java ARchive** — a packaged file containing the Java application, which can be run on any system with Java installed.                        |
-| **Index**          | A 1-based number representing a patient, NOK, or session in a list (e.g., patient 1, NOK 2).                                                   |
-| **Tag**            | A label used to classify a patient’s condition or requirement, e.g., `diabetes`, `mobility-issues`.                                            |
+| Term / Acronym     | Definition                                                                                                                                                                                                                                  |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **IC**             | **Identification Code** — a **Singapore NRIC (National Registration Identity Card)**, a unique 9-character identifier for each patient. Includes citizens (S-prefix) and permanent residents (T-prefix). Example: `S1234567A`, `T9876543B`. |
+| **NOK**            | **Next-of-Kin** — a person designated as the patient’s emergency or primary contact (e.g., family member, caregiver).                                                                                                                       |
+| **GUI**            | **Graphical User Interface** — a visual interface of the app with windows, buttons, and menus, as opposed to the CLI (command-line interface).                                                                                              |
+| **Ward**           | A designated area or unit within the nursing home where the patient resides, e.g., `2A`.                                                                                                                                                    |
+| **Caring Session** | A scheduled task or activity related to patient care, such as administering medication, hygiene assistance, or medical observation.                                                                                                         |
+| **CLI**            | **Command-Line Interface** — an interface where the user types text commands to perform actions.                                                                                                                                            |
+| **JSON**           | **JavaScript Object Notation** — a lightweight data format used to store and exchange data; NOKnock stores patient/NOK/session data in JSON.                                                                                                |
+| **JAR**            | **Java ARchive** — a packaged file containing the Java application, which can be run on any system with Java installed.                                                                                                                     |
+| **Index**          | A 1-based number representing a patient, NOK, or session in a list (e.g., patient 1, NOK 2).                                                                                                                                                |
+| **Tag**            | A label used to classify a patient’s condition or requirement, e.g., `diabetes`, `mobility-issues`.                                                                                                                                         |
