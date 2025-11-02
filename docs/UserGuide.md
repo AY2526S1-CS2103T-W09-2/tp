@@ -215,7 +215,6 @@ Made a typo? Use <code>edit-patient</code>, <code>edit-nok</code>, or <code>edit
 * All of the commands are 1 indexed. E.g. `delete-patient 1` means deleting the first person.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-*
 
 </box>
 
@@ -245,7 +244,7 @@ Displays all patients with basic information.
 
 * Success → Table with Index, Name, IC, Ward, Tags, NOK List, Caring Session List
 * None → Shows an empty table with column headers but no entries.
-  <br/><br/>
+
   ![List Example](images/screenshots/screenshot_list.png)
 
 ### Adding a patient: `add-patient`
@@ -353,6 +352,7 @@ Shows full patient details including NOKs and upcoming sessions.
 
 * Success → Full profile with NOK list and upcoming sessions
 * Failure → `The patient index provided is invalid`
+
   ![View](images/ViewPatient.png)
 
 ### Finding patients by name: `find-patient`
@@ -371,11 +371,22 @@ Search for patients by name (case-insensitive, partial matching).
 
 * Success → `X persons listed!` + list
 * None → `0 persons listed!`
-  ⚠️ Tip: You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
-  ![Find](images/TipFindCommand.png)
+
+<box type="tip" seamless>
+
+**Tip:** You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
+
+![Find](images/TipFindCommand.png)
 
 ![Find](images/TipFindCommandAfter.png)
-❗ **Common error**: Keywords can match any part of a patient’s name from the start of a word. For example, searching Alex will match “Alex Tan” and “Tan Alex”, but not “Malex Tan” (since the match is in the middle of a word).
+
+</box>
+
+<box type="warning" seamless>
+
+**Common error**: Keywords can match any part of a patient’s name from the start of a word. For example, searching Alex will match “Alex Tan” and “Tan Alex”, but not “Malex Tan” (since the match is in the middle of a word).
+
+</box>
 
 ### Finding patients by NOK name: `find-by-nok`
 
