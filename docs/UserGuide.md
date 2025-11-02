@@ -304,7 +304,11 @@ Updates an existing patient’s information. At least one field must be provided
 * Invalid index → `The patient index provided is invalid`
 * Duplicate IC → `This patient already exists in the address book`
 
-❌ **Possible mistake**: `edit-patient 1` is incorrect because no field was provided.
+<box type="warning" seamless>
+
+**Possible Mistake**: `edit-patient 1` is incorrect because no field was provided.
+
+</box>
 
 ### Deleting a patient: `delete-patient`
 
@@ -576,6 +580,12 @@ NOKnock data are saved automatically as a JSON file `[JAR file location]/data/no
 **Caution:** If your changes to the data file makes its format invalid, NOKnock will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 
 Furthermore, certain edits can cause the NOKnock to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+</box>
+
+<box type="wrong">
+
+**Common mistake:** Directly editing the JSON file while NOKnock is running can lead to data corruption or loss. Always close the application before making any changes to the data file. **NOKnock will not be liable for any data loss resulting from concurrent edits.**
 
 </box>
 
