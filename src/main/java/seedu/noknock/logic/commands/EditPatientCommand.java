@@ -75,7 +75,7 @@ public class EditPatientCommand extends Command {
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
         return new Patient(updatedName, updatedWard, updatedIc, updatedTags).withNextOfKinList(
-            patientToEdit.getNextOfKinList());
+            patientToEdit.getNextOfKinList()).withCaringSessionList(patientToEdit.getCaringSessionList());
     }
 
     @Override
