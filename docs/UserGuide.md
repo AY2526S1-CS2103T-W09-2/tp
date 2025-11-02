@@ -515,10 +515,15 @@ Edit an existing care session for a patient. You may also update the session sta
 * Success -> `Edited CaringSession: medication on 2024-12-25 at 14:30 of Patient: Dylan`
 * Failure -> parameter-specific error (e.g. invalid date/time or indices)
 
-<box type="tip" seamless>
+<box type="warning" seamless>
 
-**Tip**: To get a better view of the caring session for a specific patient before editing, use `view-patient`
-command. E.g. To edit a session of first patient, limit the caring sessions view to that of the first patient only
+**Important**: `SESSION_INDEX` refers to the index of the session **for that specific patient**, not the global index across all sessions. It is ordered by the time each session was added to that patient.
+
+To find the correct `SESSION_INDEX`:
+
+1. Use `find-patient NAME` to locate your patient (if needed)
+2. Use `view-patient PATIENT_INDEX` to see all sessions for that patient with their indices
+3. Use the session index displayed in the `view-patient` output for your edit command
 
 </box>
 
