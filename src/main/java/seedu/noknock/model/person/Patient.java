@@ -132,6 +132,20 @@ public final class Patient extends Person {
     }
 
     /**
+     * Checks if the new caring session overlaps with any existing sessions,
+     * excluding a specific session (useful for edits).
+     *
+     * @param newSession    The new caring session to check.
+     * @param sessionToEdit The session to exclude from the check.
+     * @return True if there is an overlap with existing sessions, excluding the specified one.
+     */
+    public boolean hasOverlappingSession(CaringSession newSession, CaringSession sessionToEdit) {
+        return caringSessionList.stream()
+            .filter(s -> !s.equals(sessionToEdit))
+            .anyMatch(existing -> existing.overlaps(newSession));
+    }
+
+    /**
      * Checks equality based on all identifying fields.
      *
      * @param other The object to compare.
