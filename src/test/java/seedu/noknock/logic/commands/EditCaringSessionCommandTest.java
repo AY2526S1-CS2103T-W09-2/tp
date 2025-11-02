@@ -3,11 +3,13 @@ package seedu.noknock.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.noknock.logic.commands.AddCaringSessionCommand.MESSAGE_HAS_OVERLAPPING_SESSION;
 import static seedu.noknock.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.noknock.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.noknock.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.noknock.testutil.TypicalPatients.getTypicalAddressBook;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -143,6 +145,27 @@ public class EditCaringSessionCommandTest {
             new EditCaringSessionCommand(patientIndex, outOfBoundSessionIndex, descriptor);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_SESSION_INDEX);
+    }
+
+    @Test
+    public void execute_duplicateSessionOverlap_failure() {
+        Index patientIndex = INDEX_FIRST_PERSON;
+        Patient patient = model.getFilteredPatientList().get(patientIndex.getZeroBased());
+
+        CaringSession firstSession = new CaringSessionBuilder().build();
+        CaringSession secondSession = new CaringSessionBuilder().withNote("Different note").withTime("23:59").build();
+
+        Patient updatedPatient = patient.withCaringSessionList(Arrays.asList(firstSession, secondSession));
+        model.setPatient(patient, updatedPatient);
+
+        // Attempt to edit the second session to match the first (causes overlap)
+        EditCaringSessionCommand.EditSessionDescriptor descriptor =
+            new EditSessionDescriptorBuilder(firstSession).build();
+        EditCaringSessionCommand command =
+            new EditCaringSessionCommand(patientIndex, Index.fromOneBased(2), descriptor);
+
+        String expectedMessage = String.format(MESSAGE_HAS_OVERLAPPING_SESSION, firstSession.getCareType());
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
