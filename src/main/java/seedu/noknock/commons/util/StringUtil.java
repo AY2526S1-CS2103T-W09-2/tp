@@ -19,9 +19,8 @@ public class StringUtil {
      *     containsWordIgnoreCase("ABc def", "abc") == true
      *     containsWordIgnoreCase("ABc def", "DEF") == true
      *     containsWordIgnoreCase("Benjamin", "jam") == true
-     *     containsWordIgnoreCase("ABc def", "AB") == true // now matches partial words
+     *     containsWordIgnoreCase("ABc def", "AB") == true
      * </pre>
-     *
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty, must be a single word
      */
@@ -33,11 +32,12 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String[] wordsInPreppedSentence = sentence.split("\\s+");
+        String preppedSentence = sentence;
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(wordInSentence ->
-                        wordInSentence.toLowerCase().contains(preppedWord.toLowerCase()));
+                wordInSentence.toLowerCase().contains(preppedWord.toLowerCase()));
     }
 
     /**
