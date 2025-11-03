@@ -40,7 +40,7 @@ public class AddCaringSessionCommand extends Command {
 
     public static final String MESSAGE_ADD_CARING_SESSION_SUCCESS = "Added Caring Session: %1$s to Patient: %2$s";
     public static final String MESSAGE_HAS_OVERLAPPING_SESSION =
-        "This session (%1$s) overlaps with an existing session.";
+        "This session (%1$s) overlaps with an existing session";
 
     private final Index patientIndex;
     private final CaringSession sessionToAdd;

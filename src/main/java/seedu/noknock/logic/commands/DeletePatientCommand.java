@@ -27,7 +27,7 @@ public class DeletePatientCommand extends Command {
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
     public static final String MESSAGE_INVALID_PATIENT_INDEX =
-        "Invalid patient index. Please use a number from the patient list.";
+        "Invalid patient index. Please use a number from the patient list";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found at index %d";
 
     private final Index targetIndex;

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Note {
     public static final String DEFAULT_NONE = "";
     public static final String MESSAGE_CONSTRAINTS =
-        "Note can be null or up to 200 characters long";
+        "Notes can be empty or up to 200 characters long";
 
     public static final String VALIDATION_REGEX = "^.{0,200}$";
 

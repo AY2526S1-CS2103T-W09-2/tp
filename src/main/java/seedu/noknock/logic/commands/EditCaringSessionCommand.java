@@ -52,7 +52,7 @@ public class EditCaringSessionCommand extends Command {
         + PREFIX_STATUS + "Completed";
 
     public static final String MESSAGE_EDIT_SESSION_SUCCESS = "Edited CaringSession: %1$s of Patient: %2$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
 
     private final Index patientIndex;
     private final Index sessionIndex;

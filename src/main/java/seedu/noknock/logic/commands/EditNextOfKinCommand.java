@@ -46,7 +46,7 @@ public class EditNextOfKinCommand extends Command {
         + PREFIX_RELATIONSHIP + "Mother";
 
     public static final String MESSAGE_EDIT_NOK_SUCCESS = "Edited NextOfKin: %1$s of Patient: %2$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
 
     private final Index patientIndex;
     private final Index nokIndex;
