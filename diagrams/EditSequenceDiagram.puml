@@ -1,52 +1,37 @@
 @startuml
 actor User
 
+activate UI
 User -> UI : Enters "edit-patient INDEX [fields]"
 UI -> LogicManager : execute("edit-patient INDEX [fields]")
 
 activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("edit-patient INDEX [fields]")
-
 activate AddressBookParser
-AddressBookParser -> EditPatientCommandParser : parse(arguments)
-deactivate AddressBookParser
-
-activate EditPatientCommandParser
-EditPatientCommandParser -> EditPatientDescriptor ++: create descriptor\n(from prefixes)
-EditPatientDescriptor --> EditPatientCommandParser
-deactivate EditPatientDescriptor
-EditPatientCommandParser --> EditPatientCommandParser : validate input\n(e.g. at least 1 field edited)
-EditPatientCommandParser -> EditPatientCommand++: create EditPatientCommand with editedEntity
-EditPatientCommand --> EditPatientCommandParser
+AddressBookParser -> EditPatientCommand: new()
+activate EditPatientCommand
+EditPatientCommand --> AddressBookParser
 deactivate EditPatientCommand
-EditPatientCommandParser --> LogicManager: EditPatientCommand
-deactivate EditPatientCommandParser
+AddressBookParser-->LogicManager
+deactivate AddressBookParser
 
 LogicManager -> Model : execute(EditPatientCommand)
 
 activate Model
-Model -> AddressBook : getFilteredList()
-AddressBook --> Model : returns target list
-
-Model -> Model : validate index\n(throws CommandException if invalid)
-
-Model -> Entity : create editedEntity\n(immutable copy with updated fields)
-Entity --> Model : returns editedEntity
-
-Model -> AddressBook : setEntity(targetIndex, editedEntity)
-AddressBook --> Model : entity replaced
-
-Model -> VersionedAddressBook : commit()\n(save undo/redo state)
-VersionedAddressBook --> Model : committed
+Model -> AddressBook : editPatient
+activate AddressBook
+AddressBook --> Model : updatedAddressBook
+deactivate AddressBook
+Model-->LogicManager : updatedAddressBook
 deactivate Model
 
-LogicManager -> Storage : saveAddressBook(VersionedAddressBook)
+LogicManager -> Storage : save(updatedAddressBook)
 activate Storage
-Storage --> LogicManager : success
+Storage --> LogicManager
 deactivate Storage
 
 LogicManager --> UI : CommandResult("Edited entity successfully")
 deactivate LogicManager
 
-UI -> UI : refresh displayed list
+UI -> UI : refresh()
 @enduml
