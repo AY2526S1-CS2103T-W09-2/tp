@@ -357,7 +357,10 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 * 2a. Invalid patient index → System shows `The patient index provided is invalid`.
   Use case ends.
 
-* 2b. Duplicate NOK → System shows `This next of kin already exists for this patient`.
+* 2b. Invalid phone number → System shows `Phone numbers should only contain numbers, and it should be at least 3 digits long`.
+  Use case ends.
+
+* 2c. Duplicate NOK → System shows `This next of kin already exists for this patient`.
   Use case ends.
 
 #### UC7: Edit NOK
