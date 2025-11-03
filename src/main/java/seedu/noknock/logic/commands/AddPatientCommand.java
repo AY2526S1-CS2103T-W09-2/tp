@@ -20,7 +20,7 @@ public class AddPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "add-patient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the database"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_WARD + "WARD "
@@ -34,7 +34,7 @@ public class AddPatientCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PATIENT = "A patient with this IC already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "A patient with this IC already exists in the database";
 
     private final Patient toAdd;
 

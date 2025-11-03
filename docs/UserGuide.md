@@ -282,7 +282,7 @@ Creates a new patient record.
 **Output:**
 
 * Success → `New patient added: Dylan`
-* Duplicate → `A patient with this IC already exists in the address book.`
+* Duplicate → `A patient with this IC already exists in the database.`
 * Invalid input → parameter-specific error message
 
 **Note:** A patient is considered a **duplicate** when the **IC** matches exactly.
@@ -305,7 +305,7 @@ Updates an existing patient’s information. At least one field must be provided
 
 * Success → `Edited Patient: Yue Yang`
 * Invalid index → `The patient index provided is invalid`
-* Duplicate IC → `A patient with this IC already exists in the address book`
+* Duplicate IC → `A patient with this IC already exists in the database`
 
 <box type="warning" seamless>
 

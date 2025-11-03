@@ -130,7 +130,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
+* stores the data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
 * stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -143,7 +143,7 @@ The `Model` component,
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both the data and user preferences in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -271,7 +271,7 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 * 2a. Invalid input → System shows parameter-specific error.
   Use case ends.
 
-* 2b. Duplicate IC → System shows `A patient with this IC already exists in the address book`.
+* 2b. Duplicate IC → System shows `A patient with this IC already exists in the database`.
   Use case ends.
 
 #### UC2: Edit patient
@@ -290,7 +290,7 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 * 2a. Index out of range → System shows `The patient index provided is invalid`.
   Use case ends.
 
-* 2b. Duplicate IC → System shows `A patient with this IC already exists in the address book`.
+* 2b. Duplicate IC → System shows `A patient with this IC already exists in the database`.
   Use case ends.
 
 #### UC3: Delete patient
@@ -623,8 +623,8 @@ Add patient to NOKnock
 
 1. Command: `add-patient n/Name ic/IC_NUMBER w/WARD [t/TAG]...`
 2. Expected: success message with name and IC.
-3. Edge cases: add with duplicate IC → `A patient with this IC already exists in the address book`. Missing params → parameter-specific error.
-
+3. Edge cases: add with duplicate IC → `A patient with this IC already exists in the database`. Missing params → parameter-specific error.
+![img_1.png](img_1.png)
 #### List and view
 
 List and view all patients in the database.
