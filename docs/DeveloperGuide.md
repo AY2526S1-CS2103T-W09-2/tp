@@ -13,6 +13,8 @@ pageNav: 3
 
 This project is based on the AddressBook-Level3 project by the [SE-EDU initiative](https://se-education.org/). NOKnock uses the following libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
 
+Portions of this project were developed with the assistance of AI tools such as GitHub Copilot and ChatGPT. These tools were used primarily for **code completion** and **code review assistance**, without replacing the team’s original implementation or decision-making.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
