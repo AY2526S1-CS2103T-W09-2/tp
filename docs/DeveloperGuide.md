@@ -765,9 +765,7 @@ Sequence diagram for `sessions-today` command.
 9. `delete-patient 1`
 10. Close and reopen app → confirm persistent state matches expectations.
 
----
-
-## Notes
+### Notes
 
 - For every test case, record command, expected output, actual output, and pass/fail.
 - Tests that modify state should be followed by verification steps (e.g., `list-patients`, `view-patient`).

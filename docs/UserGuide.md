@@ -6,7 +6,7 @@ pageNav: 3
 
 # NOKnock User Guide
 
-<!--* Table of Contents -->
+<!-- * Table of Contents -->
 <page-nav-print />
 
 ## What is NOKnock?
@@ -221,8 +221,6 @@ Made a typo? Use <code>edit-patient</code>, <code>edit-nok</code>, or <code>edit
 </box>
 
 ---
-
-### Features
 
 ## Viewing help : `help`
 

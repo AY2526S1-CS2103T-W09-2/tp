@@ -28,15 +28,19 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
+  * [What is NOKnock]({{ baseUrl }}/UserGuide.html#what-is-noknock)
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
-  * [Tutorial]({{ baseUrl }}/UserGuide.html#5-minute-tutorial)
-  * [Features]({{ baseUrl }}/UserGuide.html#features)
+  * [Features Overview]({{ baseUrl }}/UserGuide.html#viewing-help-help)
+    * [Viewing help : `help`]({{ baseUrl }}/UserGuide.html#viewing-help-help)
     * [Patient Management]({{ baseUrl }}/UserGuide.html#patient-management)
     * [Next of Kin (NOK) Management]({{ baseUrl }}/UserGuide.html#next-of-kin-nok-management)
     * [Caring Session Management]({{ baseUrl }}/UserGuide.html#caring-session-management)
+    * [Clearing Database]({{ baseUrl }}/UserGuide.html#clearing-database)
   * [Data Management]({{ baseUrl }}/UserGuide.html#data-management)
+  * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
