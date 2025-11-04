@@ -269,10 +269,12 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 **Extensions**
 
 * 2a. Invalid input → System informs nurse and requests correction.
-    Use case ends.
+
+  Use case ends.
 
 * 2b. Duplicate IC → System informs nurse of duplication.
-    Use case ends.
+
+  Use case ends.
 
 #### UC2: Edit patient
 
@@ -288,9 +290,11 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 **Extensions**
 
 * 2a. Index out of range → System informs nurse and requests valid index.
+
   Use case ends.
 
 * 2b. Duplicate IC → System informs nurse of duplication.
+
   Use case ends.
 
 #### UC3: Delete patient
@@ -307,6 +311,7 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 **Extensions**
 
 * 2a. Invalid index → System informs nurse and requests correction.
+
   Use case ends.
 
 #### UC4: View patient details
@@ -322,6 +327,7 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 **Extensions**
 
 * 2a. Invalid index → System informs nurse and requests correction.
+
   Use case ends.
 
 #### UC5: List patients
@@ -336,6 +342,7 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 **Extensions**
 
 * 2a. No patients → System informs nurse of lack of patients.
+
   Use case ends.
 
 #### UC6: Add Next-of-Kin (NOK)
@@ -352,12 +359,15 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 **Extensions**
 
 * 2a. Invalid patient index → System informs nurse and requests correction.
+
   Use case ends.
 
 * 2b. Invalid phone number → System informs nurse and requests for valid phone number.
+
   Use case ends.
 
 * 2c. Duplicate NOK → System informs nurse of duplication.
+
   Use case ends.
 
 #### UC7: Edit NOK
@@ -374,9 +384,11 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 **Extensions**
 
 * 2b. Invalid indices → System informs nurse and requests for valid index.
+
   Use case ends.
-  
+
 * 2b. Invalid input → System informs nurse requests for valid input.
+
   Use case ends.
 
 #### UC8: Delete NOK
@@ -393,11 +405,13 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 **Extensions**
 
 * 2a. Invalid indices → System informs and user and requests for correction.
+
   Use case ends.
 
 #### UC9: Add caring session
 
 **MSS**
+
 1. Nurse requests to add a caring session for a patient with date, time, type, and optional notes.
 2. System validates patient index, date, time, and business rules (e.g. session not in the past).
 3. System adds the session to the patient’s schedule and persists the change.
@@ -406,17 +420,23 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
    Use case ends.
 
 **Extensions**
-* 2a. Invalid date or time → System informs nurse and requests correction.  
+
+* 2a. Invalid date or time → System informs nurse and requests correction.
+
   Use case ends.
-* 2b. Invalid patient index → System informs nurse and requests valid index.  
+
+* 2b. Invalid patient index → System informs nurse and requests valid index.
+
   Use case ends.
 
 * 2c. Invalid careType → System informs nurse and requests correction.
-  Use case ends
+
+  Use case ends.
 
 #### UC10: Edit caring session
 
 **MSS**
+
 1. Nurse requests to edit details of an existing caring session (e.g. date, time, type, notes, or status).
 2. System validates patient and session indices, and checks input fields.
 3. System updates the session record and persists the change.
@@ -425,17 +445,23 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
    Use case ends.
 
 **Extensions**
-* 2a. Invalid indices → System informs nurse and requests valid indices.  
+
+* 2a. Invalid indices → System informs nurse and requests valid indices.
+
   Use case ends.
-* 2b. Invalid date, time, or status → System informs nurse and requests valid input.  
+
+* 2b. Invalid date, time, or status → System informs nurse and requests valid input.
+
   Use case ends.
 
 * 2c. Invalid careType → System informs nurse and requests correction.
-  Use case ends
+
+  Use case ends.
 
 #### UC11: Delete caring session
 
 **MSS**
+
 1. Nurse requests to delete a caring session for a specific patient.
 2. System validates indices.
 3. System removes the session from the patient’s schedule.
@@ -444,12 +470,15 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
    Use case ends.
 
 **Extensions**
-* 2a. Invalid indices → System informs nurse and requests correction.  
+
+* 2a. Invalid indices → System informs nurse and requests correction.
+
   Use case ends.
 
 #### UC12: View today’s sessions
 
 **MSS**
+
 1. Nurse requests to view sessions scheduled for today.
 2. System retrieves all sessions scheduled for the current date.
 3. System displays the list of sessions.
@@ -458,12 +487,14 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 
 **Extensions**
 
-* 2a. No sessions → System informs nurse that there are no sessions scheduled for today.  
+* 2a. No sessions → System informs nurse that there are no sessions scheduled for today.
+
   Use case ends.
 
 #### UC13: View this week’s sessions
 
 **MSS**
+
 1. Nurse requests to view sessions scheduled for the current week.
 2. System retrieves sessions within the current week’s date range.
 3. System displays the list of sessions.
@@ -472,12 +503,14 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 
 **Extensions**
 
-* 2a. No sessions → System informs nurse that there are no sessions scheduled for this week.  
+* 2a. No sessions → System informs nurse that there are no sessions scheduled for this week.
+
   Use case ends.
 
 #### UC14: Complete caring session
 
 **MSS**
+
 1. Nurse requests to mark a caring session as completed.
 2. System validates indices and ensures the session is currently incomplete.
 3. System updates the session status to “completed” and persists the change.
@@ -486,14 +519,19 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
    Use case ends.
 
 **Extensions**
-* 2a. Invalid indices → System informs nurse and requests valid indices.  
+
+* 2a. Invalid indices → System informs nurse and requests valid indices.
+
   Use case ends.
-* 2b. Session already completed → System informs nurse that the session is already marked as complete.  
+
+* 2b. Session already completed → System informs nurse that the session is already marked as complete.
+
   Use case ends.
 
 #### UC15: Find patients by name
 
 **MSS**
+
 1. Nurse requests to find patients by name or keyword.
 2. System performs a case-insensitive partial match search on patient names.
 3. System displays the matching patients.
@@ -502,12 +540,14 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 
 **Extensions**
 
-* 2a. No matches found → System informs nurse that no patients match the search.  
+* 2a. No matches found → System informs nurse that no patients match the search.
+
   Use case ends.
 
 #### UC16: Find patients by next-of-kin (NOK) name
 
 **MSS**
+
 1. Nurse requests to find patients by their next-of-kin’s name.
 2. System searches NOK lists and identifies associated patients.
 3. System displays the matching patients.
@@ -516,17 +556,18 @@ For all use cases below, the **System** is `NOKnock` and the **Actor** is the `n
 
 **Extensions**
 
-* 2a. No matches found → System informs nurse that no patients match the search.  
+* 2a. No matches found → System informs nurse that no patients match the search.
+
   Use case ends.
 
 #### UC17: Help and command discovery
 
 **MSS**
+
 1. Nurse requests help.
 2. System displays help content.
 
    Use case ends.
-
 
 ### Non-Functional Requirements
 
@@ -616,7 +657,7 @@ Add patient to NOKnock
 1. Command: `add-patient n/Name ic/IC_NUMBER w/WARD [t/TAG]...`
 2. Expected: success message with name and IC.
 3. Edge cases: add with duplicate IC → `A patient with this IC already exists in the database`. Missing params → parameter-specific error.
-![img_1.png](img_1.png)
+
 #### List and view
 
 List and view all patients in the database.
@@ -710,24 +751,6 @@ Sequence diagram for `sessions-today` command.
 
 1. `find-by-nok KEYWORD [MORE_KEYWORDS]...`
 2. Expected: patients matched via NOK name or `No patients found with NOK matching: ...`.
-
-### Saving and data integrity
-
-#### Automatic saving
-
-Modify data (add/edit/delete). Close app and reopen.
-
-- Expected: changes persisted in `data/noknock.json` next to the jar.
-
-### Corrupted/missing data file
-
-1. Simulate: rename or corrupt `data/noknock.json`.
-2. Launch app.
-    - Expected: app starts with empty data and creates a fresh data file; warn user (follow the app's documented behavior). Backup file before editing manually.
-
-#### Backup and restore manual test (if supported)
-
-Export/backup, then restore, verify data matches original.
 
 ### Example test session (regression checklist)
 
